@@ -1,4 +1,3 @@
-import React from "react";
 import {
   RiNotification2Line,
   RiHome7Fill,
@@ -8,13 +7,11 @@ import {
   BsBookmark,
   BsFillPersonFill,
   AiOutlinePlus,
-  AiOutlineQuestionCircle,
 } from "react-icons/all";
-import { FaBeer } from "react-icons/fa";
 
 function LeftBar() {
   return (
-    <div className="h-full bg-[#15202B] relative ">
+    <div className="h-full relative ">
       <div className="h-full bg-[#15202B] grid  sm:grid-cols-1 sm:h-4/4 sm:w-full sm:absolute right-0 gap-5 mt-2 w-full">
         <div className="h-full bg-[#15202B] grid grid-cols-4 sm:grid-cols-1 sm:h-3/4 sm:w-2/4 sm:absolute right-0 gap-5 w-4/4  xl:w-2/4  left-0 ">
           <div className="text-white flex justify-center items-center text-[2.8rem] xl:justify-end xl:text-[3rem]">
