@@ -1,6 +1,5 @@
-
-import { useRef, useState } from 'react';
-import useAutosizeTextArea from '../useAutosizeTextArea';
+import BlueButton from "../custom_elements/BlueButton";
+import InputTextArea from "../custom_elements/InputTextArea";
 
 interface PostInputProps {
     theme: string;
@@ -9,18 +8,6 @@ interface PostInputProps {
 const PostInput: React.FC<PostInputProps> = ({
     theme
 }) => {
-
-    const [value, setValue] = useState("");
-    const textAreaRef = useRef<HTMLTextAreaElement>(null);
-
-    useAutosizeTextArea(textAreaRef.current, value);
-
-    const handleChange = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const val = evt.target?.value;
-
-    setValue(val);
-    };
-
 
   return (
     <div className="py-2 flex w-full border-neutral-200/20 border-y">
@@ -31,27 +18,11 @@ const PostInput: React.FC<PostInputProps> = ({
             w-full
         ">
             <form action="submit">
-                <textarea                     
+                <InputTextArea 
+                    theme={theme}
                     placeholder="What is happening?!"
-                    onChange={handleChange}
-                    ref={textAreaRef}
-                    rows={1}
-                    value={value}
-                    className={`                    
-                        resize-none
-                        overflow-hidden
-                        w-[93%]
-                        text-xl
-                        ml-2
-                        p-2
-                        outline-none
-                        border-b
-                        border-neutral-200/20
-                        ${theme === 'dark' ? 'bg-[#15202B]' : ''}
-                    `}
-                >
-                
-                </textarea>
+                    classes="border-neutral-200/20 border-b"
+                />
             </form>
             <div className='
                 mr-3
@@ -59,15 +30,7 @@ const PostInput: React.FC<PostInputProps> = ({
                 flex
                 justify-end
             '>
-                <button className='
-                    bg-sky-500
-                    p-2
-                    px-5
-                    font-semibold
-                    rounded-full
-                '>
-                    Tweet
-                </button>
+                <BlueButton value="Tweet" />
             </div>
         </div>
     </div>
