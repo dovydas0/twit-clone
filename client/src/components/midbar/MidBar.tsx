@@ -66,7 +66,7 @@ const dummy_posts = [
 function MidBar() {
   const [ feedType, setFeedType ] = useState("forYou");
   const [ showContent, setShowContent ] = useState(CONTENT.MAINFEED);
-  const [ activePost, setActivePost ] = useState({});
+  const [ activePost, setActivePost ] = useState<DummyData | null>(null);
   const theme = 'dark';
   let content;
   
@@ -85,7 +85,7 @@ function MidBar() {
   }, [showContent, activePost])
   
   const handlePostClose = useCallback(() => {
-    setActivePost({});
+    setActivePost(null);
     setShowContent(CONTENT.MAINFEED)
   }, [showContent, activePost])
 

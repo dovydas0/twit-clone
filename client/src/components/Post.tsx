@@ -3,7 +3,7 @@ import DummyData from './types/DummyDataType';
 
 interface PostProps {
     onClick: (data: DummyData) => void
-    postData?: DummyData;
+    postData: DummyData;
 }
 
 const Post: React.FC<PostProps> = ({
