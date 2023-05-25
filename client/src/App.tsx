@@ -1,11 +1,14 @@
+
 import LeftBar from "./components/LeftBar";
 import MidBar from "./components/midbar/MidBar";
 import RightBar from "./components/RightBar";
-import Modal from "./components/Modal";
+import LoginModal from "./components/modals/LoginModal";
+
+
 import "./index.css";
 
 function App() {
-  const modalOpen = true;
+  const loginModalOpen = true;
 
 
   return (
@@ -21,11 +24,11 @@ function App() {
           <RightBar />
         </div>
         {
-          modalOpen ?
-            <Modal />
+          loginModalOpen ?
+            <LoginModal />
             :
             ''
-        }
+          }
       </div>
     </>
   );
