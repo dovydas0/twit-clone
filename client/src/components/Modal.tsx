@@ -16,8 +16,15 @@ const Modal = () => {
     ">
         <div className="
             bg-[#15202B]
-            w-[36rem]
-            rounded-2xl
+            rounded-none
+            w-full
+            h-full
+            sm:h-auto
+            sm:w-[36rem]
+            sm:rounded-2xl
+            md:h-auto
+            md:w-[36rem]
+            md:rounded-2xl
         ">
             <div className='flex items-center m-3'>
                 <div 
@@ -32,6 +39,8 @@ const Modal = () => {
             <div className='
                 flex
                 justify-center
+                items-center
+                h-full
             '>
                 <div className='w-72 mt-4 mb-10 flex flex-col gap-5 justify-center'>
                     <div className='text-3xl font-semibold mb-3'>
