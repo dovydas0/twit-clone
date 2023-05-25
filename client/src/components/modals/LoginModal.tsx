@@ -2,6 +2,7 @@ import { RxCross2 } from 'react-icons/rx';
 import { FcGoogle } from 'react-icons/fc';
 import { BsApple } from 'react-icons/bs';
 import Input from '../custom_elements/Input';
+import Button from '../custom_elements/Button';
 
 
 const Modal = () => {
@@ -46,77 +47,28 @@ const Modal = () => {
                     <div className='text-3xl font-semibold mb-3'>
                         Sign in to Twitter
                     </div>
-                    <button className='
-                        bg-white
-                        rounded-full
-                        text-black
-                        font-semibold
-                        flex
-                        justify-center
-                        items-align
-                        p-2
-                        gap-1
-                        hover:bg-white/90
-                        transition
-                    '>
-                        <FcGoogle size={20} />
-                        Sign in with Google
-                    </button>
-                    <button className='
-                        bg-white
-                        rounded-full
-                        text-black
-                        font-semibold
-                        flex
-                        justify-center
-                        items-align
-                        p-2
-                        gap-1
-                        hover:bg-white/90
-                        transition
-                    '>
-                        <BsApple size={20} />
-                        Sign in with Apple
-                    </button>
+                    <Button
+                        value="Sign in with Google"
+                        icon={FcGoogle}
+                    />
+                    <Button
+                        value="Sign in with Apple"
+                        icon={BsApple}
+                    />
                     <div className='flex justify-center -mb-2'>
                         <div className='before:content-[""] w-full mx-2 border-b border-neutral-200/20 -translate-y-1/2'></div>
                         or
                         <div className='before:content-[""] w-full mx-2 border-b border-neutral-200/20 -translate-y-1/2'></div>
                     </div>
                     <Input placeholder="Phone, email, or username" />
-                    <button 
-                        onClick={() => {}}
-                        className='
-                            bg-white
-                            rounded-full
-                            text-black
-                            font-semibold
-                            flex
-                            justify-center
-                            items-align
-                            p-2
-                            hover:bg-white/90
-                            transition
-                        '
-                    >Next</button>
-                    <button 
-                        onClick={() => {}}
-                        className='
-                            bg-[#15202B]
-                            rounded-full
-                            text-white
-                            font-semibold
-                            flex
-                            justify-center
-                            items-align
-                            p-2
-                            text-sm
-                            border-neutral-200/25
-                            border
-                            hover:bg-neutral-200/10
-                            transition
-                        '
-                    >Forgot password?</button>
+                    <Button
+                        value="Next"
+                    />
+                    <Button
+                        outline
+                        value="Forgot password?"
+                        textSize="sm"
+                    />
                     <div className='my-6 mb-12 text-slate-400 text-sm tracking-wider'>
                         Don't have an account? 
                         <span 

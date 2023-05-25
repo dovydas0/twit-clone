@@ -1,6 +1,4 @@
 import DummyData from "./types/DummyDataType"
-import { BrowserRouter, Route } from "react-router-dom";
-
 
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiArrowBack } from "react-icons/bi";
@@ -20,9 +18,7 @@ const PostElement: React.FC<PostElementProps> = ({
 }) => {
 
   return (
-    // <BrowserRouter>
-    //     <Route path={`/${post?.author}`}>
-            <div>
+            <div className="h-screen">
                 <div 
                     className="
                         flex
@@ -132,9 +128,7 @@ const PostElement: React.FC<PostElementProps> = ({
                         ">
                         </div>
                 }
-            </div>        
-    //     </Route>
-    // </BrowserRouter>
+            </div>
   )
 }
 

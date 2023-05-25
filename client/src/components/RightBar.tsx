@@ -1,4 +1,5 @@
 import { BsTwitter } from "react-icons/all";
+import Button from "./custom_elements/Button";
 
 
 function RightBar() {
@@ -8,7 +9,10 @@ function RightBar() {
         <div className="bg-black w-10 h-10 rounded-full mt-5"></div>
       </div>
       <div className="text-[24px] sm:hidden flex justify-center text-[#1D9BF0] mb-4 relative bottom-8">
-        <BsTwitter />
+        {/* <Button
+          value="Log in with "
+          icon={BsTwitter}
+        /> */}
       </div>
     </div>
   );
