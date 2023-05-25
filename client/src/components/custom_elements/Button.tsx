@@ -26,15 +26,15 @@ const Button: React.FC<ButtonProps> = ({
             flex
             justify-center
             items-align
-            p-2
+            p-1.5
             gap-1
             transition
-            ${small ? ' w-20' : ''}
+            ${small ? ' w-[85px]' : 'w-full'}
             ${textSize ? `text-${textSize}` : ''}
-            ${outline ? 'bg-[#15202B]' : 'bg-white'}
+            ${outline ? '' : 'bg-white'}
             ${outline ? 'text-white' : 'text-black'}
-            ${outline ? 'hover:bg-neutral-200/10' : 'hover:bg-white/90'}
-            ${outline ? 'border-neutral-200/25 border' : ''}
+            ${outline ? 'hover:bg-white/10' : 'hover:bg-white/[0.85]'}
+            ${outline ? 'border-white/25 border-2' : ''}
         `
     }>
         { Icon &&

@@ -4,6 +4,8 @@ import { BsApple } from 'react-icons/bs';
 import Input from '../custom_elements/Input';
 import Button from '../custom_elements/Button';
 
+import { Link } from 'react-router-dom'
+
 
 const Modal = () => {
   return (
@@ -28,10 +30,16 @@ const Modal = () => {
             md:rounded-2xl
         ">
             <div className='flex items-center m-3'>
-                <div 
-                    className='cursor-pointer p-1.5 hover:bg-neutral-200/20 rounded-full transition'
-                    onClick={() => {}}>
-                    <RxCross2 size={22} />
+                <div className='
+                    cursor-pointer
+                    p-1.5
+                    hover:bg-neutral-200/20
+                    rounded-full
+                    transition
+                '>
+                    <Link to="/">
+                        <RxCross2 size={22} />
+                    </Link>
                 </div>
                 <div className='absolute left-1/2 -translate-x-4'>
                     <img src="/twitter_logo.png" alt="logo" className='w-9' />

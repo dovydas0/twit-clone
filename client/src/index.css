@@ -25,3 +25,9 @@ body{
 #root{
   height: 100%;
 }
+
+@media (max-width:639.5px) {
+  .hiddenSignFooter {
+    display: none;
+  }
+}
