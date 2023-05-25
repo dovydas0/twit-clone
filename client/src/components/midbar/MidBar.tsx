@@ -91,11 +91,11 @@ function MidBar() {
 
   if (showContent === CONTENT.MAINFEED) {
     content = (
-      <div className="h-full">
-        <ContentType feedType={feedType} onClick={handleFeedType} />
-        <PostInput theme={theme} />
-        <MainFeed onClick={handlePostOpen} postData={dummy_posts} />
-      </div>
+        <>
+          <ContentType feedType={feedType} onClick={handleFeedType} />
+          <PostInput theme={theme} />
+          <MainFeed onClick={handlePostOpen} postData={dummy_posts} />
+        </>
     )
   }
 
