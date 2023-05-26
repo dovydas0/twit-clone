@@ -1,7 +1,6 @@
 import { RxCross2 } from 'react-icons/rx';
 import { FcGoogle } from 'react-icons/fc';
 import { BsApple } from 'react-icons/bs';
-import Input from '../custom_elements/Input';
 import Button from '../custom_elements/Button';
 
 import { Link } from 'react-router-dom'
