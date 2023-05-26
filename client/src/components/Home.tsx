@@ -11,10 +11,10 @@ const Home = () => {
 
   return (
     <>
-        <div className="h-20 sm:h-full sm:col-span-1 lg:col-span-1 xl:col-span-2">
+        <div className="h-20 sm:h-screen sm:col-span-1 lg:col-span-1 xl:col-span-2">
             <LeftBar />
         </div>
-        <div className="sm:col-span-7 h-full lg:col-span-5 xl:col-span-5 border-white/20 border">
+        <div className="sm:col-span-7 h-screen lg:col-span-5 xl:col-span-5 border-white/20 border">
             <MidBar />
         </div>
         <div className="sm:col-span-1 lg:col-span-3 xl:col-span-2">
