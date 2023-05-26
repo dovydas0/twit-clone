@@ -26,7 +26,7 @@ const PostElement: React.FC<PostElementProps> = ({
                         px-3
                         py-2
                         border-b
-                        border-neutral-200/20
+                        border-white/20
                     "
                 >
                     <div className="flex items-center gap-6 pb-4">
@@ -57,13 +57,13 @@ const PostElement: React.FC<PostElementProps> = ({
                             {post?.content}
                         </p>
                     </div>
-                    <div className="mb-4 border-b border-neutral-200/20">
+                    <div className="mb-4 border-b border-white/20">
                         <p>"time"</p>
                     </div>
-                    <div className="mb-4 border-b border-neutral-200/20">
+                    <div className="mb-4 border-b border-white/20">
                         <p>"stats"</p>
                     </div>
-                    <div className="mb-4 border-b border-neutral-200/20">
+                    <div className="mb-4 border-b border-white/20">
                         <p>"actions"</p>
                     </div>
                     <div className='
@@ -84,7 +84,7 @@ const PostElement: React.FC<PostElementProps> = ({
                         pt-4
                         my-2
                         border-t
-                        border-neutral-200/20
+                        border-white/20
                     ">
                         <img
                             src="/placeholder.jpg" 
@@ -121,7 +121,7 @@ const PostElement: React.FC<PostElementProps> = ({
                             pl-3
                             py-2
                             border-b
-                            border-neutral-200/20
+                            border-white/20
                             hover:bg-neutral-100/5
                             cursor-pointer
                             transition

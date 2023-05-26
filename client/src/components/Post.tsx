@@ -19,7 +19,7 @@ const Post: React.FC<PostProps> = ({
             pl-3
             py-2
             border-b
-            border-neutral-200/20
+            border-white/20
             hover:bg-neutral-100/5
             cursor-pointer
             transition

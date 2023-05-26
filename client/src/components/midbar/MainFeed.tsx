@@ -14,9 +14,9 @@ const MainFeed: React.FC<MainFeedProps> = ({
     return (
         <div>
             {
-                postData.map((post) => (
+                postData.map((post, index) => (
                     <Post 
-                    key={post.content}
+                    key={index}
                     onClick={onClick}
                     postData={post}
                     />

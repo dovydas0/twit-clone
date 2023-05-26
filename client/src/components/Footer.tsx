@@ -1,24 +1,25 @@
 import { Link } from "react-router-dom";
 
 import Button from "./custom_elements/Button"
-import LoginModal from "./modals/LoginModal";
-
 
 const Footer = () => {
   return (
     <div className="
             fixed
             bottom-0
+            w-screen
+            bg-sky-500
+            flex
+            justify-center
         ">
             <div className="
-                w-screen
-                 h-[72px]
-                bg-sky-500
+                h-[72px]
                 grid
                 sm:grid-cols-3
                 justify-items-center
-                items-center"
-            >
+                items-center
+                w-[1440px]
+            ">
                 <div className="w-[220%] hiddenSignFooter col-start-2 md:w-[200%] xl:w-[150%]">
                     <div className="text-2xl font-semibold -mb-1">
                         Don't miss what's happening

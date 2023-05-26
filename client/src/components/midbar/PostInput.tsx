@@ -10,7 +10,7 @@ const PostInput: React.FC<PostInputProps> = ({
 }) => {
 
   return (
-    <div className="py-2 flex w-full border-neutral-200/20 border-y">
+    <div className="py-2 flex w-full border-white/20 border-y">
         <img src="/placeholder.jpg" className="w-12 h-12 ml-3 rounded-full"></img>
         <div className="
             flex
@@ -21,7 +21,7 @@ const PostInput: React.FC<PostInputProps> = ({
                 <InputTextArea 
                     theme={theme}
                     placeholder="What is happening?!"
-                    classes="border-neutral-200/20 border-b"
+                    classes="border-white/20 border-b"
                 />
             </form>
             <div className='

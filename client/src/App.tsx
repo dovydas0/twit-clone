@@ -1,18 +1,22 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 
 import "./index.css";
 import Home from "./components/Home";
 import LoginModal from "./components/modals/LoginModal";
+import SignupModal from "./components/modals/SignupModal";
+import Footer from "./components/Footer";
 
 function App() {
 
   return (
     <>
-      <div className=" sm:grid sm:grid-cols-6 sm:gap-2 bg-[#15202B]">
+      <div className="max-w-[1440px] mx-auto h-screen sm:grid sm:grid-cols-9">
         <Home />
       </div>
+      <Footer />
       <Routes>
         <Route path="/login" element={<LoginModal />} />
+        <Route path="/signup" element={<SignupModal />} />
       </Routes>
     </>
   );
