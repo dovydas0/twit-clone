@@ -12,7 +12,7 @@ const MainFeed: React.FC<MainFeedProps> = ({
 }) => {
   
     return (
-        <div>
+        <>
             {
                 postData.map((post, index) => (
                     <Post 
@@ -22,7 +22,7 @@ const MainFeed: React.FC<MainFeedProps> = ({
                     />
                 ))
             }
-        </div>
+        </>
     )
 }
 

@@ -10,7 +10,7 @@ function App() {
 
   return (
     <>
-      <div className="max-w-[1440px] mx-auto h-screen sm:grid sm:grid-cols-9">
+      <div className="max-w-[1440px] mx-auto h-full sm:grid sm:grid-cols-9">
         <Home />
       </div>
       <Footer />
