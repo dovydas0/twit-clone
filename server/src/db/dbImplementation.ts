@@ -48,7 +48,7 @@ export const createTables = async() => {
         poolNew.query(`
             CREATE TABLE IF NOT EXISTS user_table (
                 id UUID UNIQUE DEFAULT uuid_generate_v4() PRIMARY KEY NOT NULL,
-                created_at DATE DEFAULT CURRENT_DATE NOT NULL,
+                created_at TIMESTAMP DEFAULT NOW() NOT NULL,
                 username VARCHAR(50) NOT NULL,
                 password VARCHAR(255) NOT NULL,
                 email VARCHAR(150) UNIQUE NOT NULL,

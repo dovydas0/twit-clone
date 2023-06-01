@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import router from './router';
+import { createDatabase, connectToDatabase, createTables } from './db/dbImplementation';
 
 const app = express();
 const PORT = 8000;
@@ -13,17 +14,17 @@ app.use(express.json());
 //     res.end("home");
 // })
 
-// // Implementing a database
-// app.get('/db', (req, res) => {
-//     createDatabase();
-//     setTimeout(() => {
-//         connectToDatabase();
-//         setTimeout(() => {
-//             createTables();
-//         }, 1000)
-//     }, 1000)
-//     res.end('hi');
-// })
+// Implementing a database
+app.get('/db', (req, res) => {
+    createDatabase();
+    setTimeout(() => {
+        connectToDatabase();
+        setTimeout(() => {
+            createTables();
+        }, 1000)
+    }, 1000)
+    res.end('hi');
+})
 
 // app.get('/users', async (req, res) => {    
 //     const users = await getUsers()
