@@ -48,10 +48,10 @@ export const createTables = async() => {
         poolNew.query(`
             CREATE TABLE IF NOT EXISTS user_table (
                 id UUID UNIQUE DEFAULT uuid_generate_v4() PRIMARY KEY NOT NULL,
-                created_at DATE NOT NULL,
+                created_at DATE DEFAULT CURRENT_DATE NOT NULL,
                 username VARCHAR(50) NOT NULL,
                 password VARCHAR(255) NOT NULL,
-                email VARCHAR(150) NOT NULL,
+                email VARCHAR(150) UNIQUE NOT NULL,
                 dob DATE NOT NULL,
                 avatar VARCHAR(255),
                 cover_image VARCHAR(255),
@@ -66,10 +66,10 @@ export const createTables = async() => {
         poolNew.query(`
             CREATE TABLE IF NOT EXISTS post_table (
                 id UUID UNIQUE DEFAULT uuid_generate_v4() PRIMARY KEY NOT NULL, 
-                created_at DATE NOT NULL, 
+                created_at DATE DEFAULT CURRENT_DATE NOT NULL, 
                 user_id UUID NOT NULL, 
                 content text NOT NULL, 
-                liked integer NOT NULL, 
+                liked integer DEFAULT 0 NOT NULL, 
                 CONSTRAINT fk_post_user FOREIGN KEY (user_id) REFERENCES user_table (id)
             );
         `)
@@ -79,10 +79,10 @@ export const createTables = async() => {
         poolNew.query(`
             CREATE TABLE IF NOT EXISTS comment_table (
                 id UUID UNIQUE DEFAULT uuid_generate_v4() PRIMARY KEY NOT NULL, 
-                created_at DATE NOT NULL, 
+                created_at DATE DEFAULT CURRENT_DATE NOT NULL, 
                 user_id UUID NOT NULL, 
                 content text NOT NULL, 
-                liked integer NOT NULL,
+                liked integer DEFAULT 0 NOT NULL,
                 CONSTRAINT fk_comment_user FOREIGN KEY (user_id) REFERENCES user_table (id)
             );
         `)
@@ -92,7 +92,7 @@ export const createTables = async() => {
         poolNew.query(`
             CREATE TABLE IF NOT EXISTS comments_table (
                 id UUID UNIQUE DEFAULT uuid_generate_v4() PRIMARY KEY NOT NULL,
-                created_at DATE NOT NULL,
+                created_at DATE DEFAULT CURRENT_DATE NOT NULL,
                 comment_id UUID NOT NULL,
                 user_id UUID NOT NULL,
                 post_id UUID NOT NULL,
