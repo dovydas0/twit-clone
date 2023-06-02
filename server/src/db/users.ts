@@ -26,9 +26,3 @@ export const createUser = (username: string, password: string, email: string, do
 // export const updateUserById = (userID: string) => {
 //     return poolNew.query('SELECT * FROM user_table WHERE id = $1', userID);
 // }
-
-
-// COMMENTS
-export const getComments = () => {
-    return poolNew.query('SELECT * FROM comment_table');
-}

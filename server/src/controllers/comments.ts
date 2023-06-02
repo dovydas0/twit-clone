@@ -1,42 +1,61 @@
 import express from 'express';
 import { validateUUID } from '../utils';
-import { v4 as uuid, validate } from 'uuid';
 
-import { deleteUserById, getUserById, getUsers } from "../db/users"
+import { deleteCommentById, getCommentById, getComments, createComment } from "../db/comments"
 
-export const getAllUsers = async(req: express.Request, res: express.Response) => {
+export const getAllComments = async(req: express.Request, res: express.Response) => {
     try {
-        const users = await getUsers();
-        return res.status(200).json(users.rows);
+        const { rows } = await getComments();
+                
+        return res.status(200).json(rows);
     } catch (error) {
         console.log(error);
-        return res.status(404).json({ message: "No users found" });        
+        return res.status(404).json({ message: "No comments found" });        
     }
 }
 
-export const deleteUser = async (req: express.Request, res: express.Response) => {
+export const createNewComment = async(req: express.Request, res: express.Response) => {
+
+    try {
+        const { userID, content } = req.body;
+
+        if (!userID || !content) {
+            return res.status(400).json({ message: "Invalid Request: Data missing." });
+        }
+        
+        await createComment(userID, content)        
+
+        return res.status(200).json({ message: "Comment created" });
+    } catch (error) {
+        
+        return res.status(400).json({ message: "Something went wrong" });
+    }
+
+}
+
+export const deleteComment = async (req: express.Request, res: express.Response) => {
     try {
         const { id } = req.params;
 
         if (!validateUUID(id)) {
-            return res.status(404).json({ message: "User not found" });
+            return res.status(404).json({ message: "Comment not found" });
         } 
         
-        const { rows } = await getUserById(id);
+        const { rows } = await getCommentById(id);
 
         if (rows.length < 1) {
-            return res.status(404).json({ message: "User not found" });
+            return res.status(404).json({ message: "Comment not found" });
         }
         
-        await deleteUserById(id);
+        await deleteCommentById(id);
 
-        return res.status(200).json({ message: "User deleted" });
+        return res.status(200).json({ message: "Comment deleted" });
     } catch (error) {
         console.log(error);
         return res.status(400);        
     }
 }
 
-export const updateUser = async (req: express.Request, res: express.Response) => {
+// export const updateComment = async (req: express.Request, res: express.Response) => {
 
-}
+// }

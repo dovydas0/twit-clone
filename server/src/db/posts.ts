@@ -18,8 +18,8 @@ export const getPostById = (postID: string) => {
     return poolNew.query('SELECT * FROM post_table WHERE id = $1', [postID])
 };
 
-export const updatePostById = (postID: string) => {
-    return poolNew.query('SELECT * FROM post_table WHERE id = $1', [postID])
-};
+// export const updatePostById = (postID: string) => {
+//     return poolNew.query('SELECT * FROM post_table WHERE id = $1', [postID])
+// };
 
 
