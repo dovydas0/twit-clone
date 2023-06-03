@@ -1,67 +1,18 @@
 import ContentType from "./ContentType";
 import PostInput from "./PostInput";
 import MainFeed from "./MainFeed";
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import PostElement from "../PostElement";
 import DummyData from "../types/DummyDataType";
+import axios from "axios";
 
 enum CONTENT {
   MAINFEED = 0,
   POST = 1
 }
 
-const dummy_posts = [
-  {
-      author: "dummy user",
-      content: "Hello this is my first post",
-      likes: 3,
-  },
-  {
-      author: "dummy user 2",
-      content: "Hello this is my third post",
-      likes: 26,
-  },
-  {
-      author: "dummy user",
-      content: "Hello this is my first post",
-      likes: 3,
-  },
-  {
-      author: "dummy user 2",
-      content: "Hello this is my third post",
-      likes: 26,
-  },
-  {
-      author: "dummy user",
-      content: "Hello this is my first post",
-      likes: 3,
-  },
-  {
-      author: "dummy user 2",
-      content: "Hello this is my third post",
-      likes: 26,
-  },
-  {
-      author: "dummy user",
-      content: "Hello this is my first post",
-      likes: 3,
-  },
-  {
-      author: "dummy user 2",
-      content: "Hello this is my third post",
-      likes: 26,
-  },
-  {
-      author: "dummy user",
-      content: "Hello this is my first post",
-      likes: 3,
-  },
-  {
-      author: "dummy user 2",
-      content: "Hello this is my third post",
-      likes: 26,
-  },
-]
+let posts = []
+
 
 function MidBar() {
   const [ feedType, setFeedType ] = useState("forYou");
@@ -70,6 +21,22 @@ function MidBar() {
   const theme = 'dark';
   let content;
   
+  useEffect(() => {
+
+    const fetchData = async () => {
+      const postString = import.meta.env.VITE_API_SERVER_URL + "/posts";
+      const data = await axios.get(postString);
+
+      return data;
+    };
+
+    const posts = fetchData();
+    
+    console.log(posts);
+    
+
+  }, [])
+
   const handleFeedType = useCallback((type: string) => {
     if (type === "forYou") {
       setFeedType("forYou");
@@ -94,7 +61,7 @@ function MidBar() {
         <>
           <ContentType feedType={feedType} onClick={handleFeedType} />
           <PostInput theme={theme} />
-          <MainFeed onClick={handlePostOpen} postData={dummy_posts} />
+          <MainFeed onClick={handlePostOpen} postData={posts} />
         </>
     )
   }

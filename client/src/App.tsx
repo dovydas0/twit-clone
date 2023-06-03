@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import "./index.css";
 import Home from "./components/Home";
@@ -7,7 +7,7 @@ import SignupModal from "./components/modals/SignupModal";
 import Footer from "./components/Footer";
 
 function App() {
-
+  
   return (
     <div className="bg-[#15202B]">
       <div className="max-w-[1440px] mx-auto h-screen sm:grid sm:grid-cols-9">
