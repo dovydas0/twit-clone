@@ -1,29 +1,36 @@
+import { useCallback } from "react";
 import Post from "../Post"
 import PostType from "../types/PostType";
-import { AxiosResponse } from "axios";
+import axios from "axios";
 
 interface MainFeedProps {
     onClick: (data: PostType) => void;
     postData: PostType[];
+    setPosts: (post: React.Dispatch<React.SetStateAction<PostType[]>>) => PostType;
 }
 
 const MainFeed: React.FC<MainFeedProps> = ({
     onClick,
-    postData
+    postData,
+    setPosts
 }) => {
-  
 
-    console.log(postData);
-    
+    const updateLikedPost = async (e: React.MouseEvent, post: PostType, isLiked: boolean) => {
+        e.stopPropagation();
+                
+        await axios.post(import.meta.env.VITE_API_SERVER_URL + `/posts/like/${post.id}`, { isLiked });
+    }
+      
     return (
         <>
             {
-                postData?.length > 0 ? (
+                postData.length > 0 ? (
                     postData.map((post, index) => (
                         <Post 
                             key={index}
                             onClick={onClick}
-                            postData={post}
+                            Post={post}
+                            updateLikedPost={updateLikedPost}
                         />
                     ))
                 ) : (

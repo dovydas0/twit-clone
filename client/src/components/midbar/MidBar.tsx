@@ -4,13 +4,12 @@ import MainFeed from "./MainFeed";
 import { useCallback, useEffect, useState } from 'react';
 import PostElement from "../PostElement";
 import PostType from "../types/PostType";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 
 enum CONTENT {
   MAINFEED = 0,
   POST = 1
 }
-
 
 function MidBar() {
   const [ feedType, setFeedType ] = useState("forYou");
@@ -25,12 +24,13 @@ function MidBar() {
       try {
         const postString = import.meta.env.VITE_API_SERVER_URL + "/posts";
         const data = await axios.get(postString);
-        
-        setPosts(data.data); 
+
+        setPosts(data.data.reverse()); 
       } catch (error) {
         console.log(error);
       }
     };
+
     fetchPosts();
   }, [])
 
@@ -58,7 +58,7 @@ function MidBar() {
         <>
           <ContentType feedType={feedType} onClick={handleFeedType} />
           <PostInput theme={theme} />
-          <MainFeed onClick={handlePostOpen} postData={posts} />
+          <MainFeed onClick={handlePostOpen} postData={posts} setPosts={setPosts} />
         </>
     )
   }
