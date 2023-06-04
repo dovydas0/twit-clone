@@ -3,38 +3,35 @@ import PostInput from "./PostInput";
 import MainFeed from "./MainFeed";
 import { useCallback, useEffect, useState } from 'react';
 import PostElement from "../PostElement";
-import DummyData from "../types/DummyDataType";
-import axios from "axios";
+import PostType from "../types/PostType";
+import axios, { AxiosResponse } from "axios";
 
 enum CONTENT {
   MAINFEED = 0,
   POST = 1
 }
 
-let posts = []
-
 
 function MidBar() {
   const [ feedType, setFeedType ] = useState("forYou");
   const [ showContent, setShowContent ] = useState(CONTENT.MAINFEED);
-  const [ activePost, setActivePost ] = useState<DummyData | null>(null);
+  const [ activePost, setActivePost ] = useState<PostType | null>(null);
+  const [ posts, setPosts ] = useState<PostType[]>([]);
   const theme = 'dark';
   let content;
   
   useEffect(() => {
-
-    const fetchData = async () => {
-      const postString = import.meta.env.VITE_API_SERVER_URL + "/posts";
-      const data = await axios.get(postString);
-
-      return data;
+    const fetchPosts = async () => {
+      try {
+        const postString = import.meta.env.VITE_API_SERVER_URL + "/posts";
+        const data = await axios.get(postString);
+        
+        setPosts(data.data); 
+      } catch (error) {
+        console.log(error);
+      }
     };
-
-    const posts = fetchData();
-    
-    console.log(posts);
-    
-
+    fetchPosts();
   }, [])
 
   const handleFeedType = useCallback((type: string) => {
@@ -46,7 +43,7 @@ function MidBar() {
 
   }, [feedType])
 
-  const handlePostOpen = useCallback((post: DummyData) => {
+  const handlePostOpen = useCallback((post: PostType) => {
     setActivePost(post)
     setShowContent(CONTENT.POST)
   }, [showContent, activePost])

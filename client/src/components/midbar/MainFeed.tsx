@@ -1,9 +1,10 @@
 import Post from "../Post"
-import DummyData from "../types/DummyDataType";
+import PostType from "../types/PostType";
+import { AxiosResponse } from "axios";
 
 interface MainFeedProps {
-    onClick: (data: DummyData) => void;
-    postData: DummyData[];
+    onClick: (data: PostType) => void;
+    postData: PostType[];
 }
 
 const MainFeed: React.FC<MainFeedProps> = ({
@@ -11,16 +12,27 @@ const MainFeed: React.FC<MainFeedProps> = ({
     postData
 }) => {
   
+
+    console.log(postData);
+    
     return (
         <>
             {
-                postData.map((post, index) => (
-                    <Post 
-                    key={index}
-                    onClick={onClick}
-                    postData={post}
-                    />
-                ))
+                postData?.length > 0 ? (
+                    postData.map((post, index) => (
+                        <Post 
+                            key={index}
+                            onClick={onClick}
+                            postData={post}
+                        />
+                    ))
+                ) : (
+                    <div>
+                        <h2 className="mt-6 text-xl text-neutral-500 flex justify-center">
+                            No posts found
+                        </h2>
+                    </div>
+                )
             }
         </>
     )

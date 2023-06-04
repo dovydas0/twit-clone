@@ -1,4 +1,4 @@
-import DummyData from "./types/DummyDataType"
+import DummyData from "./types/PostType"
 
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiArrowBack } from "react-icons/bi";

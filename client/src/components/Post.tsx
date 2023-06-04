@@ -1,9 +1,9 @@
 import { AiOutlineHeart } from 'react-icons/ai';
-import DummyData from './types/DummyDataType';
+import PostType from './types/PostType';
 
 interface PostProps {
-    onClick: (data: DummyData) => void
-    postData: DummyData;
+    onClick: (data: PostType) => void
+    postData: PostType;
 }
 
 const Post: React.FC<PostProps> = ({
@@ -34,7 +34,7 @@ const Post: React.FC<PostProps> = ({
         </div>
         <div className="flex flex-col gap-2">
             <div>
-                <b>{postData.author}</b>
+                <b>{postData.user_id}</b>
             </div> 
             <div>
                 <p className='text-[15px]'>
@@ -52,7 +52,7 @@ const Post: React.FC<PostProps> = ({
                 cursor-pointer
             '>
                 <AiOutlineHeart size={18} />
-                <p className="text-xs">{postData.likes}</p>
+                <p className="text-xs">{postData.liked}</p>
             </div>
         </div>
     </div>
