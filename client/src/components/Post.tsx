@@ -49,7 +49,7 @@ const Post: React.FC<PostProps> = ({
         </div>
         <div className="flex flex-col gap-2">
             <div>
-                <b>{Post.user_id}</b>
+                <b>{Post.username}</b>
             </div> 
             <div>
                 <p className='text-[15px]'>

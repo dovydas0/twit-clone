@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import Post from "../Post"
 import PostType from "../types/PostType";
 import axios from "axios";
@@ -18,7 +17,7 @@ const MainFeed: React.FC<MainFeedProps> = ({
     const updateLikedPost = async (e: React.MouseEvent, post: PostType, isLiked: boolean) => {
         e.stopPropagation();
                 
-        await axios.post(import.meta.env.VITE_API_SERVER_URL + `/posts/like/${post.id}`, { isLiked });
+        await axios.post(import.meta.env.VITE_API_SERVER_URL + `/posts/like/${post.post_id}`, { isLiked });
     }
       
     return (

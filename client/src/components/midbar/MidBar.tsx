@@ -23,9 +23,9 @@ function MidBar() {
     const fetchPosts = async () => {
       try {
         const postString = import.meta.env.VITE_API_SERVER_URL + "/posts";
-        const data = await axios.get(postString);
+        const data = await axios.get(postString);        
 
-        setPosts(data.data.reverse()); 
+        setPosts(data.data); 
       } catch (error) {
         console.log(error);
       }
@@ -47,13 +47,13 @@ function MidBar() {
     }
     
     if (value) {
-        await axios.post(url, { userID: "6e95197f-7ac0-46df-8c9b-cb662c11361b", content: value })
+        await axios.post(url, { userID: "8177fd72-cc06-4564-bbd7-1f2a75430d85", content: value })
     }
 
     // Fetching updated posts
     const updatedPosts = await axios.get(url);    
     
-    setPosts(updatedPosts.data.reverse())
+    setPosts(updatedPosts.data)
     
     // if (textAreaEl) {
     //   textAreaEl.value = "";
