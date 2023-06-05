@@ -1,7 +1,7 @@
 import ContentType from "./ContentType";
 import PostInput from "./PostInput";
 import MainFeed from "./MainFeed";
-import { useCallback, useEffect, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useState } from 'react';
 import PostElement from "../PostElement";
 import PostType from "../types/PostType";
 import axios from "axios";
@@ -34,6 +34,32 @@ function MidBar() {
     fetchPosts();
   }, [])
 
+  const handlePost = async (e: FormEvent) => {
+    e.preventDefault();
+    let value;
+    let textAreaEl;
+    const url = import.meta.env.VITE_API_SERVER_URL + "/posts";
+
+    // Textarea validation
+    if (e?.target instanceof HTMLFormElement) {
+        textAreaEl = e.target[0] as HTMLTextAreaElement;
+        value = textAreaEl.value;
+    }
+    
+    if (value) {
+        await axios.post(url, { userID: "6e95197f-7ac0-46df-8c9b-cb662c11361b", content: value })
+    }
+
+    // Fetching updated posts
+    const updatedPosts = await axios.get(url);    
+    
+    setPosts(updatedPosts.data.reverse())
+    
+    // if (textAreaEl) {
+    //   textAreaEl.value = "";
+    // }
+  }
+
   const handleFeedType = useCallback((type: string) => {
     if (type === "forYou") {
       setFeedType("forYou");
@@ -57,7 +83,7 @@ function MidBar() {
     content = (
         <>
           <ContentType feedType={feedType} onClick={handleFeedType} />
-          <PostInput theme={theme} />
+          <PostInput theme={theme} handlePost={handlePost} />
           <MainFeed onClick={handlePostOpen} postData={posts} setPosts={setPosts} />
         </>
     )

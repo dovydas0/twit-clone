@@ -14,7 +14,7 @@ const Post: React.FC<PostProps> = ({
     updateLikedPost
 }) => {
     const [ isLiked, setIsLiked ] = useState(false)
-    const [ likes, setLikes ] = useState(Post.liked || 0)
+    const [ likes, setLikes ] = useState(Post.likes || 0)
 
     const handlePostLike = (e: React.MouseEvent, post: PostType) => {
         if (!isLiked) {

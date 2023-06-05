@@ -3,5 +3,5 @@ export default interface PostType {
     created_at: Date;
     user_id: string;
     content: string;
-    liked: number;
+    likes: number;
 }

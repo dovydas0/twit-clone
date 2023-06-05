@@ -10,8 +10,9 @@ interface InputTextAreaProps {
 const InputTextArea: React.FC<InputTextAreaProps> = ({
   theme,
   placeholder, 
-  classes = ""
+  classes = "",
 }) => {
+  // Use this state to send the content to db and to restore empty input
   const [inputValue, setInputValue] = useState("");
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
