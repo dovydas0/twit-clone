@@ -1,98 +1,275 @@
 import { RxCross2 } from 'react-icons/rx';
 import { FcGoogle } from 'react-icons/fc';
 import { BsApple } from 'react-icons/bs';
-import Button from '../custom_elements/Button';
-
+import { FormEvent, useState, useRef } from 'react';
 import { Link } from 'react-router-dom'
+import Input from '../custom_elements/Input';
+import Button from '../custom_elements/Button';
+import DropdownSelector from '../custom_elements/DropdownSelector';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { DevTool } from '@hookform/devtools'
+import axios from 'axios';
 
+enum SIGNUP {
+    ACCOUNT_TYPES = 0,
+    CREATE_ACCOUNT = 1
+
+}
 
 const Modal = () => {
-  return (
-    <div className="
-        inset-0
-        flex
-        justify-center
-        items-center
-        fixed
-        bg-neutral-500/30
-    ">
-        <div className="
-            bg-[#15202B]
-            rounded-none
-            w-full
-            h-full
-            sm:h-auto
-            sm:w-[36rem]
-            sm:rounded-2xl
-            md:h-auto
-            md:w-[36rem]
-            md:rounded-2xl
-        ">
-            <div className='flex items-center m-3'>
-                <div className='
-                    cursor-pointer
-                    p-1.5
-                    hover:bg-neutral-200/20
-                    rounded-full
-                    transition
-                '>
-                    <Link to="/">
-                        <RxCross2 size={22} />
-                    </Link>
-                </div>
-                <div className='absolute left-1/2 -translate-x-4'>
-                    <img src="/twitter_logo.png" alt="logo" className='w-9' />
-                </div>
-            </div>
-            <div className='
+    const [ showContent, setShowContent ] = useState(SIGNUP.ACCOUNT_TYPES);
+    const [ disabled, setDisabled ] = useState(false);
+    const { 
+        handleSubmit, 
+        register, 
+        control,
+        formState: {
+            errors
+        }
+    } = useForm<FieldValues>({
+        defaultValues: {
+            username: '',
+            email: '',
+            password: '',
+            dob: '',
+        }
+    })
+
+    let content;
+
+    const months = ["", 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const days = ["", '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+    const years = ["", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", 
+    "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", 
+    "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", 
+    "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", 
+    "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906",
+    "1905", "1904", "1903", "1902", "1901", "1900"]
+
+
+    const createAccount: SubmitHandler<FieldValues> = (data) => {
+
+        console.log(data);
+        
+
+        // await axios.post('/users', {
+        //     username: 
+        // })
+    }
+
+    if (showContent === SIGNUP.ACCOUNT_TYPES) {
+        content = (
+            <div className="
+                inset-0
                 flex
                 justify-center
                 items-center
-                h-full
-            '>
-                <div className='w-72 mt-4 mb-10 flex flex-col gap-5 justify-center'>
-                    <div className='text-3xl font-semibold mb-3'>
-                        Join Twitter today
+                fixed
+                bg-neutral-500/30
+            ">
+                <div className="
+                    bg-[#15202B]
+                    rounded-none
+                    w-full
+                    h-full
+                    sm:h-auto
+                    sm:w-[36rem]
+                    sm:rounded-2xl
+                    md:h-auto
+                    md:w-[36rem]
+                    md:rounded-2xl
+                ">
+                    <div className='flex items-center m-3'>
+                        <div className='
+                            cursor-pointer
+                            p-1.5
+                            hover:bg-neutral-200/20
+                            rounded-full
+                            transition
+                        '>
+                            <Link to="/">
+                                <RxCross2 size={22} />
+                            </Link>
+                        </div>
+                        <div className='absolute left-1/2 -translate-x-4'>
+                            <img src="/twitter_logo.png" alt="logo" className='w-9' />
+                        </div>
                     </div>
-                    <Button
-                        value="Sign up with Google"
-                        icon={FcGoogle}
-                    />
-                    <Button
-                        value="Sign up with Apple"
-                        icon={BsApple}
-                    />
-                    <div className='flex justify-center -mb-2'>
-                        <div className='before:content-[""] w-full mx-2 border-b border-neutral-200/20 -translate-y-1/2'></div>
-                        or
-                        <div className='before:content-[""] w-full mx-2 border-b border-neutral-200/20 -translate-y-1/2'></div>
-                    </div>
-                    <Button
-                        value="Create account"
-                    />
-                    <div className='-mt-2 text-slate-400 text-xs tracking-wider'>
-                        By signing up, you agree to the Terms of Service 
-                        and Privacy Policy, including Cookie Use.
-                    </div>
-                    <div className='my-6 mb-36 text-slate-400 text-sm tracking-wider'>
-                        Have an account already? 
-                        <span 
-                            onClick={() => {}}
-                            className='
-                                text-sky-500
-                                cursor-pointer
-                                hover:underline
-                                ml-1
-                            '
-                        >
-                            Log in
-                        </span>
+                    <div className='
+                        flex
+                        justify-center
+                        items-center
+                        h-full
+                    '>
+                        <div className='w-72 mt-4 mb-10 flex flex-col gap-5 justify-center'>
+                            <div className='text-3xl font-semibold mb-3'>
+                                Join Twitter today
+                            </div>
+                            <Button
+                                value="Sign up with Google"
+                                icon={FcGoogle}
+                                onClick={() => {}}
+                                />
+                            <Button
+                                value="Sign up with Apple"
+                                icon={BsApple}
+                                onClick={() => {}}
+                            />
+                            <div className='flex justify-center -mb-2'>
+                                <div className='before:content-[""] w-full mx-2 border-b border-neutral-200/20 -translate-y-1/2'></div>
+                                or
+                                <div className='before:content-[""] w-full mx-2 border-b border-neutral-200/20 -translate-y-1/2'></div>
+                            </div>
+                            <Button
+                                value="Create account"
+                                onClick={() => setShowContent(SIGNUP.CREATE_ACCOUNT)}
+                            />
+                            <div className='-mt-2 text-slate-400 text-xs tracking-wider'>
+                                By signing up, you agree to the Terms of Service 
+                                and Privacy Policy, including Cookie Use.
+                            </div>
+                            <div className='my-6 mb-36 text-slate-400 text-sm tracking-wider'>
+                                Have an account already?
+                                <Link to="/login">
+                                    <span className='
+                                        text-sky-500
+                                        cursor-pointer
+                                        hover:underline
+                                        ml-1
+                                    '>
+                                        Log in
+                                    </span>
+                                </Link>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-  )
+        )
+    }
+    
+    if (showContent === SIGNUP.CREATE_ACCOUNT) {
+        content = (
+            <div className="
+                inset-0
+                flex
+                justify-center
+                items-center
+                fixed
+                bg-neutral-500/30
+            ">
+                <div className="
+                    bg-[#15202B]
+                    rounded-none
+                    w-full
+                    h-full
+                    sm:h-auto
+                    sm:w-[36rem]
+                    sm:rounded-2xl
+                    md:h-auto
+                    md:w-[36rem]
+                    md:rounded-2xl
+                ">
+                    <div className='flex items-center m-3'>
+                        <div className='
+                            cursor-pointer
+                            p-1.5
+                            hover:bg-neutral-200/20
+                            rounded-full
+                            transition
+                        '>
+                            <Link to="/">
+                                <RxCross2 size={22} />
+                            </Link>
+                        </div>
+                        <div className='absolute left-1/2 -translate-x-4'>
+                            <img src="/twitter_logo.png" alt="logo" className='w-9' />
+                        </div>
+                    </div>
+                    <div className='
+                        flex
+                        justify-center
+                        items-center
+                        h-full
+                    '>
+                        <div className='w-96 mt-4 mb-10 flex flex-col gap-5 justify-center'>
+                            <div className='text-3xl font-semibold mb-3'>
+                                Create your account
+                            </div>
+                            <Input
+                                required
+                                id='username'
+                                placeholder='Name'
+                                type='text'
+                                register={register}
+                                errors={errors}
+                            />
+                            <Input
+                                required
+                                id='email'
+                                placeholder='Email'
+                                type='email'
+                                register={register}
+                                errors={errors}
+                            />
+                            <Input
+                                required
+                                id='password'
+                                placeholder='Password'
+                                type='password'
+                                register={register}
+                                errors={errors}
+                            />
+                            <div className=' mb-36'>
+                                <div className='mt-5 mb-1 text-md text-white font-bold'>
+                                    Date of Birth
+                                </div>
+                                <div className='text-slate-400 text-xs tracking-wider'>
+                                    This will not be shown publicly. Confirm your own age, 
+                                    even if this account is for a business, a pet, or something else.
+                                </div>
+                                <div className='mt-4 grid grid_date'>
+                                    <DropdownSelector
+                                        label='Month'
+                                        span={5}
+                                        width={180}
+                                        options={months}
+                                    />
+                                    <DropdownSelector
+                                        label='Day'
+                                        span={3}
+                                        width={77}
+                                        options={days}
+                                    />
+                                    <DropdownSelector
+                                        label='Year'
+                                        span={2}
+                                        width={105}
+                                        options={years}
+                                    />
+                                </div>
+                            </div>
+                            {/* <Link to="/"> */}
+                                <Button
+                                    thick
+                                    disabled={disabled}
+                                    value="Create account"
+                                    onClick={handleSubmit(createAccount)}
+                                />
+                            {/* </Link> */}
+                        </div>
+                        <DevTool control={control} />
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+  return (
+        <>
+            { content }
+        </>
+    )
 }
 
 export default Modal

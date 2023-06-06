@@ -1,29 +1,46 @@
 import { useRef, useState } from 'react';
+import { UseFormRegister, FieldValues, FieldErrors } from "react-hook-form";
+
 
 interface InputProps {
+    id: string;
     placeholder: string;
+    required?: boolean;
+    type: string;
+    register: UseFormRegister<FieldValues>;
+    errors: FieldErrors;
 }
 
 const Input: React.FC<InputProps> = ({
-    placeholder
+    id,
+    placeholder,
+    type,
+    required,
+    register,
+    errors
 }) => {
     // To check if input field is empty
     const [ value, setValue ] = useState(''); 
-
-    const inputRef = useRef<HTMLInputElement>(null);
-
+    
+    const divRef = useRef<HTMLDivElement>(null);
+    
     const handleLabelClick = () => {
-        inputRef.current?.focus();
-    }
+        const inputEl = divRef.current?.children[0] as HTMLDivElement;
+        inputEl.focus();
+    }    
+        
 
   return (
-    <div className="w-full relative">
+    <div ref={divRef} className="w-full relative">
         <input 
-            ref={inputRef}
-            type="text"
-            onChange={(e) => setValue(e.target.value)}
-            value={value}
-            className='
+            id={id}
+            type={type}
+            {...register(id, {
+                onChange: (e) => setValue(e.target.value),
+                required
+                }
+            )}
+            className={`
                 peer
                 w-full
                 bg-[#15202B]
@@ -36,7 +53,8 @@ const Input: React.FC<InputProps> = ({
                 focus:border-sky-500
                 focus:border-2
                 border
-            '    
+                ${errors[id]? 'border-red-500' : ''}
+            `}
         />
         <label 
             onClick={handleLabelClick}

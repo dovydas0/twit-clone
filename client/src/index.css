@@ -27,6 +27,10 @@ body{
   height: 100%;
 }
 
+.grid_date {
+  grid-template-columns: 50% 23% 28%;
+}
+
 @media (max-width:639.5px) {
   .hiddenSignFooter {
     display: none;

@@ -3,11 +3,13 @@ import { FcGoogle } from 'react-icons/fc';
 import { BsApple } from 'react-icons/bs';
 import Input from '../custom_elements/Input';
 import Button from '../custom_elements/Button';
-
 import { Link } from 'react-router-dom'
+import { useForm } from 'react-hook-form';
 
 
 const Modal = () => {
+    const { register } = useForm();
+
   return (
     <div className="
         inset-0
@@ -68,7 +70,12 @@ const Modal = () => {
                         or
                         <div className='before:content-[""] w-full mx-2 border-b border-neutral-200/20 -translate-y-1/2'></div>
                     </div>
-                    <Input placeholder="Phone, email, or username" />
+                    <Input
+                        id="email"
+                        placeholder="Email"
+                        type="email"
+                        register={register}
+                    />
                     <Button
                         value="Next"
                     />
@@ -79,17 +86,16 @@ const Modal = () => {
                     />
                     <div className='my-6 mb-12 text-slate-400 text-sm tracking-wider'>
                         Don't have an account? 
-                        <span 
-                            onClick={() => {}}
-                            className='
+                        <Link to="/signup">
+                            <span className='
                                 text-sky-500
                                 cursor-pointer
                                 hover:underline
                                 ml-1
-                            '
-                        >
-                            Sign up
-                        </span>
+                            '>
+                                Sign up
+                            </span>
+                        </Link>
                     </div>
                 </div>
             </div>
