@@ -42,7 +42,7 @@ const Post: React.FC<PostProps> = ({
     >
         <div className="mr-3">
             <img
-                src="/placeholder.jpg" 
+                src={Post.user_avatar} 
                 alt="avatar"
                 className="rounded-full w-12 h-12"
             />

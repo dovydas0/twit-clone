@@ -1,14 +1,18 @@
 import { RxCross2 } from 'react-icons/rx';
 import { FcGoogle } from 'react-icons/fc';
 import { BsApple } from 'react-icons/bs';
-import { FormEvent, useState, useRef } from 'react';
-import { Link } from 'react-router-dom'
+import { useState } from 'react';
+import { Link, Route } from 'react-router-dom'
 import Input from '../custom_elements/Input';
 import Button from '../custom_elements/Button';
 import DropdownSelector from '../custom_elements/DropdownSelector';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { DevTool } from '@hookform/devtools'
+import { toast } from 'react-hot-toast';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+import Home from '../Home';
+
 
 enum SIGNUP {
     ACCOUNT_TYPES = 0,
@@ -22,7 +26,6 @@ const Modal = () => {
     const { 
         handleSubmit, 
         register, 
-        control,
         formState: {
             errors
         }
@@ -31,10 +34,13 @@ const Modal = () => {
             username: '',
             email: '',
             password: '',
-            dob: '',
+            day: '',
+            month: '',
+            year: '',
         }
     })
 
+    const navigate = useNavigate();
     let content;
 
     const months = ["", 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -47,14 +53,35 @@ const Modal = () => {
     "1905", "1904", "1903", "1902", "1901", "1900"]
 
 
-    const createAccount: SubmitHandler<FieldValues> = (data) => {
-
-        console.log(data);
+    const createAccount: SubmitHandler<FieldValues> = async (data) => {        
         
+        // constructing dob property
+        data.dob = data.day + "-" + data.month + "-" + data.year;
 
-        // await axios.post('/users', {
-        //     username: 
-        // })
+        delete data.day
+        delete data.month
+        delete data.year;
+
+        data.dob = new Date(data.dob).toLocaleDateString("en-GB");
+        data.avatar = 'default_avatar.jpg';
+
+        // request
+        const createAccount = axios.post(import.meta.env.VITE_API_SERVER_URL + '/users', data);
+        
+        // Posting data to server
+        const accountRequest = await toast.promise(createAccount, {
+                loading: 'Creating account...',
+                success: 'Account created successfully!',
+                error: 'Error creating account.'
+            }
+        )
+
+        if (accountRequest.status === 200) {
+            console.log('success');
+            navigate('/');
+            
+        }        
+
     }
 
     if (showContent === SIGNUP.ACCOUNT_TYPES) {
@@ -201,22 +228,25 @@ const Modal = () => {
                                 id='username'
                                 placeholder='Name'
                                 type='text'
+                                RegExPattern={new RegExp('^[a-zA-Z-0-9]{4,20}$')}
                                 register={register}
                                 errors={errors}
-                            />
+                                />
                             <Input
                                 required
                                 id='email'
                                 placeholder='Email'
                                 type='email'
+                                RegExPattern={new RegExp('^[a-zA-Z0-9]+@[a-z]+\.[a-z]{2,3}$')}
                                 register={register}
                                 errors={errors}
-                            />
+                                />
                             <Input
                                 required
                                 id='password'
                                 placeholder='Password'
                                 type='password'
+                                RegExPattern={new RegExp('^[a-zA-Z-0-9]{6,}$')}
                                 register={register}
                                 errors={errors}
                             />
@@ -230,22 +260,28 @@ const Modal = () => {
                                 </div>
                                 <div className='mt-4 grid grid_date'>
                                     <DropdownSelector
+                                        id='month'
                                         label='Month'
-                                        span={5}
                                         width={180}
+                                        register={register}
                                         options={months}
+                                        errors={errors}
                                     />
                                     <DropdownSelector
+                                        id='day'
                                         label='Day'
-                                        span={3}
                                         width={77}
+                                        register={register}
                                         options={days}
+                                        errors={errors}
                                     />
                                     <DropdownSelector
+                                        id='year'
                                         label='Year'
-                                        span={2}
                                         width={105}
+                                        register={register}
                                         options={years}
+                                        errors={errors}
                                     />
                                 </div>
                             </div>
@@ -258,7 +294,6 @@ const Modal = () => {
                                 />
                             {/* </Link> */}
                         </div>
-                        <DevTool control={control} />
                     </div>
                 </div>
             </div>
