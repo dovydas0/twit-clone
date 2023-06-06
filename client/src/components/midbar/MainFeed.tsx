@@ -5,7 +5,7 @@ import axios from "axios";
 interface MainFeedProps {
     onClick: (data: PostType) => void;
     postData: PostType[];
-    setPosts: (post: React.Dispatch<React.SetStateAction<PostType[]>>) => PostType;
+    setPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
 }
 
 const MainFeed: React.FC<MainFeedProps> = ({

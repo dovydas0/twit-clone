@@ -16,6 +16,7 @@ function MidBar() {
   const [ showContent, setShowContent ] = useState(CONTENT.MAINFEED);
   const [ activePost, setActivePost ] = useState<PostType | null>(null);
   const [ posts, setPosts ] = useState<PostType[]>([]);
+  const [inputValue, setInputValue] = useState("");
   const theme = 'dark';
   let content;
   
@@ -35,29 +36,16 @@ function MidBar() {
   }, [])
 
   const handlePost = async (e: FormEvent) => {
-    e.preventDefault();
-    let value;
-    let textAreaEl;
+    e.preventDefault()
     const url = import.meta.env.VITE_API_SERVER_URL + "/posts";
 
-    // Textarea validation
-    if (e?.target instanceof HTMLFormElement) {
-        textAreaEl = e.target[0] as HTMLTextAreaElement;
-        value = textAreaEl.value;
-    }
-    
-    if (value) {
-        await axios.post(url, { userID: "8177fd72-cc06-4564-bbd7-1f2a75430d85", content: value })
-    }
+    await axios.post(url, { userID: "8177fd72-cc06-4564-bbd7-1f2a75430d85", content: inputValue })
 
     // Fetching updated posts
     const updatedPosts = await axios.get(url);    
     
     setPosts(updatedPosts.data)
-    
-    // if (textAreaEl) {
-    //   textAreaEl.value = "";
-    // }
+    setInputValue('');
   }
 
   const handleFeedType = useCallback((type: string) => {
@@ -83,7 +71,7 @@ function MidBar() {
     content = (
         <>
           <ContentType feedType={feedType} onClick={handleFeedType} />
-          <PostInput theme={theme} handlePost={handlePost} />
+          <PostInput theme={theme} handlePost={handlePost} inputValue={inputValue} setInputValue={setInputValue} />
           <MainFeed onClick={handlePostOpen} postData={posts} setPosts={setPosts} />
         </>
     )
@@ -91,7 +79,13 @@ function MidBar() {
 
   if (showContent === CONTENT.POST) {
     content = (
-      <PostElement theme={theme} post={activePost} onClose={handlePostClose} />
+      <PostElement 
+        theme={theme}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+        post={activePost}
+        onClose={handlePostClose}
+      />
     )
   }
 

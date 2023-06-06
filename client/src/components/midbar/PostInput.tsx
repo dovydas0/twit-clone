@@ -1,17 +1,20 @@
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import BlueButton from "../custom_elements/BlueButton";
 import InputTextArea from "../custom_elements/InputTextArea";
 
 interface PostInputProps {
     theme: string;
+    inputValue: string;
+    setInputValue: (value: string) => void;
     handlePost: (e: FormEvent) => void;
 }
 
 const PostInput: React.FC<PostInputProps> = ({
     theme,
+    inputValue,
+    setInputValue,
     handlePost
 }) => {
-
 
   return (
     <div className="py-2 flex w-full border-white/20 border-y">
@@ -24,6 +27,8 @@ const PostInput: React.FC<PostInputProps> = ({
             <form action="submit" onSubmit={(e) => handlePost(e)}>
                 <InputTextArea 
                     theme={theme}
+                    inputValue={inputValue}
+                    setInputValue={setInputValue}
                     placeholder="What is happening?!"
                     classes="border-white/20 border-b"
                 />

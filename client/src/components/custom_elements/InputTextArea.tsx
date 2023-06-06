@@ -3,17 +3,20 @@ import {useState, useRef } from 'react';
 
 interface InputTextAreaProps {
   theme: string;
+  inputValue: string;
+  setInputValue: (value: string) => void;
   placeholder: string;
   classes?: string;
 }
 
 const InputTextArea: React.FC<InputTextAreaProps> = ({
   theme,
+  inputValue,
+  setInputValue,
   placeholder, 
   classes = "",
 }) => {
   // Use this state to send the content to db and to restore empty input
-  const [inputValue, setInputValue] = useState("");
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   useAutosizeTextArea(textAreaRef.current, inputValue);
@@ -42,9 +45,8 @@ const InputTextArea: React.FC<InputTextAreaProps> = ({
           ${classes}
           ${theme === 'dark' ? 'bg-[#15202B]' : ''}
       `}
-  >
-  
-  </textarea>
+    >
+    </textarea>
   )
 }
 

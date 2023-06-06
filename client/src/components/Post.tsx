@@ -51,8 +51,8 @@ const Post: React.FC<PostProps> = ({
             <div>
                 <b>{Post.username}</b>
             </div> 
-            <div>
-                <p className='text-[15px]'>
+            <div className=' break-all'>
+                <p className='text-[15px] break-words'>
                     {Post.content}
                 </p>
             </div>

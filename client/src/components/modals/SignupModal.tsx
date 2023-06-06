@@ -2,7 +2,7 @@ import { RxCross2 } from 'react-icons/rx';
 import { FcGoogle } from 'react-icons/fc';
 import { BsApple } from 'react-icons/bs';
 import { useState } from 'react';
-import { Link, Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Input from '../custom_elements/Input';
 import Button from '../custom_elements/Button';
 import DropdownSelector from '../custom_elements/DropdownSelector';
@@ -10,9 +10,6 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
-import Home from '../Home';
-
 
 enum SIGNUP {
     ACCOUNT_TYPES = 0,
@@ -77,9 +74,7 @@ const Modal = () => {
         )
 
         if (accountRequest.status === 200) {
-            console.log('success');
             navigate('/');
-            
         }        
 
     }
