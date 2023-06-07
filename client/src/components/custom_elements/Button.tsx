@@ -34,7 +34,6 @@ const Button: React.FC<ButtonProps> = ({
             justify-center
             items-align
             p-1.5
-            gap-1
             transition
             ${thick ? 'py-3' : ''}
             ${small ? ' w-[85px]' : 'w-full'}

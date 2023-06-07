@@ -24,10 +24,10 @@ const Modal = () => {
             rounded-none
             w-full
             h-full
-            sm:h-auto
+            sm:h-[95%]
             sm:w-[36rem]
             sm:rounded-2xl
-            md:h-auto
+            md:h-[95%]
             md:w-[36rem]
             md:rounded-2xl
         ">
@@ -60,10 +60,12 @@ const Modal = () => {
                     <Button
                         value="Sign in with Google"
                         icon={FcGoogle}
-                    />
+                        onClick={() => {}}
+                        />
                     <Button
                         value="Sign in with Apple"
                         icon={BsApple}
+                        onClick={() => {}}
                     />
                     <div className='flex justify-center -mb-2'>
                         <div className='before:content-[""] w-full mx-2 border-b border-neutral-200/20 -translate-y-1/2'></div>
@@ -78,11 +80,13 @@ const Modal = () => {
                     />
                     <Button
                         value="Next"
+                        onClick={() => {}}
                     />
                     <Button
                         outline
                         value="Forgot password?"
                         textSize="sm"
+                        onClick={() => {}}
                     />
                     <div className='my-6 mb-12 text-slate-400 text-sm tracking-wider'>
                         Don't have an account? 

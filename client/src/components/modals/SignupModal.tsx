@@ -94,10 +94,10 @@ const Modal = () => {
                     rounded-none
                     w-full
                     h-full
-                    sm:h-auto
+                    sm:h-[95%]
                     sm:w-[36rem]
                     sm:rounded-2xl
-                    md:h-auto
+                    md:h-[95%]
                     md:w-[36rem]
                     md:rounded-2xl
                 ">
@@ -183,16 +183,18 @@ const Modal = () => {
                 <div className="
                     bg-[#15202B]
                     rounded-none
+                    flex
+                    flex-col
                     w-full
                     h-full
-                    sm:h-auto
+                    sm:h-[640px]
                     sm:w-[36rem]
                     sm:rounded-2xl
-                    md:h-auto
+                    md:h-[640px]
                     md:w-[36rem]
                     md:rounded-2xl
                 ">
-                    <div className='flex items-center m-3'>
+                    <div className='flex items-center p-3 border-yellow-400 border'>
                         <div className='
                             cursor-pointer
                             p-1.5
@@ -210,12 +212,16 @@ const Modal = () => {
                     </div>
                     <div className='
                         flex
-                        justify-center
+                        flex-col
                         items-center
-                        h-full
+                        overflow-y-auto
+                        overflow-x-hidden
+                        border-pink-700
+                        border
+                        mx-auto
                     '>
-                        <div className='w-96 mt-4 mb-10 flex flex-col gap-5 justify-center'>
-                            <div className='text-3xl font-semibold mb-3'>
+                        <div className='max-w-96 mt-4 flex flex-col gap-5'>
+                            <div className='text-3xl font-semibold mb-2'>
                                 Create your account
                             </div>
                             <Input
@@ -245,15 +251,15 @@ const Modal = () => {
                                 register={register}
                                 errors={errors}
                             />
-                            <div className=' mb-36'>
-                                <div className='mt-5 mb-1 text-md text-white font-bold'>
+                            <div className='mt-2'>
+                                <div className='mb-1 text-md text-white font-bold'>
                                     Date of Birth
                                 </div>
                                 <div className='text-slate-400 text-xs tracking-wider'>
                                     This will not be shown publicly. Confirm your own age, 
                                     even if this account is for a business, a pet, or something else.
                                 </div>
-                                <div className='mt-4 grid grid_date'>
+                                <div className='mt-4 grid grid_date h-16'>
                                     <DropdownSelector
                                         id='month'
                                         label='Month'
@@ -280,14 +286,28 @@ const Modal = () => {
                                     />
                                 </div>
                             </div>
-                            {/* <Link to="/"> */}
-                                <Button
-                                    thick
-                                    disabled={disabled}
-                                    value="Create account"
-                                    onClick={handleSubmit(createAccount)}
-                                />
-                            {/* </Link> */}
+                        </div>
+                    </div>
+                    <div className='
+                        w-full
+                        sticky
+                        border-red-300
+                        border
+                        border-t
+                        border-neutral-200/25
+                    '>
+                        <div className='
+                            w-96
+                            m-auto
+                            border-green-300
+                            border
+                        '>
+                            <Button
+                                thick
+                                disabled={disabled}
+                                value="Create account"
+                                onClick={handleSubmit(createAccount)}
+                            />
                         </div>
                     </div>
                 </div>

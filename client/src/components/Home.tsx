@@ -3,6 +3,7 @@ import MidBar from "./midbar/MidBar";
 import RightBar from "./RightBar";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { setState } from "../store/features/stateSlice";
+import Footer from "./Footer";
 
 const Home = () => {
 
@@ -10,7 +11,7 @@ const Home = () => {
     const selector = useAppSelector(state => state.state);
 
   return (
-    <>
+    <div className="max-w-[1440px] mx-auto h-screen sm:grid sm:grid-cols-9">
         <div className="h-20 sm:h-full sm:col-span-1 lg:col-span-1 xl:col-span-2 bg-[#15202B]">
             <LeftBar currentUser={true} />
         </div>
@@ -20,7 +21,8 @@ const Home = () => {
         <div className="sm:col-span-1 lg:col-span-3 xl:col-span-2 bg-[#15202B]">
             <RightBar />
         </div>
-    </>
+        <Footer />
+    </div>
   )
 }
 

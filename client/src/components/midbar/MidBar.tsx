@@ -16,7 +16,7 @@ function MidBar() {
   const [ showContent, setShowContent ] = useState(CONTENT.MAINFEED);
   const [ activePost, setActivePost ] = useState<PostType | null>(null);
   const [ posts, setPosts ] = useState<PostType[]>([]);
-  const [inputValue, setInputValue] = useState("");
+  const [ inputValue, setInputValue ] = useState("");
   const theme = 'dark';
   let content;
   
@@ -38,6 +38,10 @@ function MidBar() {
   const handlePost = async (e: FormEvent) => {
     e.preventDefault()
     const url = import.meta.env.VITE_API_SERVER_URL + "/posts";
+
+    if (inputValue === '') {
+      return;
+    }
 
     await axios.post(url, { userID: "8177fd72-cc06-4564-bbd7-1f2a75430d85", content: inputValue })
 
