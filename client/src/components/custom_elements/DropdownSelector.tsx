@@ -4,7 +4,7 @@ interface DropdownSelectorProps {
     id: string;
     label: string;
     options: string[];
-    width: number;
+    widthClass: string;
     register: UseFormRegister<FieldValues>;
     errors: FieldErrors;
 }
@@ -13,12 +13,12 @@ const DropdownSelector: React.FC<DropdownSelectorProps> = ({
     id,
     label,
     options,
-    width,
+    widthClass,
     register,
     errors
 }) => {
   return (
-    <div>
+    <div className="border-red-500 border">
         
         <select 
             id={id}
@@ -26,9 +26,10 @@ const DropdownSelector: React.FC<DropdownSelectorProps> = ({
                 required: true,
             })}
             className={`
+                border-green-500 border
                 peer
-                w-[${width}px]
                 bg-[#15202B]
+                ${widthClass}
                 absolute
                 pt-8
                 pl-[3px]

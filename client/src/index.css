@@ -31,6 +31,18 @@ body{
   grid-template-columns: 50% 23% 28%;
 }
 
+.custom_month_width {
+  width: 160px;
+}
+
+.custom_day_width {
+  width: 93px;
+}
+
+.custom_year_width {
+  width: 120px;
+}
+
 @media (max-width:639.5px) {
   .hiddenSignFooter {
     display: none;

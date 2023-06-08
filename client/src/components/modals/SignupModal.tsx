@@ -183,10 +183,10 @@ const Modal = () => {
                 <div className="
                     bg-[#15202B]
                     rounded-none
-                    flex
-                    flex-col
                     w-full
                     h-full
+                    relative
+                    overflow-auto
                     sm:h-[640px]
                     sm:w-[36rem]
                     sm:rounded-2xl
@@ -194,7 +194,7 @@ const Modal = () => {
                     md:w-[36rem]
                     md:rounded-2xl
                 ">
-                    <div className='flex items-center p-3 border-yellow-400 border'>
+                    <div className='flex items-center p-3 sticky top-0 z-50 bg-[#15202B]'>
                         <div className='
                             cursor-pointer
                             p-1.5
@@ -213,14 +213,13 @@ const Modal = () => {
                     <div className='
                         flex
                         flex-col
-                        items-center
-                        overflow-y-auto
                         overflow-x-hidden
-                        border-pink-700
-                        border
                         mx-auto
+                        px-8
+                        max-w-lg
+                        mb-5
                     '>
-                        <div className='max-w-96 mt-4 flex flex-col gap-5'>
+                        <div className=' mt-4 flex flex-col gap-5'>
                             <div className='text-3xl font-semibold mb-2'>
                                 Create your account
                             </div>
@@ -259,11 +258,11 @@ const Modal = () => {
                                     This will not be shown publicly. Confirm your own age, 
                                     even if this account is for a business, a pet, or something else.
                                 </div>
-                                <div className='mt-4 grid grid_date h-16'>
+                                <div className='mt-4 flex h-16 border-yellow-500 border'>
                                     <DropdownSelector
                                         id='month'
                                         label='Month'
-                                        width={180}
+                                        widthClass='custom_month_width'
                                         register={register}
                                         options={months}
                                         errors={errors}
@@ -271,7 +270,7 @@ const Modal = () => {
                                     <DropdownSelector
                                         id='day'
                                         label='Day'
-                                        width={77}
+                                        widthClass='custom_day_width'
                                         register={register}
                                         options={days}
                                         errors={errors}
@@ -279,7 +278,7 @@ const Modal = () => {
                                     <DropdownSelector
                                         id='year'
                                         label='Year'
-                                        width={105}
+                                        widthClass='custom_year_width'
                                         register={register}
                                         options={years}
                                         errors={errors}
@@ -289,18 +288,18 @@ const Modal = () => {
                         </div>
                     </div>
                     <div className='
+                        bg-[#15202B]
                         w-full
+                        py-6
                         sticky
-                        border-red-300
-                        border
+                        bottom-0
+                        z-50
                         border-t
                         border-neutral-200/25
                     '>
                         <div className='
                             w-96
                             m-auto
-                            border-green-300
-                            border
                         '>
                             <Button
                                 thick
