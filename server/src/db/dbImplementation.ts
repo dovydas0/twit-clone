@@ -66,10 +66,10 @@ export const createTables = async() => {
         poolNew.query(`
             CREATE TABLE IF NOT EXISTS post_table (
                 id UUID UNIQUE DEFAULT uuid_generate_v4() PRIMARY KEY NOT NULL, 
-                created_at DATE DEFAULT CURRENT_DATE NOT NULL, 
+                created_at TIMESTAMP DEFAULT NOW() NOT NULL, 
                 user_id UUID NOT NULL, 
                 content text NOT NULL, 
-                liked integer DEFAULT 0 NOT NULL, 
+                likes integer DEFAULT 0 NOT NULL, 
                 CONSTRAINT fk_post_user FOREIGN KEY (user_id) REFERENCES user_table (id)
             );
         `)
@@ -79,10 +79,10 @@ export const createTables = async() => {
         poolNew.query(`
             CREATE TABLE IF NOT EXISTS comment_table (
                 id UUID UNIQUE DEFAULT uuid_generate_v4() PRIMARY KEY NOT NULL, 
-                created_at DATE DEFAULT CURRENT_DATE NOT NULL, 
+                created_at TIMESTAMP DEFAULT NOW() NOT NULL, 
                 user_id UUID NOT NULL, 
                 content text NOT NULL, 
-                liked integer DEFAULT 0 NOT NULL,
+                likes integer DEFAULT 0 NOT NULL,
                 CONSTRAINT fk_comment_user FOREIGN KEY (user_id) REFERENCES user_table (id)
             );
         `)
@@ -92,11 +92,26 @@ export const createTables = async() => {
         poolNew.query(`
             CREATE TABLE IF NOT EXISTS comments_table (
                 id UUID UNIQUE DEFAULT uuid_generate_v4() PRIMARY KEY NOT NULL,
-                created_at DATE DEFAULT CURRENT_DATE NOT NULL,
+                created_at TIMESTAMP DEFAULT NOW() NOT NULL,
                 comment_id UUID NOT NULL,
                 user_id UUID NOT NULL,
                 post_id UUID NOT NULL,
                 CONSTRAINT fk_comment_comments FOREIGN KEY (comment_id) REFERENCES comment_table (id),
+                CONSTRAINT fk_user_comments FOREIGN KEY (user_id) REFERENCES user_table (id),
+                CONSTRAINT fk_post_comments FOREIGN KEY (post_id) REFERENCES post_table (id)
+            );
+        `)
+        
+        await sleep(100);
+
+        poolNew.query(`
+            CREATE TABLE IF NOT EXISTS user_post_table (
+                id UUID UNIQUE DEFAULT uuid_generate_v4() PRIMARY KEY NOT NULL,
+                created_at TIMESTAMP DEFAULT NOW() NOT NULL,
+                user_id UUID NOT NULL,
+                post_id UUID NOT NULL,
+                isLiked boolean DEFAULT FALSE NOT NULL,
+                isRetweeted boolean DEFAULT FALSE NOT NULL,
                 CONSTRAINT fk_user_comments FOREIGN KEY (user_id) REFERENCES user_table (id),
                 CONSTRAINT fk_post_comments FOREIGN KEY (post_id) REFERENCES post_table (id)
             );

@@ -61,7 +61,6 @@ export const createNewUser = async(req: express.Request, res: express.Response) 
 
         return res.status(200).json({ message: "User created" });
     } catch (error) {
-        
         return res.status(400).json({ message: "Something went wrong" });
     }
 

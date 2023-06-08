@@ -2,7 +2,7 @@ import express from 'express';
 import { validateUUID } from '../utils';
 import { v4 as uuid, validate } from 'uuid';
 
-import { getPosts, deletePostById, createPost, getPostById } from "../db/posts"
+import { getPosts, deletePostById, createPost, getPostById, updatePostById } from "../db/posts"
 import { getUserById } from '../db/users';
 
 export const getAllPosts = async(req: express.Request, res: express.Response) => {
@@ -24,8 +24,9 @@ export const createNewPost = async(req: express.Request, res: express.Response) 
             return res.status(400).json({ message: "Invalid user ID" });
         }
 
-        // Checking is user exists
         const { rows } = await getUserById(userID)
+        
+        // Checking is user exists
         if (rows.length < 1) {
             return res.status(400).json({ message: "Invalid user ID" });
         }
@@ -61,4 +62,27 @@ export const deletePost = async(req:express.Request, res: express.Response) => {
         return res.status(400).json({ message: "Something went wrong" });
     }
 
+}
+
+export const updatePostLikes = async(req: express.Request, res: express.Response) => {
+    try {
+        const { id } = req.params;
+        const isLiked = req.body;
+
+        const { rows } = await getPostById(id);        
+
+        // Checking if the post has already been liked
+        if (!isLiked.isLiked) {
+            rows[0].liked++;
+        } else {
+            rows[0].liked--;
+        }
+
+        // Updating the post
+        const updatedPost = await updatePostById(id, rows[0].content, rows[0].liked)
+        console.log(updatedPost[0].rows);
+        
+    } catch (error) {
+        return res.status(400).json({ message: "Invalid post ID" });
+    }
 }
