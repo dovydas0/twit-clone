@@ -32,15 +32,15 @@ body{
 }
 
 .custom_month_width {
-  width: 160px;
+  flex-basis: 50%;
 }
 
 .custom_day_width {
-  width: 93px;
+  flex-basis: 20%;
 }
 
 .custom_year_width {
-  width: 120px;
+  flex-basis: 30%;
 }
 
 @media (max-width:639.5px) {

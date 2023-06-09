@@ -18,7 +18,7 @@ const DropdownSelector: React.FC<DropdownSelectorProps> = ({
     errors
 }) => {
   return (
-    <div className="border-red-500 border">
+    <div className={`relative ${widthClass}`}>
         
         <select 
             id={id}
@@ -26,10 +26,9 @@ const DropdownSelector: React.FC<DropdownSelectorProps> = ({
                 required: true,
             })}
             className={`
-                border-green-500 border
                 peer
                 bg-[#15202B]
-                ${widthClass}
+                min-w-full
                 absolute
                 pt-8
                 pl-[3px]

@@ -24,9 +24,13 @@ export const createNewPost = async(req: express.Request, res: express.Response) 
             return res.status(400).json({ message: "Invalid user ID" });
         }
 
+        if (!content.trim()) {
+            return res.status(400).json({ message: "No content provided" });
+        }
+
         const { rows } = await getUserById(userID)
         
-        // Checking is user exists
+        // Checking if user exists
         if (rows.length < 1) {
             return res.status(400).json({ message: "Invalid user ID" });
         }

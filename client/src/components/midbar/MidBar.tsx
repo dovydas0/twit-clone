@@ -5,6 +5,7 @@ import { FormEvent, useCallback, useEffect, useState } from 'react';
 import PostElement from "../PostElement";
 import PostType from "../types/PostType";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 enum CONTENT {
   MAINFEED = 0,
@@ -39,11 +40,12 @@ function MidBar() {
     e.preventDefault()
     const url = import.meta.env.VITE_API_SERVER_URL + "/posts";
 
-    if (inputValue === '') {
+    if (inputValue.trim() === '') {
+      toast.error("Post cannot be empty");
       return;
     }
 
-    await axios.post(url, { userID: "8177fd72-cc06-4564-bbd7-1f2a75430d85", content: inputValue })
+    await axios.post(url, { userID: "8177fd72-cc06-4564-bbd7-1f2a75430d85", content: inputValue.trim() })
 
     // Fetching updated posts
     const updatedPosts = await axios.get(url);    

@@ -86,7 +86,8 @@ const Modal = () => {
                 flex
                 justify-center
                 items-center
-                fixed
+                absolute
+                overflow-y-auto
                 bg-neutral-500/30
             ">
                 <div className="
@@ -94,14 +95,17 @@ const Modal = () => {
                     rounded-none
                     w-full
                     h-full
-                    sm:h-[95%]
+                    flex
+                    flex-col
+                    overflow-y-auto
+                    sm:max-h-[90%]
                     sm:w-[36rem]
                     sm:rounded-2xl
-                    md:h-[95%]
+                    md:max-h-[660px]
                     md:w-[36rem]
                     md:rounded-2xl
                 ">
-                    <div className='flex items-center m-3'>
+                    <div className='flex rounded-2xl items-center p-3 top-0 z-50 bg-[#15202B]'>
                         <div className='
                             cursor-pointer
                             p-1.5
@@ -119,11 +123,11 @@ const Modal = () => {
                     </div>
                     <div className='
                         flex
-                        justify-center
+                        flex-col
                         items-center
-                        h-full
+                        overflow-y-auto
                     '>
-                        <div className='w-72 mt-4 mb-10 flex flex-col gap-5 justify-center'>
+                        <div className='w-80 mt-4 flex flex-col gap-5'>
                             <div className='text-3xl font-semibold mb-3'>
                                 Join Twitter today
                             </div>
@@ -157,7 +161,8 @@ const Modal = () => {
                                         text-sky-500
                                         cursor-pointer
                                         hover:underline
-                                        ml-1
+                                        ml-1            
+                                        pb-4
                                     '>
                                         Log in
                                     </span>
@@ -177,7 +182,8 @@ const Modal = () => {
                 flex
                 justify-center
                 items-center
-                fixed
+                absolute
+                overflow-y-auto
                 bg-neutral-500/30
             ">
                 <div className="
@@ -185,12 +191,14 @@ const Modal = () => {
                     rounded-none
                     w-full
                     h-full
-                    relative
-                    overflow-auto
-                    sm:h-[640px]
+                    flex
+                    flex-col
+                    justify-between
+                    overflow-y-auto
+                    sm:max-h-[90%]
                     sm:w-[36rem]
                     sm:rounded-2xl
-                    md:h-[640px]
+                    md:max-h-[660px]
                     md:w-[36rem]
                     md:rounded-2xl
                 ">
@@ -213,13 +221,16 @@ const Modal = () => {
                     <div className='
                         flex
                         flex-col
+                        items-center
                         overflow-x-hidden
+                        overflow-y-auto
+                        grow
+                        w-full
                         mx-auto
                         px-8
-                        max-w-lg
-                        mb-5
+                        pb-5
                     '>
-                        <div className=' mt-4 flex flex-col gap-5'>
+                        <div className='w-80 mt-4 flex flex-col gap-5'>
                             <div className='text-3xl font-semibold mb-2'>
                                 Create your account
                             </div>
@@ -258,7 +269,7 @@ const Modal = () => {
                                     This will not be shown publicly. Confirm your own age, 
                                     even if this account is for a business, a pet, or something else.
                                 </div>
-                                <div className='mt-4 flex h-16 border-yellow-500 border'>
+                                <div className='mt-4 flex justify-between gap-2 h-16'>
                                     <DropdownSelector
                                         id='month'
                                         label='Month'
@@ -288,25 +299,31 @@ const Modal = () => {
                         </div>
                     </div>
                     <div className='
-                        bg-[#15202B]
                         w-full
-                        py-6
+                        bg-[#15202B]                            
+                        mx-auto
+                        border-t
                         sticky
                         bottom-0
-                        z-50
-                        border-t
                         border-neutral-200/25
+                        z-50
                     '>
                         <div className='
-                            w-96
-                            m-auto
+                            max-w-lg
+                            mx-auto
+                            py-6
+                            px-8
                         '>
-                            <Button
-                                thick
-                                disabled={disabled}
-                                value="Create account"
-                                onClick={handleSubmit(createAccount)}
-                            />
+                            <div className='
+                                m-auto
+                            '>
+                                <Button
+                                    thick
+                                    disabled={disabled}
+                                    value="Create account"
+                                    onClick={handleSubmit(createAccount)}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

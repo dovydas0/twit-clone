@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import { validateUUID } from '../utils';
 import { v4 as uuid, validate } from 'uuid';
 
-import { deleteUserById, getUserById, getUsers, createUser } from "../db/users"
+import { deleteUserById, getUserById, getByEmail, getUsers, createUser } from "../db/users"
 
 export const getAllUsers = async(req: express.Request, res: express.Response) => {
     try {
@@ -12,6 +12,23 @@ export const getAllUsers = async(req: express.Request, res: express.Response) =>
     } catch (error) {
         console.log(error);
         return res.status(404).json({ message: "No users found" });        
+    }
+}
+
+export const getUserByEmail = async(req: express.Request, res: express.Response) => {
+    try {
+        const { email } = req.body;
+
+        const user = await getByEmail(email);        
+
+        if (user.rows.length < 1) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        
+        return res.status(200).json(user.rows);
+    } catch (error) {
+        console.log(error);
+        return res.status(404).json({ message: "No user found" });        
     }
 }
 
