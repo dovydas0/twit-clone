@@ -39,7 +39,8 @@ const DropdownSelector: React.FC<DropdownSelectorProps> = ({
                 focus:border-sky-500
                 focus:border-2
                 border
-                ${errors[id]? 'border-red-500 focus:border-red-500' : ''}
+                ${errors[id]? 'border-red-500 ' : ''}
+                ${errors[id]? ' focus:border-red-500' : ''}
             `}
         >
             {

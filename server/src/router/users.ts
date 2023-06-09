@@ -1,9 +1,9 @@
 import express from 'express';
-import { getAllUsers, deleteUser, updateUser, createNewUser, getUserByEmail } from '../controllers/users';
+import { getAllUsers, deleteUser, updateUser, getUserByEmail } from '../controllers/users';
+import { isAuthenticated } from '../middleware';
 
 export default (router: express.Router) => {
-    router.get('/users', getAllUsers);
-    router.post('/users', createNewUser);
+    router.get('/users', isAuthenticated, getAllUsers);
     router.post('/users/email', getUserByEmail);
     router.delete('/users/:id', deleteUser);
     // router.patch('/users/:id', updateUser);

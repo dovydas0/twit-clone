@@ -60,10 +60,9 @@ const Modal = () => {
         delete data.year;
 
         data.dob = new Date(data.dob).toLocaleDateString("en-GB");
-        data.avatar = 'default_avatar.jpg';
 
         // request
-        const createAccount = axios.post(import.meta.env.VITE_API_SERVER_URL + '/users', data);
+        const createAccount = axios.post(import.meta.env.VITE_API_SERVER_URL + '/auth/register', data);
         
         // Posting data to server
         const accountRequest = await toast.promise(createAccount, {
