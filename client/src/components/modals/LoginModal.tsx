@@ -46,6 +46,24 @@ const LoginModal = () => {
         }        
     }
     
+    const handleSigninSubmit: SubmitHandler<FieldValues> = async (data) => {
+        try {
+            const password = data.password;        
+    
+            if (!email) {
+                toast.error('Please enter a valid email');
+                return;
+            }
+            
+            await axios.post(import.meta.env.VITE_API_SERVER_URL + '/auth/login', { email, password })
+            
+            // setShowContent(SIGNIN.PASSWORD_AUTHENTICATION)
+        } catch (error) {
+            toast.error('User not found');
+            
+        }        
+    }
+    
     if (showContent === SIGNIN.EMAIL_AUTHENTICATION) {
         content = (
             <div className="

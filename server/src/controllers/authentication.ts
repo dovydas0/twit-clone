@@ -36,10 +36,7 @@ export const register = async (req: express.Request, res: express.Response) => {
 export const login = async (req: express.Request, res: express.Response) => {
 
     try {
-        const { 
-            email,
-            password
-            } = req.body;
+        const { email, password } = req.body;
 
         if (!email || !password) {
             return res.status(400).json({ message: "Invalid Request: Data missing." });
@@ -47,27 +44,26 @@ export const login = async (req: express.Request, res: express.Response) => {
         
         // Fetching existing user from DB
         const user = await getByEmail(email);
-
+        
         if (user.rows.length < 1) {
             return res.status(404).json({ message: "User not found." });
         }
+        
+        let userObject = user.rows[0];
 
-        const expectedHash = await bcrypt.compare(password, user.rows[0].password);
+        const expectedHash = await bcrypt.compare(password, userObject.password);
         
         if (expectedHash === false) {
             return res.status(403).json({ message: "Invalid Password." });
         }
 
-        let data = {
-            time: Date(),
-            userId: user.rows[0].id,
-        }
+        delete userObject.password;
         
-        const token = jwt.sign(data, process.env.JWT_SECRET_KEY);
+        const token = jwt.sign(userObject, process.env.JWT_SECRET_KEY, { expiresIn: '30m' });
 
-        res.cookie('USER_TOKEN', token, { domain: process.env.DOMAIN, path: '/' })
+        res.cookie('USER_TOKEN', token/*, { domain: process.env.DOMAIN, path: '/' }*/)
 
-        return res.status(200).json({ token: token });
+        return res.status(200).json({ token });
     } catch (error) {
         console.log(error.message);
         
