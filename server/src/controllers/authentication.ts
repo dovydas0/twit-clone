@@ -57,13 +57,13 @@ export const login = async (req: express.Request, res: express.Response) => {
             return res.status(403).json({ message: "Invalid Password." });
         }
 
-        delete userObject.password;
-        
+        delete userObject.password;        
+
         const token = jwt.sign(userObject, process.env.JWT_SECRET_KEY, { expiresIn: '30m' });
 
-        res.cookie('USER_TOKEN', token/*, { domain: process.env.DOMAIN, path: '/' }*/)
+        res.cookie("USER_TOKEN", token, { httpOnly: true });
 
-        return res.status(200).json({ token });
+        res.sendStatus(200);
     } catch (error) {
         console.log(error.message);
         

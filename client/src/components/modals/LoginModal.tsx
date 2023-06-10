@@ -48,18 +48,19 @@ const LoginModal = () => {
     
     const handleSigninSubmit: SubmitHandler<FieldValues> = async (data) => {
         try {
-            const password = data.password;        
-    
-            if (!email) {
-                toast.error('Please enter a valid email');
+            const password = data.password;
+
+            if (!email || !password) {
+                toast.error('Please enter email and password');
                 return;
             }
             
             await axios.post(import.meta.env.VITE_API_SERVER_URL + '/auth/login', { email, password })
-            
+
+            toast.success('Successfully logged in');
             // setShowContent(SIGNIN.PASSWORD_AUTHENTICATION)
         } catch (error) {
-            toast.error('User not found');
+            toast.error('Wrong password');
             
         }        
     }
@@ -224,26 +225,38 @@ const LoginModal = () => {
                         w-full
                         mx-auto
                         px-8
+                        h-full
                     '>
-                        <div className=' w-80 mt-4 mb-10 flex flex-col gap-5'>
-                            <div className='text-3xl font-semibold mb-3'>
-                                Sign in to Twitter
+                        <div className='w-80 mt-4 mb-10 flex flex-col h-full justify-between'>
+                            <div className='flex flex-col gap-5'>
+                                <div className='text-3xl font-semibold mb-3'>
+                                    Enter your password
+                                </div>
+                                <Input
+                                    required
+                                    id="email"
+                                    placeholder="Email"
+                                    type="email"
+                                    register={register}
+                                    RegExPattern={new RegExp('^[a-zA-Z0-9]+@[a-z]+\.[a-z]{2,3}$')}
+                                    errors={errors}
+                                    textValue={email}
+                                />
+                                <Input
+                                    required
+                                    id="password"
+                                    placeholder="Password"
+                                    type="password"
+                                    register={register}
+                                    errors={errors}
+                                />
                             </div>
-                            
-                            <Input
-                                required
-                                id="email"
-                                placeholder="Email"
-                                type="email"
-                                register={register}
-                                RegExPattern={new RegExp('^[a-zA-Z0-9]+@[a-z]+\.[a-z]{2,3}$')}
-                                errors={errors}
-                            />
-                            {email}
-                            <Button
-                                value="Next"
-                                onClick={handleSubmit(handleEmailSubmit)}
-                            />
+                            <div>
+                                <Button
+                                    value="Log in"
+                                    onClick={handleSubmit(handleSigninSubmit)}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

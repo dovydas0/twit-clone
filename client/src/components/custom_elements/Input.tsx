@@ -5,9 +5,10 @@ import { UseFormRegister, FieldValues, FieldErrors } from "react-hook-form";
 interface InputProps {
     id: string;
     placeholder: string;
-    required?: boolean;
     RegExPattern?: RegExp;
     type: string;
+    required?: boolean;
+    textValue?: string;
     register?: UseFormRegister<FieldValues>;
     errors?: FieldErrors;
 }
@@ -15,22 +16,22 @@ interface InputProps {
 const Input: React.FC<InputProps> = ({
     id,
     placeholder,
-    required,
     RegExPattern,
     type,
+    required,
+    textValue,
     register,
     errors
 }) => {
     // To check if input field is empty
-    const [ value, setValue ] = useState(''); 
+    const [ value, setValue ] = useState(textValue ? textValue : ''); 
     
     const divRef = useRef<HTMLDivElement>(null);
     
     const handleLabelClick = () => {
         const inputEl = divRef.current?.children[0] as HTMLDivElement;
         inputEl.focus();
-    }    
-        
+    }        
 
   return (
     <div ref={divRef} className="w-full relative">
@@ -41,6 +42,7 @@ const Input: React.FC<InputProps> = ({
                     type={type}
                     { ...register(id, {
                         onChange: (e) => setValue(e.target.value),
+                        value: value,
                         pattern: RegExPattern,
                         required
                         })
@@ -67,6 +69,7 @@ const Input: React.FC<InputProps> = ({
                     id={id}
                     type={type}
                     onChange={(e) => setValue(e.target.value)}
+                    value={value}
                     className={`
                         peer
                         w-full

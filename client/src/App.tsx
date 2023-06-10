@@ -4,6 +4,7 @@ import "./index.css";
 import Home from "./components/Home";
 import LoginModal from "./components/modals/LoginModal";
 import SignupModal from "./components/modals/SignupModal";
+import Users from "./users";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginModal />} />
         <Route path="/signup" element={<SignupModal />} />
+        <Route path="/users" element={<Users />} />
       </Routes>
     </div>
   );
