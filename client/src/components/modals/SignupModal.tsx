@@ -59,11 +59,11 @@ const Modal = () => {
         delete data.month
         delete data.year;
 
-        data.dob = new Date(data.dob).toLocaleDateString("en-GB");
+        data.dob = new Date(data.dob).toLocaleDateString("en-GB");        
 
         // request
-        const createAccount = axios.post(import.meta.env.VITE_API_SERVER_URL + '/auth/register', data);
-        
+        const createAccount = axios.post(import.meta.env.VITE_API_SERVER_URL + '/auth/register', data);        
+
         // Posting data to server
         const accountRequest = await toast.promise(createAccount, {
                 loading: 'Creating account...',

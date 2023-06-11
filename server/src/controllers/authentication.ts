@@ -24,8 +24,11 @@ export const register = async (req: express.Request, res: express.Response) => {
             return res.status(400).json({ message: "User already exists." });
         }
 
+        
+        
         const newPassword = await bcrypt.hash(password, 10)
         await createUser(username, newPassword, email, dob)        
+        console.log(username, newPassword, email, dob);
 
         return res.status(200).json({ message: "User created successfully!" }).end();
     } catch (error) {
@@ -61,7 +64,7 @@ export const login = async (req: express.Request, res: express.Response) => {
 
         const token = jwt.sign(userObject, process.env.JWT_SECRET_KEY, { expiresIn: '30m' });
 
-        res.cookie("USER_TOKEN", token, { httpOnly: true });
+        res.cookie("USER_TOKEN", token);
 
         res.sendStatus(200);
     } catch (error) {
@@ -70,5 +73,3 @@ export const login = async (req: express.Request, res: express.Response) => {
         return res.status(400).json({ message: "Something went wrong" });
     }
 }
-
-

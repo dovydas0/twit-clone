@@ -8,13 +8,10 @@ require('dotenv').config();
 const app = express();
 const PORT = 8000;
 
-console.log(process.env.CLIENT_URL);
-
-
 // middleware
 app.use(cors({
-    origin: process.env.CLIENT_URL,
     credentials: true,
+    origin: process.env.CLIENT_URL
 }));
 app.use(express.json());
 app.use(cookieParser());

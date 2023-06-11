@@ -6,8 +6,9 @@ import Button from '../custom_elements/Button';
 import { Link } from 'react-router-dom'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 enum SIGNIN {
     EMAIL_AUTHENTICATION,
@@ -26,6 +27,7 @@ const LoginModal = () => {
         } 
     } = useForm<FieldValues>();
 
+    const navigate = useNavigate();
 
     const handleEmailSubmit: SubmitHandler<FieldValues> = async (data) => {
         try {
@@ -40,6 +42,7 @@ const LoginModal = () => {
             
             setEmail(email);
             setShowContent(SIGNIN.PASSWORD_AUTHENTICATION)
+            
         } catch (error) {
             toast.error('User not found');
         }        
@@ -53,13 +56,13 @@ const LoginModal = () => {
                 toast.error('Please enter email and password');
                 return;
             }
-            console.log('hi');
             
-            const postReq = await axios.post(import.meta.env.VITE_API_SERVER_URL + '/auth/login', { email, password }, { withCredentials: true})
-
-            
+            await axios.post(import.meta.env.VITE_API_SERVER_URL + '/auth/login', { email, password }, { withCredentials: true })
 
             toast.success('Successfully logged in');
+            
+
+            navigate('/users');
             // setShowContent(SIGNIN.PASSWORD_AUTHENTICATION)
         } catch (error) {
             toast.error('Wrong password');
