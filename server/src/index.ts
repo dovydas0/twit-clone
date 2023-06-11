@@ -3,12 +3,19 @@ import cors from 'cors';
 import router from './router';
 import cookieParser from 'cookie-parser';
 import { createDatabase, connectToDatabase, createTables } from './db/dbImplementation';
+require('dotenv').config();
 
 const app = express();
 const PORT = 8000;
 
+console.log(process.env.CLIENT_URL);
+
+
 // middleware
-app.use(cors());
+app.use(cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+}));
 app.use(express.json());
 app.use(cookieParser());
 

@@ -3,7 +3,7 @@ import express from 'express';
 
 export const isAuthenticated = (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
-        const sessionToken = req.cookies['USER_TOKEN']; // not reading
+        const sessionToken = req.cookies['USER_TOKEN'];
         
         if (!sessionToken) {
             return res.sendStatus(403);

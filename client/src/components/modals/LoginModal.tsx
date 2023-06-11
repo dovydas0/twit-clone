@@ -42,7 +42,6 @@ const LoginModal = () => {
             setShowContent(SIGNIN.PASSWORD_AUTHENTICATION)
         } catch (error) {
             toast.error('User not found');
-            
         }        
     }
     
@@ -54,8 +53,11 @@ const LoginModal = () => {
                 toast.error('Please enter email and password');
                 return;
             }
+            console.log('hi');
             
-            await axios.post(import.meta.env.VITE_API_SERVER_URL + '/auth/login', { email, password })
+            const postReq = await axios.post(import.meta.env.VITE_API_SERVER_URL + '/auth/login', { email, password }, { withCredentials: true})
+
+            
 
             toast.success('Successfully logged in');
             // setShowContent(SIGNIN.PASSWORD_AUTHENTICATION)
