@@ -23,15 +23,15 @@ export const register = async (req: express.Request, res: express.Response) => {
         if (existingUser.rows.length > 0) {
             return res.status(400).json({ message: "User already exists." });
         }
+        
+        const newPassword = await bcrypt.hash(password, 10);
 
-        
-        
-        const newPassword = await bcrypt.hash(password, 10)
-        await createUser(username, newPassword, email, dob)        
-        console.log(username, newPassword, email, dob);
+        await createUser(username, newPassword, email, dob);    
 
         return res.status(200).json({ message: "User created successfully!" }).end();
     } catch (error) {
+        console.log(error);
+        
         return res.status(400).json({ message: "Something went wrong" });
     }
 }

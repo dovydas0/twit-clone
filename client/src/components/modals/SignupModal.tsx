@@ -53,13 +53,13 @@ const Modal = () => {
     const createAccount: SubmitHandler<FieldValues> = async (data) => {        
         
         // constructing dob property
-        data.dob = data.day + "-" + data.month + "-" + data.year;
+        data.dob = data.year + "-" + data.month + "-" + data.day;
 
         delete data.day
         delete data.month
         delete data.year;
 
-        data.dob = new Date(data.dob).toLocaleDateString("en-GB");        
+        data.dob = new Date(data.dob).toLocaleDateString("zh-Hans-CN");                
 
         // request
         const createAccount = axios.post(import.meta.env.VITE_API_SERVER_URL + '/auth/register', data);        

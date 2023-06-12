@@ -8,8 +8,8 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 
 enum CONTENT {
-  MAINFEED = 0,
-  POST = 1
+  MAINFEED,
+  POST
 }
 
 function MidBar() {
@@ -45,7 +45,7 @@ function MidBar() {
       return;
     }
 
-    await axios.post(url, { userID: "8177fd72-cc06-4564-bbd7-1f2a75430d85", content: inputValue.trim() })
+    await axios.post(url, { userID: "9d0095f1-ef68-4c4c-8f98-05e598bec8e6", content: inputValue.trim() })
 
     // Fetching updated posts
     const updatedPosts = await axios.get(url);    
