@@ -9,6 +9,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { setUser } from "../../store/features/userSlice";
 
 enum SIGNIN {
     EMAIL_AUTHENTICATION,
@@ -28,6 +30,8 @@ const LoginModal = () => {
     } = useForm<FieldValues>();
 
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+
 
     const handleEmailSubmit: SubmitHandler<FieldValues> = async (data) => {
         try {
@@ -57,16 +61,15 @@ const LoginModal = () => {
                 return;
             }
             
-            await axios.post(import.meta.env.VITE_API_SERVER_URL + '/auth/login', { email, password }, { withCredentials: true })
+            const user = await axios.post(import.meta.env.VITE_API_SERVER_URL + '/auth/login', { email, password }, { withCredentials: true })
+
+            dispatch(setUser(user.data));
 
             toast.success('Successfully logged in');
             
-
             navigate('/users');
-            // setShowContent(SIGNIN.PASSWORD_AUTHENTICATION)
-        } catch (error) {
+        } catch (error) {            
             toast.error('Wrong password');
-            
         }        
     }
     

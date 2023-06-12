@@ -62,11 +62,11 @@ export const login = async (req: express.Request, res: express.Response) => {
 
         delete userObject.password;        
 
-        const token = jwt.sign(userObject, process.env.JWT_SECRET_KEY, { expiresIn: '30m' });
+        const token = jwt.sign(userObject, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
 
         res.cookie("USER_TOKEN", token);
 
-        res.sendStatus(200);
+        res.status(200).json(userObject);
     } catch (error) {
         console.log(error.message);
         

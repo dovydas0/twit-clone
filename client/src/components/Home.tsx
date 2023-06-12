@@ -1,14 +1,9 @@
 import LeftBar from "./LeftBar";
 import MidBar from "./midbar/MidBar";
 import RightBar from "./RightBar";
-import { useAppDispatch, useAppSelector } from "../store/store";
-import { setState } from "../store/features/stateSlice";
 import Footer from "./Footer";
 
 const Home = () => {
-
-    const dispatch = useAppDispatch();
-    const selector = useAppSelector(state => state.state);
 
   return (
     <div className="max-w-[1440px] mx-auto h-screen sm:grid sm:grid-cols-9">
