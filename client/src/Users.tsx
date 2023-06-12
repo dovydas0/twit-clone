@@ -4,11 +4,7 @@ import { useAppSelector } from './store/store'
 
 const Users = () => {
   const [ users, setUsers ] = useState([])
-  const selector = useAppSelector(state => state.state);
-
-  if (Object.keys(selector).length > 0) {
-    console.log(selector);
-  }
+  const selector = useAppSelector(state => state.user);
 
   useEffect(() => {
       const getUsers = async () => {

@@ -73,3 +73,21 @@ export const login = async (req: express.Request, res: express.Response) => {
         return res.status(400).json({ message: "Something went wrong" });
     }
 }
+
+export const reconnection = async (req: express.Request, res: express.Response) => {
+    try {        
+        const token = req.cookies.USER_TOKEN;
+        
+        if (!token) {
+            return res.status(403).json({ message: "No authentication token found" });
+        }
+
+        jwt.verify(token, process.env.JWT_SECRET_KEY);
+
+        const userObject = jwt.decode(token);
+
+        return res.status(200).json(userObject);
+    } catch (error) {
+        return res.status(403).json({ message: "Unauthenticated connection" });
+    }
+}

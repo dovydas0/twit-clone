@@ -32,7 +32,6 @@ const LoginModal = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-
     const handleEmailSubmit: SubmitHandler<FieldValues> = async (data) => {
         try {
             const email = data.email.trim();        
@@ -67,7 +66,7 @@ const LoginModal = () => {
 
             toast.success('Successfully logged in');
             
-            navigate('/users');
+            navigate('/');
         } catch (error) {            
             toast.error('Wrong password');
         }        

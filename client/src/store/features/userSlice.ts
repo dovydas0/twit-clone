@@ -13,18 +13,18 @@ type User = {
     website: string | null
 }
 
-const initialState: User = {
-    avatar: null,
-    bio: null,
-    cover_image: null,
-    created_at: null,
-    dob: null,
-    email: null,
-    id: null,
-    location: null,
-    username: null,
-    website: null
-}
+// const initialState: User = {
+//     avatar: null,
+//     bio: null,
+//     cover_image: null,
+//     created_at: null,
+//     dob: null,
+//     email: null,
+//     id: null,
+//     location: null,
+//     username: null,
+//     website: null
+// }
 
 export const UserSlice = createSlice({
     name: "user",
