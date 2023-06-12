@@ -1,24 +1,27 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import "./index.css";
 import Home from "./components/Home";
 import LoginModal from "./components/modals/LoginModal";
 import SignupModal from "./components/modals/SignupModal";
-import Footer from "./components/Footer";
+import Users from "./Users";
+import { useAppDispatch, useAppSelector } from "./store/store";
+
 
 function App() {
 
+  const selector = useAppSelector(state => state.state);
+  
+
   return (
-    <>
-      <div className="max-w-[1440px] mx-auto h-full sm:grid sm:grid-cols-9">
-        <Home />
-      </div>
-      <Footer />
+    <div className="bg-[#15202B]">
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginModal />} />
         <Route path="/signup" element={<SignupModal />} />
+        <Route path="/users" element={<Users />} />
       </Routes>
-    </>
+    </div>
   );
 }
 

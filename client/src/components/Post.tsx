@@ -1,19 +1,34 @@
-import { AiOutlineHeart } from 'react-icons/ai';
-import DummyData from './types/DummyDataType';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import PostType from './types/PostType';
+import { useState } from 'react';
 
 interface PostProps {
-    onClick: (data: DummyData) => void
-    postData: DummyData;
+    onClick: (data: PostType) => void;
+    Post: PostType;
+    updateLikedPost: (e: React.MouseEvent, post: PostType, isLiked: boolean) => void;
 }
 
 const Post: React.FC<PostProps> = ({
     onClick,
-    postData
+    Post,
+    updateLikedPost
 }) => {
+    const [ isLiked, setIsLiked ] = useState(false)
+    const [ likes, setLikes ] = useState(Post.likes || 0)
 
+    const handlePostLike = (e: React.MouseEvent, post: PostType) => {
+        if (!isLiked) {
+            setLikes(prev => prev + 1);
+        } else {
+            setLikes(prev => prev - 1);
+        }
+        updateLikedPost(e, post, isLiked);
+        setIsLiked(!isLiked);
+    }
+    
   return (
     <div 
-        onClick={() => onClick(postData)}
+        onClick={() => onClick(Post)}
         className="
             flex
             pl-3
@@ -27,32 +42,46 @@ const Post: React.FC<PostProps> = ({
     >
         <div className="mr-3">
             <img
-                src="/placeholder.jpg" 
+                src={Post.user_avatar} 
                 alt="avatar"
                 className="rounded-full w-12 h-12"
             />
         </div>
         <div className="flex flex-col gap-2">
             <div>
-                <b>{postData.author}</b>
+                <b>{Post.username}</b>
             </div> 
-            <div>
-                <p className='text-[15px]'>
-                    {postData.content}
+            <div className=' break-all'>
+                <p className='text-[15px] break-words'>
+                    {Post.content}
                 </p>
             </div>
-            <div className='
-                flex
-                gap-1
-                w-fit
-                pr-2
-                items-center
-                hover:text-pink-600
-                transition
-                cursor-pointer
-            '>
-                <AiOutlineHeart size={18} />
-                <p className="text-xs">{postData.likes}</p>
+            <div
+                onClick={(e) => {handlePostLike(e, Post)}}
+                className={`
+                    flex
+                    gap-1
+                    w-fit
+                    pr-2
+                    items-center
+                    hover:text-pink-600
+                    transition
+                    cursor-pointer
+                    ${ isLiked ? 'text-pink-600' : 'text-neutral-500'}
+                `}
+            >
+            {
+                isLiked ? (
+                    <AiFillHeart size={18} />
+                    ) : (
+                    <AiOutlineHeart size={18} 
+                        className='
+    
+                        '
+                        />
+                )
+            }
+            <p className="text-xs">{likes}</p>
             </div>
         </div>
     </div>

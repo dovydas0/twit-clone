@@ -1,4 +1,4 @@
-import DummyData from "./types/DummyDataType"
+import PostType from "./types/PostType"
 
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiArrowBack } from "react-icons/bi";
@@ -7,12 +7,16 @@ import BlueButton from "./custom_elements/BlueButton";
 
 interface PostElementProps {
     theme: string;
-    post: DummyData | null;
+    inputValue: string;
+    setInputValue: (value: string) => void;
+    post: PostType | null;
     onClose: (e: React.MouseEvent) => void;
 }
 
 const PostElement: React.FC<PostElementProps> = ({
     theme,
+    inputValue,
+    setInputValue,
     post,
     onClose
 }) => {
@@ -44,15 +48,15 @@ const PostElement: React.FC<PostElementProps> = ({
                     </div>
                     <div className="flex">
                         <img
-                            src="/placeholder.jpg" 
+                            src="/default_avatar.jpg" 
                             alt="avatar"
                             className="rounded-full w-12 h-12 mr-3"
                         />
                         <div className="mt-1 gap-2">
-                            <b className=" text-[15px]">{post?.author}</b>
+                            <b className=" text-[15px]">{post?.username}</b>
                         </div>
                     </div>
-                    <div className="mb-4">
+                    <div className="mb-4 break-all">
                         <p className='text-lg mt-4'>
                             {post?.content}
                         </p>
@@ -93,6 +97,8 @@ const PostElement: React.FC<PostElementProps> = ({
                         />
                         <InputTextArea 
                             theme={theme}
+                            inputValue={inputValue}
+                            setInputValue={setInputValue}
                             placeholder="Tweet your reply!"
                             classes="mr-2"
                         />

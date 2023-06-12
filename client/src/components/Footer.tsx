@@ -35,12 +35,14 @@ const Footer = () => {
                                 value="Log in"
                                 outline
                                 small
+                                onClick={() => {}}
                             />
                         </Link>
                         <Link to="/signup">
                             <Button
                                 value="Sign up"
                                 small
+                                onClick={() => {}}
                             />
                         </Link>
                     </div>
@@ -51,11 +53,13 @@ const Footer = () => {
                                 <Button
                                     value="Log in"
                                     outline
+                                    onClick={() => {}}
                                 />
                         </Link>
                         <Link to="/signup" className="w-full mr-12">
                                 <Button
                                     value="Sign up"
+                                    onClick={() => {}}
                                 />
                         </Link>
                     </div>
