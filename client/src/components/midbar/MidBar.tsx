@@ -6,6 +6,8 @@ import PostElement from "../PostElement";
 import PostType from "../types/PostType";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useAppSelector } from "../../store/store"
+import ExploreHeader from "./ExploreHeader";
 
 enum CONTENT {
   MAINFEED,
@@ -20,6 +22,8 @@ function MidBar() {
   const [ inputValue, setInputValue ] = useState("");
   const theme = 'dark';
   let content;
+
+  const loggedUser = useAppSelector(state => state.user);
   
   useEffect(() => {
     const fetchPosts = async () => {
@@ -73,19 +77,29 @@ function MidBar() {
     setShowContent(CONTENT.MAINFEED)
   }, [showContent, activePost])
 
-  if (showContent === CONTENT.MAINFEED) {
+  if (Object.keys(loggedUser).length === 0) {
+    content = (
+        <>
+          <ExploreHeader />
+          <MainFeed isUserLogged={false} onClick={handlePostOpen} postData={posts} setPosts={setPosts} />
+        </>
+    )
+  }
+
+  else if (showContent === CONTENT.MAINFEED) {
     content = (
         <>
           <ContentType feedType={feedType} onClick={handleFeedType} />
           <PostInput theme={theme} handlePost={handlePost} inputValue={inputValue} setInputValue={setInputValue} />
-          <MainFeed onClick={handlePostOpen} postData={posts} setPosts={setPosts} />
+          <MainFeed isUserLogged={true} onClick={handlePostOpen} postData={posts} setPosts={setPosts} />
         </>
     )
   }
 
   if (showContent === CONTENT.POST) {
     content = (
-      <PostElement 
+      <PostElement
+        isUserLogged={Object.keys(loggedUser).length === 0 ? false : true}
         theme={theme}
         inputValue={inputValue}
         setInputValue={setInputValue}

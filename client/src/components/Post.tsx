@@ -1,22 +1,32 @@
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import PostType from './types/PostType';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 interface PostProps {
+    isUserLogged: boolean;
     onClick: (data: PostType) => void;
     Post: PostType;
     updateLikedPost: (e: React.MouseEvent, post: PostType, isLiked: boolean) => void;
 }
 
 const Post: React.FC<PostProps> = ({
+    isUserLogged,
     onClick,
     Post,
     updateLikedPost
 }) => {
     const [ isLiked, setIsLiked ] = useState(false)
     const [ likes, setLikes ] = useState(Post.likes || 0)
+    const navigate = useNavigate();
 
     const handlePostLike = (e: React.MouseEvent, post: PostType) => {
+        // If user is not logged in navigate to login page
+        if (!isUserLogged) {
+            navigate('/login')
+            return;
+        }
+
         if (!isLiked) {
             setLikes(prev => prev + 1);
         } else {

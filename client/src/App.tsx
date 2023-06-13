@@ -19,14 +19,28 @@ function App() {
   useEffect(() => {
     if (document.cookie.indexOf('USER_TOKEN=') === -1) {
       return;
-    }
+    }    
+    
+    // Temporary solution to clearing the auth cookie
+    const timeout = setTimeout(() => {
+      console.log('clearing cookies');
+      document.cookie = '';
+    }, 1800000)
 
     const getUserObject = async () => {
-      const userObject = await axios.get(import.meta.env.VITE_API_SERVER_URL + "/auth/user", { withCredentials: true });
-      dispatch(setUser(userObject.data))
+      try {
+        const userObject = await axios.get(import.meta.env.VITE_API_SERVER_URL + "/auth/user", { withCredentials: true });
+        dispatch(setUser(userObject.data))
+
+      } catch (error) {        
+      }
     };
 
     getUserObject();
+
+    return () => {
+      clearTimeout(timeout);
+    }
   }, [])
     
   return (

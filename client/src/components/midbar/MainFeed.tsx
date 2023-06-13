@@ -3,12 +3,14 @@ import PostType from "../types/PostType";
 import axios from "axios";
 
 interface MainFeedProps {
+    isUserLogged: boolean;
     onClick: (data: PostType) => void;
     postData: PostType[];
     setPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
 }
 
 const MainFeed: React.FC<MainFeedProps> = ({
+    isUserLogged,
     onClick,
     postData,
     setPosts
@@ -27,6 +29,7 @@ const MainFeed: React.FC<MainFeedProps> = ({
                     postData.map((post, index) => (
                         <Post 
                             key={index}
+                            isUserLogged={isUserLogged}
                             onClick={onClick}
                             Post={post}
                             updateLikedPost={updateLikedPost}

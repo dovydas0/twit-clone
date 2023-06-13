@@ -6,6 +6,7 @@ import InputTextArea from "./custom_elements/InputTextArea";
 import BlueButton from "./custom_elements/BlueButton";
 
 interface PostElementProps {
+    isUserLogged: boolean;
     theme: string;
     inputValue: string;
     setInputValue: (value: string) => void;
@@ -14,12 +15,16 @@ interface PostElementProps {
 }
 
 const PostElement: React.FC<PostElementProps> = ({
+    isUserLogged,
     theme,
     inputValue,
     setInputValue,
     post,
     onClose
-}) => {
+}) => {    
+    if (!isUserLogged) {
+        // don't allow any buttons to be interactive
+    }
 
   return (
             <div className="h-screen">
@@ -83,27 +88,33 @@ const PostElement: React.FC<PostElementProps> = ({
                         <AiOutlineHeart size={18} />
                         <p className="text-xs">{post?.likes}</p>
                     </div>
-                    <div className="
-                        flex
-                        pt-4
-                        my-2
-                        border-t
-                        border-white/20
-                    ">
-                        <img
-                            src="/placeholder.jpg" 
-                            alt="avatar"
-                            className="rounded-full w-12 h-12"
-                        />
-                        <InputTextArea 
-                            theme={theme}
-                            inputValue={inputValue}
-                            setInputValue={setInputValue}
-                            placeholder="Tweet your reply!"
-                            classes="mr-2"
-                        />
-                        <BlueButton value="Reply" />
-                    </div>
+                    {
+                        isUserLogged ? (
+                            <div className="
+                                flex
+                                pt-4
+                                my-2
+                                border-t
+                                border-white/20
+                            ">
+                                <img
+                                    src="/placeholder.jpg" 
+                                    alt="avatar"
+                                    className="rounded-full w-12 h-12"
+                                />
+                                <InputTextArea 
+                                    theme={theme}
+                                    inputValue={inputValue}
+                                    setInputValue={setInputValue}
+                                    placeholder="Tweet your reply!"
+                                    classes="mr-2"
+                                />
+                                <BlueButton value="Reply" />
+                            </div>
+                        ) : (
+                            ""
+                        )
+                    }
                 </div>
                 {
                     true ? 
