@@ -7,6 +7,7 @@ const Footer = () => {
     <div className="
             fixed
             bottom-0
+            left-0
             w-screen
             bg-sky-500
             flex

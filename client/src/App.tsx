@@ -32,7 +32,8 @@ function App() {
         const userObject = await axios.get(import.meta.env.VITE_API_SERVER_URL + "/auth/user", { withCredentials: true });
         dispatch(setUser(userObject.data))
 
-      } catch (error) {        
+      } catch (error) {
+        
       }
     };
 
