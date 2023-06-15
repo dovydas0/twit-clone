@@ -77,10 +77,11 @@ const LoginModal = () => {
             <div className="
                 inset-0
                 flex
+                z-20
                 justify-center
                 items-center
                 absolute
-                bg-neutral-500/30
+                bg-gray-800
             ">
                 <div className="
                     bg-[#15202B]
@@ -188,10 +189,11 @@ const LoginModal = () => {
             <div className="
                 inset-0
                 flex
+                z-20
                 justify-center
                 items-center
                 absolute
-                bg-neutral-500/30
+                bg-gray-800
             ">
                 <div className="
                     bg-[#15202B]

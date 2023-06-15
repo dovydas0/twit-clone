@@ -85,6 +85,8 @@ const Modal = () => {
                 flex
                 justify-center
                 items-center
+                z-20
+                bg-gray-800
                 absolute
                 overflow-y-auto
                 bg-neutral-500/30
@@ -182,6 +184,8 @@ const Modal = () => {
                 justify-center
                 items-center
                 absolute
+                z-20
+                bg-gray-800
                 overflow-y-auto
                 bg-neutral-500/30
             ">

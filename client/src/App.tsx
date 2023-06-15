@@ -11,6 +11,9 @@ import { useEffect } from "react";
 import { setUser } from "./store/features/userSlice";
 import { useAppSelector } from "./store/store";
 import Error from "./components/Error";
+import Settings from "./components/Settings";
+import LeftBar from "./components/LeftBar";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -45,15 +48,20 @@ function App() {
   }, [])
     
   return (
-    <div className="bg-[#15202B]">
+    <div className="max-w-[1440px] px-4 mx-auto h-screen sm:grid sm:grid-cols-9 bg-[#15202B]">
       {loggedUser.username}
+      <LeftBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginModal />} />
         <Route path="/signup" element={<SignupModal />} />
         <Route path="/users" element={<Users />} />
+        <Route path="/settings" element={<Settings />} />
         <Route path="*" element={<Error />} />
       </Routes>
+      {
+        Object.keys(loggedUser).length === 0 ? <Footer /> : ''
+      }
     </div>
   );
 }

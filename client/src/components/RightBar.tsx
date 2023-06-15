@@ -39,12 +39,12 @@ function RightBar() {
 
         </div>
       </div>
-      <div className="mt-4 text-[13px] text-gray-400 flex flex-col items-center whitespace-break-spaces">
+      <div className="mt-4 mx-3 text-xs text-gray-400 flex flex-col items-center whitespace-break-spaces">
           <div>
-          Terms of Service    Privacy Policy    Cookie Policy
+          Terms of Service   Privacy Policy   Cookie Policy
           </div> 
           <div>
-          Accessibility    Ads info    more...    © 2023 X Corp.
+          Accessibility   Ads info    more...   © 2023 X Corp.
           </div>
       </div>
     </div>
