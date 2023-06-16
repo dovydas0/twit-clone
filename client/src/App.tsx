@@ -49,7 +49,6 @@ function App() {
     
   return (
     <div className="max-w-[1440px] px-4 mx-auto h-screen sm:grid sm:grid-cols-9 bg-[#15202B]">
-      
       <LeftBar />
       <Routes>
         <Route path="/" element={<Home />} />

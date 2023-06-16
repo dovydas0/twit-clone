@@ -49,7 +49,7 @@ function MidBar() {
       return;
     }
 
-    await axios.post(url, { userID: "9d0095f1-ef68-4c4c-8f98-05e598bec8e6", content: inputValue.trim() })
+    await axios.post(url, { userID: loggedUser.id, content: inputValue.trim() })
 
     // Fetching updated posts
     const updatedPosts = await axios.get(url);    
