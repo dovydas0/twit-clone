@@ -1,6 +1,7 @@
 import { FcGoogle } from "react-icons/fc";
 import { BsApple } from 'react-icons/bs';
 import Button from "./custom_elements/Button";
+import { Link } from "react-router-dom";
 
 function RightBar() {
 
@@ -29,9 +30,11 @@ function RightBar() {
             value="Sign up with Google"
             icon={BsApple}
           />
-          <Button 
-            value="Create account"
-          />
+          <Link to='/signup'>
+            <Button 
+              value="Create account"
+            />
+          </Link>
           <div className="text-[13px] text-gray-400">
             By signing up, you agree to the Terms of Service 
             and Privacy Policy, including Cookie Use.

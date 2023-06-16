@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
     IoIosArrowForward
 } from 'react-icons/all'
@@ -19,8 +18,6 @@ const SettingsCategories: React.FC<SettingsCategoriesProps> = ({
     categoryClick,
     selectedCat
 }) => {
-
-    
 
   return (
     <div className=''>

@@ -3,9 +3,7 @@ import {
   RiHome7Fill,
   BiEnvelope,
   BsTwitter,
-  BsBookmark,
   BsFillPersonFill,
-  AiOutlinePlus,
   CiSettings,
   CiSearch
 } from "react-icons/all";

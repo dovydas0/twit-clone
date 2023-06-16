@@ -9,7 +9,7 @@ interface ButtonProps {
     disabled?: boolean;
     textSize?: string;
     icon?: IconType;
-    onClick: () => void;
+    onClick?: () => void;
 }
 
 const Button: React.FC<ButtonProps> = ({

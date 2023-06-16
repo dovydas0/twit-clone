@@ -9,7 +9,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from "../../store/store";
+import { useAppDispatch } from "../../store/store";
 import { setUser } from "../../store/features/userSlice";
 
 enum SIGNIN {
@@ -99,13 +99,15 @@ const LoginModal = () => {
                     md:rounded-2xl
                 ">
                     <div className='flex items-center p-3 sticky top-0 z-50 bg-[#15202B]'>
-                        <div className='
-                            cursor-pointer
-                            p-1.5
-                            hover:bg-neutral-200/20
-                            rounded-full
-                            transition
-                        '>
+                        <div 
+                            className='
+                                cursor-pointer
+                                p-1.5
+                                hover:bg-neutral-200/20
+                                rounded-full
+                                transition
+                            '
+                        >
                             <Link to="/">
                                 <RxCross2 size={22} />
                             </Link>

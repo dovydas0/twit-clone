@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-
 import Button from "./custom_elements/Button"
 
 const Footer = () => {
+
   return (
     <div className="
             fixed
