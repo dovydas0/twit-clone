@@ -36,14 +36,12 @@ const Footer = () => {
                                 value="Log in"
                                 outline
                                 small
-                                onClick={() => {}}
                             />
                         </Link>
                         <Link to="/signup">
                             <Button
                                 value="Sign up"
                                 small
-                                onClick={() => {}}
                             />
                         </Link>
                     </div>
@@ -51,17 +49,15 @@ const Footer = () => {
                 <div className="sm:hidden w-full overflow-hidden">
                     <div className="flex w-full gap-3 mx-4">
                         <Link to="/login" className="w-full">
-                                <Button
-                                    value="Log in"
-                                    outline
-                                    onClick={() => {}}
-                                />
+                            <Button
+                                value="Log in"
+                                outline
+                            />
                         </Link>
                         <Link to="/signup" className="w-full mr-12">
-                                <Button
-                                    value="Sign up"
-                                    onClick={() => {}}
-                                />
+                            <Button
+                                value="Sign up"
+                            />
                         </Link>
                     </div>
                 </div>

@@ -98,7 +98,7 @@ const PostElement: React.FC<PostElementProps> = ({
                                 border-white/20
                             ">
                                 <img
-                                    src="/placeholder.jpg" 
+                                    src="/default_avatar.jpg" 
                                     alt="avatar"
                                     className="rounded-full w-12 h-12"
                                 />

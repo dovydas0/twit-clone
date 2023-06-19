@@ -19,6 +19,8 @@ const BlueButton: React.FC<BlueButtonProps> = ({
           h-10
           font-semibold
           rounded-full
+          hover:bg-sky-600
+          transition
       '
     >
         {value}

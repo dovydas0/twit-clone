@@ -5,6 +5,7 @@ interface ButtonProps {
     value: string;
     outline?: boolean;
     small?: boolean;
+    medium?: boolean
     thick?: boolean;
     disabled?: boolean;
     textSize?: string;
@@ -17,6 +18,7 @@ const Button: React.FC<ButtonProps> = ({
     outline,
     textSize,
     small,
+    medium,
     disabled,
     thick,
     icon: Icon,
@@ -37,6 +39,7 @@ const Button: React.FC<ButtonProps> = ({
             transition
             ${thick ? 'py-3' : ''}
             ${small ? ' w-[85px]' : 'w-full'}
+            ${medium ? ' w-[115px]' : ''}
             ${textSize ? `text-${textSize}` : ''}
             ${outline ? '' : 'bg-white'}
             ${outline ? 'text-white' : 'text-black'}

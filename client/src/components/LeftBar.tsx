@@ -71,6 +71,7 @@ const loggedInCat = [
 ]
 
 const LeftBar: React.FC<LeftBarProps> = ({}) => {
+  const [ profileClick, setProfileClick ] = useState(true)
   const [ selectedCat, setSelectedCat ] = useState('')
   const loggedUser = useAppSelector(state => state.user)
 
@@ -81,7 +82,30 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
     navigate(route);
   }
 
+  const handleSignOut = async () => {
+    document.cookie = "USER_TOKEN=; expires=true; path=/"
+    navigate('/');
+    document.location.reload()
+  }
+
   return (
+    <>
+      {
+        profileClick && (
+          <div 
+            onClick={() => setProfileClick(state => !state)}
+            className="
+              z-40
+              absolute
+              top-0
+              left-0
+              w-full
+              h-full
+            "
+          >
+          </div>
+        )
+      }
       <div className="h-20 relative sm:h-full sm:col-span-1 lg:col-span-1 xl:col-span-2 bg-[#15202B]">
         {
           Object.keys(loggedUser).length > 0 ? (
@@ -89,6 +113,7 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
               {
                 loggedInCat.map(category => (
                   <LeftBarCategory
+                    key={category.label ? category.label : 'logo'}
                     label={category.label ? category.label : ''}
                     onClick={handleCategoryClick}
                     icon={category.icon}
@@ -97,33 +122,64 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
                   />
                 ))
               }
-              <div className="absolute bottom-3 xl:pr-2 xl:w-full">
-                  <button 
-                  onClick={() => {}}
-                  className={`
-                      flex
-                      justify-between
-                      w-full
-                      gap-3
-                      items-center
-                      p-2
-                      xl:py-3
-                      xl:px-4
-                      hover:bg-white/10
-                      rounded-full
-                      transition  
-                  `}
-                  >
-                    <div className="flex items-center gap-4">
-                      <img
-                        src={loggedUser.avatar || 'default_avatar.jpg'}
-                        className="rounded-full w-10"
-                        alt="user image"
-                      />
-                      <b className="hidden xl:block text-lg">{loggedUser.username}</b>
+              <div className="absolute bottom-3 -mr-2 xl:pr-2 xl:w-full">
+                {
+                  profileClick && (                      
+                    <div className="
+                    bg-[#15202B]
+                      pop-up_shadow
+                      absolute
+                      shadow-lg
+                      rounded-xl
+                      bottom-16
+                      z-50
+                      py-2
+                      w-[320px]
+                      border-white/20
+                      border
+                    ">
+                      <div
+                        onClick={handleSignOut}
+                        className="
+                          hover:bg-white/5
+                          font-bold
+                          text-lg
+                          p-3
+                          w-full
+                          cursor-pointer
+                        "
+                        >
+                        Log out {loggedUser.username}
+                      </div>
                     </div>
-                    <BsThreeDots size={18} className='hidden xl:block' />
-                  </button>
+                  )
+                }
+                <button 
+                onClick={() => {setProfileClick(prev => !prev)}}
+                className={`
+                    flex
+                    justify-between
+                    w-full
+                    gap-3
+                    items-center
+                    p-4
+                    xl:py-3
+                    xl:px-4
+                    hover:bg-white/10
+                    rounded-full
+                    transition  
+                `}
+                >
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={loggedUser.avatar || 'default_avatar.jpg'}
+                      className="rounded-full w-10"
+                      alt="user image"
+                    />
+                    <b className="hidden xl:block text-lg">{loggedUser.username}</b>
+                  </div>
+                  <BsThreeDots size={18} className='hidden xl:block' />
+                </button>
               </div>
             </div>
           ) : (
@@ -131,6 +187,7 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
               {
                 loggedOutCat.map(category => (
                   <LeftBarCategory
+                    key={category.label ? category.label : 'logo'}
                     label={category.label ? category.label : ''}
                     onClick={handleCategoryClick}
                     icon={category.icon}
@@ -143,6 +200,7 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
           )
         }
       </div>
+    </>
   );
 }
 

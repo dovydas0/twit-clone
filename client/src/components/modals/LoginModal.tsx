@@ -26,7 +26,7 @@ const LoginModal = () => {
         register,
         formState: {
             errors
-        } 
+        }
     } = useForm<FieldValues>();
 
     const navigate = useNavigate();
