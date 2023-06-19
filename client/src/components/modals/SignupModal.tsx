@@ -86,10 +86,9 @@ const Modal = () => {
                 justify-center
                 items-center
                 z-20
-                bg-gray-800
                 absolute
                 overflow-y-auto
-                bg-neutral-500/30
+                bg-gray-800
             ">
                 <div className="
                     bg-[#15202B]

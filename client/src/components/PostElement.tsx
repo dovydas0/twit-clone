@@ -55,7 +55,7 @@ const PostElement: React.FC<PostElementProps> = ({
                         <img
                             src="/default_avatar.jpg" 
                             alt="avatar"
-                            className="rounded-full w-12 h-12 mr-3"
+                            className="rounded-full w-10 h-10 mr-3"
                         />
                         <div className="mt-1 gap-2">
                             <b className=" text-[15px]">{post?.username}</b>

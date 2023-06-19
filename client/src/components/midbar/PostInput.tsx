@@ -18,7 +18,7 @@ const PostInput: React.FC<PostInputProps> = ({
 
   return (
     <div className="py-2 flex w-full border-white/20 border-y">
-        <img src="/default_avatar.jpg" className="w-12 h-12 ml-3 rounded-full"></img>
+        <img src="/default_avatar.jpg" className="w-10 h-10 ml-3 rounded-full"></img>
         <div className="
             flex
             flex-col

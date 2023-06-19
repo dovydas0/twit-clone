@@ -5,7 +5,8 @@ import {
   BsTwitter,
   BsFillPersonFill,
   CiSettings,
-  CiSearch
+  CiSearch,
+  BsThreeDots
 } from "react-icons/all";
 import { useState } from 'react';
 import { useAppSelector } from "../store/store";
@@ -81,7 +82,7 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
   }
 
   return (
-      <div className="h-20 sm:h-full sm:col-span-1 lg:col-span-1 xl:col-span-2 bg-[#15202B]">
+      <div className="h-20 relative sm:h-full sm:col-span-1 lg:col-span-1 xl:col-span-2 bg-[#15202B]">
         {
           Object.keys(loggedUser).length > 0 ? (
             <div className="pt-4 mr-4 flex flex-col gap-1 items-end xl:items-start">
@@ -96,6 +97,34 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
                   />
                 ))
               }
+              <div className="absolute bottom-3 xl:pr-2 xl:w-full">
+                  <button 
+                  onClick={() => {}}
+                  className={`
+                      flex
+                      justify-between
+                      w-full
+                      gap-3
+                      items-center
+                      p-2
+                      xl:py-3
+                      xl:px-4
+                      hover:bg-white/10
+                      rounded-full
+                      transition  
+                  `}
+                  >
+                    <div className="flex items-center gap-4">
+                      <img
+                        src={loggedUser.avatar || 'default_avatar.jpg'}
+                        className="rounded-full w-10"
+                        alt="user image"
+                      />
+                      <b className="hidden xl:block text-lg">{loggedUser.username}</b>
+                    </div>
+                    <BsThreeDots size={18} className='hidden xl:block' />
+                  </button>
+              </div>
             </div>
           ) : (
             <div className="pt-4 mr-4 flex flex-col gap-1 items-end xl:items-start">

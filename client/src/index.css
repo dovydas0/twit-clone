@@ -43,6 +43,10 @@ body{
   flex-basis: 30%;
 }
 
+.profile_shadow:hover {
+  box-shadow: 0 0 0 15px rgb(229, 229, 229, 0.2);
+}
+
 @media (max-width:639.5px) {
   .hiddenSignFooter {
     display: none;

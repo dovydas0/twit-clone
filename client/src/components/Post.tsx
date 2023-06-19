@@ -54,7 +54,7 @@ const Post: React.FC<PostProps> = ({
             <img
                 src={Post.user_avatar} 
                 alt="avatar"
-                className="rounded-full w-12 h-12"
+                className="rounded-full w-10 h-10"
             />
         </div>
         <div className="flex flex-col gap-2">
