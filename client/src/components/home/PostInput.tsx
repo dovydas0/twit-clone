@@ -24,7 +24,7 @@ const PostInput: React.FC<PostInputProps> = ({
             flex-col
             w-full
         ">
-            <form action="submit" onSubmit={(e) => handlePost(e)}>
+            <form action="submit" onSubmit={handlePost}>
                 <InputTextArea 
                     theme={theme}
                     inputValue={inputValue}
@@ -38,7 +38,10 @@ const PostInput: React.FC<PostInputProps> = ({
                     flex
                     justify-end
                     '>
-                    <BlueButton value="Tweet" />
+                    <BlueButton 
+                        disabled={inputValue === ''}
+                        value="Tweet"
+                    />
                 </div>
             </form>
         </div>

@@ -71,7 +71,7 @@ const loggedInCat = [
 ]
 
 const LeftBar: React.FC<LeftBarProps> = ({}) => {
-  const [ profileClick, setProfileClick ] = useState(true)
+  const [ profileClick, setProfileClick ] = useState(false)
   const [ selectedCat, setSelectedCat ] = useState('')
   const loggedUser = useAppSelector(state => state.user)
 

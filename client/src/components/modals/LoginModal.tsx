@@ -264,6 +264,7 @@ const LoginModal = () => {
                             </div>
                             <div>
                                 <Button
+                                    big
                                     value="Log in"
                                     onClick={handleSubmit(handleSigninSubmit)}
                                 />

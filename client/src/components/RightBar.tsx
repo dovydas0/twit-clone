@@ -11,7 +11,14 @@ function RightBar() {
   
 
   return (
-    <div className="sm:hidden lg:block">
+    <div className="
+      bg-[#15202B]
+      sm:col-span-1 
+      lg:col-span-3 
+      xl:col-span-2 
+      lg:block
+      sm:hidden
+    ">
       {
         Object.keys(loggedUser).length > 0 ? (
           <div className="
@@ -61,7 +68,8 @@ function RightBar() {
                 icon={BsApple}
               />
               <Link to='/signup'>
-                <Button 
+                <Button
+                  big
                   value="Create account"
                 />
               </Link>

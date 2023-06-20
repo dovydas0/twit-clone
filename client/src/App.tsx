@@ -1,8 +1,6 @@
 import "./index.css";
-import Home from "./components/Home";
 import LoginModal from "./components/modals/LoginModal";
 import SignupModal from "./components/modals/SignupModal";
-import Users from "./Users";
 import axios from "axios";
 
 import { Routes, Route } from "react-router-dom";
@@ -14,6 +12,10 @@ import Error from "./components/Error";
 import Settings from "./components/Settings";
 import LeftBar from "./components/LeftBar";
 import Footer from "./components/Footer";
+import ProfilePage from "./components/profile/ProfilePage";
+import RightBar from "./components/RightBar";
+import Home from "./components/Home";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -51,11 +53,31 @@ function App() {
     <div className="max-w-[1440px] px-4 mx-auto h-screen sm:grid sm:grid-cols-9 bg-[#15202B]">
       <LeftBar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        {/* Authentication */}
         <Route path="/login" element={<LoginModal />} />
         <Route path="/signup" element={<SignupModal />} />
-        <Route path="/users" element={<Users />} />
+        
+        {/* Site Navigation */}
+        <Route path="/" element={
+          <>
+            <Home />
+            <RightBar />
+          </>
+        }
+        />
         <Route path="/settings" element={<Settings />} />
+
+        {/* Only Authenticated Pages */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/profile" element={
+            <>
+              <ProfilePage />
+              <RightBar />
+            </>
+          } />
+        </Route>
+        
+        {/* Unexisting Pages */}
         <Route path="*" element={<Error />} />
       </Routes>
       {

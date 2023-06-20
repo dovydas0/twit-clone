@@ -320,6 +320,7 @@ const Modal = () => {
                             '>
                                 <Button
                                     thick
+                                    big
                                     disabled={disabled}
                                     value="Create account"
                                     onClick={handleSubmit(createAccount)}
