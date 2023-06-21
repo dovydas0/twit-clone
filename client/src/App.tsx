@@ -21,6 +21,7 @@ function App() {
   const dispatch = useAppDispatch();
   const loggedUser = useAppSelector(state => state.user);
 
+
   useEffect(() => {
     if (document.cookie.indexOf('USER_TOKEN=') === -1) {
       return;
@@ -50,13 +51,13 @@ function App() {
   }, [])
     
   return (
-    <div className="max-w-[1440px] px-4 mx-auto h-screen sm:grid sm:grid-cols-9 bg-[#15202B]">
+    <div className="max-w-[1440px] px-4 mx-auto h-full sm:grid sm:grid-cols-9 bg-[#15202B]">
       <LeftBar />
       <Routes>
         {/* Authentication */}
         <Route path="/login" element={<LoginModal />} />
         <Route path="/signup" element={<SignupModal />} />
-        
+
         {/* Site Navigation */}
         <Route path="/" element={
           <>
@@ -66,8 +67,7 @@ function App() {
         }
         />
         <Route path="/settings" element={<Settings />} />
-
-        {/* Only Authenticated Pages */}
+        {/* Authenticated Pages */}
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={
             <>

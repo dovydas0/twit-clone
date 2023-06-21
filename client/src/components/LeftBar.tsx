@@ -122,7 +122,7 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
                   />
                 ))
               }
-              <div className="absolute bottom-3 -mr-2 xl:pr-2 xl:w-full">
+              <div className="fixed bottom-3 -mr-2 xl:pr-2 xl:w-full">
                 {
                   profileClick && (                      
                     <div className="
