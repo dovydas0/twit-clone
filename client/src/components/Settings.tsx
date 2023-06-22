@@ -5,7 +5,7 @@ import SettingsCategories from './SettingsCategories';
 
 
 const Settings = () => {
-    const [ selectedCat, setSelectedCat] = useState('Personalization and data')
+    const [ selectedCat, setSelectedCat] = useState('')
 
     const loggedUser = useAppSelector(state => state.user);
     let content;
@@ -17,13 +17,31 @@ const Settings = () => {
     if (Object.keys(loggedUser).length > 0) {
         content = (
             <>
-                {/* sm:w-[648px] */}
-                <div className="sm:max-w-[628px] sm:min-w-[540px] sm:col-span-6 lg:min-w-0 lg:w-auto lg:col-span-3 xl:col-span-3 border-white/20 border bg-[#15202B]">
-                    <SettingsCategories categoryClick={handleCategoryClick} selectedCat={selectedCat} />
+                <div className="xl:ml-[223px] ml-[76px] sm:col-span-9 lg:min-w-0 lg:w-auto lg:col-span-4 xl:col-span-5 border-white/20 border bg-[#15202B]">
+                    <SettingsCategories 
+                        categoryClick={handleCategoryClick} 
+                        selectedCat={selectedCat}
+                    />
+                    {
+                        selectedCat && (
+                            <div className="absolute top-0 block sm:block lg:hidden mr-4">
+                                <SettingsCatContent handleCategoryClick={handleCategoryClick}  category={selectedCat} />
+                            </div>
+                        )
+                    }
                 </div>
-                {/* block sm:hidden */}
-                <div className="block sm:hidden lg:block lg:col-span-5 xl:col-span-4 border-white/20 border-r bg-[#15202B]">
-                    <SettingsCatContent category={selectedCat} />
+                <div className="hidden sm:hidden lg:block lg:col-span-5 xl:col-span-4 border-white/20 border-r bg-[#15202B]">
+                    {
+                        selectedCat === '' ? (
+                            <div className='flex flex-col'>
+                                <div className='mx-auto mt-20 text-2xl italic text-white/60 tracking-wide'>
+                                    Please select a category
+                                </div>
+                            </div>
+                        ) : (
+                            <SettingsCatContent category={selectedCat} />
+                        )
+                    }
                 </div>
             </>
         )
@@ -32,13 +50,31 @@ const Settings = () => {
     else {
         content = (
             <>
-                {/* sm:w-[648px] */}
-                <div className="sm:max-w-[628px] sm:min-w-[540px] sm:col-span-6 lg:min-w-0 lg:w-auto lg:col-span-3 xl:col-span-3 border-white/20 border bg-[#15202B]">
-                    <SettingsCategories categoryClick={handleCategoryClick} selectedCat={selectedCat} />
+                <div className="xl:ml-[223px] ml-[76px] sm:col-span-9 lg:min-w-0 lg:w-auto lg:col-span-4 xl:col-span-5 border-white/20 border bg-[#15202B]">
+                    <SettingsCategories 
+                        categoryClick={handleCategoryClick} 
+                        selectedCat={selectedCat}
+                    />
+                    {
+                        selectedCat && (
+                            <div className="absolute top-0 block sm:block lg:hidden mr-4">
+                                <SettingsCatContent handleCategoryClick={handleCategoryClick}  category={selectedCat} />
+                            </div>
+                        )
+                    }
                 </div>
-                {/* block sm:hidden */}
-                <div className="block sm:hidden lg:block lg:col-span-5 xl:col-span-4 border-white/20 border-r bg-[#15202B]">
-                    <SettingsCatContent category={selectedCat} />
+                <div className="hidden sm:hidden lg:block lg:col-span-5 xl:col-span-4 border-white/20 border-r bg-[#15202B]">
+                    {
+                        selectedCat === '' ? (
+                            <div className='flex flex-col'>
+                                <div className='mx-auto mt-20 text-2xl italic text-white/60 tracking-wide'>
+                                    Please select a category
+                                </div>
+                            </div>
+                        ) : (
+                            <SettingsCatContent category={selectedCat} />
+                        )
+                    }
                 </div>
             </>
         )

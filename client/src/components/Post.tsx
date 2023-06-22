@@ -41,7 +41,7 @@ const Post: React.FC<PostProps> = ({
         onClick={() => onClick(Post)}
         className="
             flex
-            pl-3
+            px-3
             py-2
             border-b
             border-white/20
@@ -50,18 +50,16 @@ const Post: React.FC<PostProps> = ({
             transition
         "
     >
-        <div className="mr-3">
-            <img
-                src={Post.user_avatar} 
-                alt="avatar"
-                className="rounded-full w-10 h-10"
-            />
-        </div>
+        <img
+            src={Post.user_avatar} 
+            alt="avatar"
+            className="rounded-full w-10 h-10 mr-3"
+        />
         <div className="flex flex-col gap-2">
             <div>
                 <b>{Post.username}</b>
             </div> 
-            <div className=' break-all'>
+            <div className=''>
                 <p className='text-[15px] break-words'>
                     {Post.content}
                 </p>

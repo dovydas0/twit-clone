@@ -13,9 +13,8 @@ function RightBar() {
   return (
     <div className="
       bg-[#15202B]
-      sm:col-span-1 
-      lg:col-span-3 
-      xl:col-span-2 
+      lg:col-span-3
+      xl:col-span-3
       lg:block
       sm:hidden
     ">

@@ -92,21 +92,50 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
     <>
       {
         profileClick && (
-          <div 
-            onClick={() => setProfileClick(state => !state)}
-            className="
-              z-40
+          <>
+            <div 
+              onClick={() => setProfileClick(state => !state)}
+              className="
+                z-40
+                absolute
+                top-0
+                left-0
+                w-full
+                h-full
+              "
+            >
+            </div>                    
+            <div className="
+            bg-[#15202B]
+              pop-up_shadow
               absolute
-              top-0
-              left-0
-              w-full
-              h-full
-            "
-          >
-          </div>
+              shadow-lg
+              rounded-xl
+              bottom-20
+              z-50
+              py-2
+              w-[320px]
+              border-white/20
+              border
+            ">
+              <div
+                onClick={handleSignOut}
+                className="
+                  hover:bg-white/5
+                  font-bold
+                  text-lg
+                  p-3
+                  w-full
+                  cursor-pointer
+                "
+                >
+                Log out {loggedUser.username}
+              </div>
+            </div>
+          </>
         )
       }
-      <div className="h-20 relative sm:h-full sm:col-span-1 lg:col-span-1 xl:col-span-2 bg-[#15202B]">
+      <div className="h-20 fixed sm:h-screen sm:col-span-1 lg:col-span-1 xl:col-span-2 bg-[#15202B]">
         {
           Object.keys(loggedUser).length > 0 ? (
             <div className="pt-4 mr-4 flex flex-col gap-1 items-end xl:items-start">
@@ -122,38 +151,7 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
                   />
                 ))
               }
-              <div className="fixed bottom-3 -mr-2 xl:pr-2 xl:w-full">
-                {
-                  profileClick && (                      
-                    <div className="
-                    bg-[#15202B]
-                      pop-up_shadow
-                      absolute
-                      shadow-lg
-                      rounded-xl
-                      bottom-16
-                      z-50
-                      py-2
-                      w-[320px]
-                      border-white/20
-                      border
-                    ">
-                      <div
-                        onClick={handleSignOut}
-                        className="
-                          hover:bg-white/5
-                          font-bold
-                          text-lg
-                          p-3
-                          w-full
-                          cursor-pointer
-                        "
-                        >
-                        Log out {loggedUser.username}
-                      </div>
-                    </div>
-                  )
-                }
+              <div className="absolute bottom-3 -mr-2 xl:pr-2 xl:w-full">
                 <button 
                 onClick={() => {setProfileClick(prev => !prev)}}
                 className={`
@@ -183,7 +181,7 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
               </div>
             </div>
           ) : (
-            <div className="pt-4 mr-4 flex flex-col gap-1 items-end xl:items-start">
+            <div className="pt-4 mr-4 flex flex-col gap-1 xl:w-[12.9rem] items-end xl:items-start">
               {
                 loggedOutCat.map(category => (
                   <LeftBarCategory

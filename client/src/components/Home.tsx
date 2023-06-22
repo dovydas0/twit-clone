@@ -79,10 +79,10 @@ function Home() {
 
   if (Object.keys(loggedUser).length === 0) {
     content = (
-        <>
+        <div className="mb-[70px]">
           <ExploreHeader />
           <MainFeed isUserLogged={false} onClick={handlePostOpen} postData={posts} setPosts={setPosts} />
-        </>
+        </div>
     )
   }
 
@@ -110,7 +110,7 @@ function Home() {
   }
 
   return (
-    <div className="sm:col-span-7 h-full lg:col-span-5 xl:col-span-5 border-white/20 border bg-[#15202B]">
+    <div className="sm:col-span-8 lg:col-span-6 xl:ml-[223px] ml-[76px] h-full border-white/20 border bg-[#15202B]">
       {content}
     </div>
   )

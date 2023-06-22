@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 import Button from "../custom_elements/Button";
 import { FaRegCalendarAlt } from "react-icons/fa";
+import EditProfileModal from "../modals/EditProfileModal";
 
 const categories = [
     {
@@ -31,6 +32,7 @@ const categories = [
 const ProfilePage = () => {
     const loggedUser = useAppSelector(state => state.user)
     const [ selectedCat, setSelectedCat ] = useState(categories[0].category)
+    const [ openedEditProfile, setOpenedEditProfile ] = useState(false)
 
     const navigate = useNavigate();
 
@@ -41,13 +43,18 @@ const ProfilePage = () => {
     const date = new Date(loggedUser.created_at as string);
     const JoinedDate = date.toLocaleString('default', { month: 'long'}) + ' ' + date.getFullYear();
 
+    const handleProfileEditModal = () => {
+        setOpenedEditProfile(state => !state)
+    }
 
     return (
       <div className="
-          sm:col-span-7
+          sm:col-span-8
           h-full
-          lg:col-span-5
-          xl:col-span-5
+          lg:col-span-6
+          xl:col-span-6
+          xl:ml-[223px] 
+          ml-[76px]
           border-white/20
           border
         bg-[#15202B]
@@ -112,6 +119,7 @@ const ProfilePage = () => {
                         small
                         outline
                         value='Edit profile'
+                        onClick={handleProfileEditModal}
                     />
                 </div>
             </div>
@@ -138,35 +146,35 @@ const ProfilePage = () => {
                 flex
                 justify-around
             '>
-                {
-                    categories.map(category => (
-                            <div 
-                                key={category.category}
-                                onClick={() => setSelectedCat(category.category)}
-                                className="
-                                    hover:bg-white/10
-                                    text-center
-                                    h-14
-                                    flex
-                                    pt-[0.9rem]
-                                    font-semibold
-                                    text-lg
-                                    w-full
-                                    cursor-pointer
-                                "
-                            >
-                                <p className={`
-                                    border-sky-500
-                                    ${category.category === selectedCat ? 'border-b-4' : ''}                                    
-                                    w-fit
-                                    mx-auto
-                                `}>
-                                    {category.category}
-                                </p>
-                            </div>
-                        )
+            {
+                categories.map(category => (
+                        <div 
+                            key={category.category}
+                            onClick={() => setSelectedCat(category.category)}
+                            className="
+                                hover:bg-white/10
+                                text-center
+                                h-14
+                                flex
+                                pt-[0.9rem]
+                                font-semibold
+                                text-lg
+                                w-full
+                                cursor-pointer
+                            "
+                        >
+                            <p className={`
+                                border-sky-500
+                                ${category.category === selectedCat ? 'border-b-4' : ''}                                    
+                                w-fit
+                                mx-auto
+                            `}>
+                                {category.category}
+                            </p>
+                        </div>
                     )
-                }
+                )
+            }
             </div>
             <div
                 className="
@@ -175,34 +183,39 @@ const ProfilePage = () => {
                     border-t
                 "
             >
-                {
-                    categories.map(category => (
-                        category.category === selectedCat ? (
-                            <div className="
-                                mt-10
-                                mb-14
-                                mx-auto
-                                w-96
-                                flex
-                                flex-col
-                                gap-4
-                            ">
-                                <div className="font-bold text-3xl">
-                                    {
-                                        category.emptyContentHeader
-                                    }
-                                </div>
-                                <div className="text-md text-slate-400/80">
-                                    {
-                                        category.emptyContentText
-                                    }
-                                </div>
+            {
+                categories.map(category => (
+                    category.category === selectedCat && (
+                        <div className="
+                            mt-10
+                            mb-14
+                            mx-auto
+                            w-96
+                            flex
+                            flex-col
+                            gap-4
+                        ">
+                            <div className="font-bold text-3xl">
+                                {
+                                    category.emptyContentHeader
+                                }
                             </div>
-                        ) : ''
-                    ))
-                }
+                            <div className="text-md text-slate-400/80">
+                                {
+                                    category.emptyContentText
+                                }
+                            </div>
+                        </div>
+                    )
+                ))
+            }
             </div>
         </div>
+        {
+            openedEditProfile && (
+                <EditProfileModal handleProfileEditModal={handleProfileEditModal} />
+            )
+        }
       </div>
     )
 }

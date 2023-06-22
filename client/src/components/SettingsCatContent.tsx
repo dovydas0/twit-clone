@@ -1,15 +1,39 @@
 import React from 'react'
+import { IoMdArrowBack } from 'react-icons/io';
 
 interface SettingsCatContentProps {
     category: string;
+    handleCategoryClick?: (category: string) => void;
 }
 
 const SettingsCatContent: React.FC<SettingsCatContentProps> = ({
-    category
+    category,
+    handleCategoryClick
 }) => {
+
+    const handleGoBack = () => {
+        if (handleCategoryClick) {
+            handleCategoryClick('')
+        }
+    }
+
   return (
-    <div className='m-4'>
+    <div className='p-4 h-screen bg-[#15202B]'>
         <div className='flex items-center'>
+            <div 
+                onClick={handleGoBack}
+                className="
+                    block
+                    rounded-full
+                    p-2
+                    mr-6
+                    cursor-pointer
+                    lg:hidden
+                    hover:bg-white/10
+                    "
+                >
+                <IoMdArrowBack size={22} />
+            </div>
             <p className='text-xl font-semibold'>
                 {category}
             </p>
