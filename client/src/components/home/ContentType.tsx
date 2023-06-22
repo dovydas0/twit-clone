@@ -10,7 +10,7 @@ const ContentType: React.FC<ContentTypeProps> = ({
 }) => {
 
   return (
-    <div className="sticky top-0 bg-[#15202B]/80 backdrop-blur-md">
+    <div className="sticky top-0 mr-[1px] bg-[#15202B]/80 backdrop-blur-md">
         <div className="pl-3 py-3 font-semibold text-xl">
             Home
         </div>
