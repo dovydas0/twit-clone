@@ -1,11 +1,13 @@
 import { RxCross2 } from "react-icons/rx"
 import Input from "../custom_elements/Input"
 import Button from "../custom_elements/Button"
+import { ChangeEvent } from "react";
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setUser } from "../../store/features/userSlice";
 import axios from "axios";
+import { useRef } from "react";
 
 interface EditProfileModalProps {
   handleProfileEditModal: () => void;
@@ -14,9 +16,10 @@ interface EditProfileModalProps {
 const EditProfileModal: React.FC<EditProfileModalProps> = ({
   handleProfileEditModal
 }) => {
-
   const loggedUser = useAppSelector(state => state.user)
   const dispatch = useAppDispatch()
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { 
     handleSubmit,
@@ -25,6 +28,18 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
         errors
     }
   } = useForm<FieldValues>();
+
+  const handleAvatarClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  }
+
+  const handleAvatarUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      console.log(e.target.files[0]);
+    }
+  }
 
   const updateAccount: SubmitHandler<FieldValues> = async (data) => {
     const userUpdate = await axios.patch(import.meta.env.VITE_API_SERVER_URL + `/users/${loggedUser.id}`, data);
@@ -149,8 +164,8 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                   {
                     loggedUser.avatar && (
                       <div className="relative">
-                        <div 
-                          onClick={() => {}}
+                        <div
+                          onClick={handleAvatarClick}
                           className="
                             z-10
                             absolute
@@ -165,6 +180,12 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                             transition
                           "
                         >
+                          <input 
+                            ref={fileInputRef}
+                            type="file"
+                            onChange={handleAvatarUpload}
+                            className='absolute top-0 left-0 w-0 opacity-0'
+                          />
                           <MdOutlineAddPhotoAlternate size={20} />
                         </div>
                         <img 

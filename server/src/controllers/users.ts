@@ -74,10 +74,7 @@ export const updateUser = async (req: express.Request, res: express.Response) =>
             website: rows[0].website,
             avatar: rows[0].avatar,
             cover_image: rows[0].cover_image
-        }
-        
-        console.log('db info:', updatedUserObject);
-        
+        }        
 
         if (user.name !== updatedUserObject.username) {
             updatedUserObject.username = user.name;

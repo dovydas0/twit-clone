@@ -1,6 +1,7 @@
 import express from 'express';
 import users from './users';
 import posts from './posts';
+import images from './images';
 import comments from './comments';
 import authentication from './authentication';
 
@@ -11,6 +12,7 @@ export default (): express.Router => {
     users(router);
     posts(router);
     comments(router);
+    images(router);
 
     return router;
 }
