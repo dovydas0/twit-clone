@@ -1,4 +1,5 @@
 import { poolNew } from './dbImplementation';
+import { dbUser } from '../types/userObject'
 
 
 export const getUsers = () => poolNew.query('SELECT * FROM user_table');
@@ -25,6 +26,24 @@ export const createUser = (
         );
 }
 
-// export const updateUserById = (userID: string) => {
-//     return poolNew.query('SELECT * FROM user_table WHERE id = $1', userID);
-// }
+export const updateUserById = (userID: string, userObject: dbUser ) => {
+    return poolNew.query(`
+        UPDATE user_table
+        SET username = $2,
+            bio = $3,
+            location = $4,
+            website = $5,
+            avatar = $6,
+            cover_image = $7
+        WHERE id = $1;
+        `,
+        [
+            userID,
+            userObject.username,
+            userObject.bio,
+            userObject.location,
+            userObject.website,
+            userObject.avatar,
+            userObject.cover_image
+        ]);
+}

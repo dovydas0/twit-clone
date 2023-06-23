@@ -17,7 +17,7 @@ const Settings = () => {
     if (Object.keys(loggedUser).length > 0) {
         content = (
             <>
-                <div className="xl:ml-[223px] ml-[76px] sm:col-span-9 lg:min-w-0 lg:w-auto lg:col-span-4 xl:col-span-5 border-white/20 border bg-[#15202B]">
+                <div className="h-full xl:ml-[223px] ml-[76px] sm:col-span-9 lg:min-w-0 lg:w-auto lg:col-span-4 xl:col-span-5 border-white/20 border bg-[#15202B]">
                     <SettingsCategories 
                         categoryClick={handleCategoryClick} 
                         selectedCat={selectedCat}
@@ -34,7 +34,7 @@ const Settings = () => {
                     {
                         selectedCat === '' ? (
                             <div className='flex flex-col'>
-                                <div className='mx-auto mt-20 text-2xl italic text-white/60 tracking-wide'>
+                                <div className='mx-auto mt-20 text-2xl font-semibold text-white/60 tracking-wide'>
                                     Please select a category
                                 </div>
                             </div>
@@ -50,7 +50,7 @@ const Settings = () => {
     else {
         content = (
             <>
-                <div className="xl:ml-[223px] ml-[76px] sm:col-span-9 lg:min-w-0 lg:w-auto lg:col-span-4 xl:col-span-5 border-white/20 border bg-[#15202B]">
+                <div className="h-full xl:ml-[223px] ml-[76px] sm:col-span-9 lg:min-w-0 lg:w-auto lg:col-span-4 xl:col-span-5 border-white/20 border bg-[#15202B]">
                     <SettingsCategories 
                         categoryClick={handleCategoryClick} 
                         selectedCat={selectedCat}
@@ -67,7 +67,7 @@ const Settings = () => {
                     {
                         selectedCat === '' ? (
                             <div className='flex flex-col'>
-                                <div className='mx-auto mt-20 text-2xl italic text-white/60 tracking-wide'>
+                                <div className='mx-auto mt-20 text-2xl font-semibold text-white/60 tracking-wide'>
                                     Please select a category
                                 </div>
                             </div>

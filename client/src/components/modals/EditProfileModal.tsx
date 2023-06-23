@@ -3,7 +3,9 @@ import Input from "../custom_elements/Input"
 import Button from "../custom_elements/Button"
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
-import { useAppSelector } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { setUser } from "../../store/features/userSlice";
+import axios from "axios";
 
 interface EditProfileModalProps {
   handleProfileEditModal: () => void;
@@ -14,6 +16,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
 }) => {
 
   const loggedUser = useAppSelector(state => state.user)
+  const dispatch = useAppDispatch()
 
   const { 
     handleSubmit,
@@ -23,9 +26,10 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
     }
   } = useForm<FieldValues>();
 
-  const updateAccount: SubmitHandler<FieldValues> = async (data) => {        
-    console.log('update');
-    
+  const updateAccount: SubmitHandler<FieldValues> = async (data) => {
+    const userUpdate = await axios.patch(import.meta.env.VITE_API_SERVER_URL + `/users/${loggedUser.id}`, data);
+
+    dispatch(setUser(userUpdate.data))
   }
 
   return (
@@ -82,22 +86,66 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
           '>
               <div className='w-full mb-10 flex flex-col h-full justify-between'>
                 <div className='flex flex-col gap-5'>
-                  <div className=" bg-[#10171f] flex items-center justify-center h-48">
-                    <div 
-                      onClick={() => {}}
-                      className="
-                        cursor-pointer
-                        w-fit
-                        p-4
-                        rounded-full 
-                        bg-gray-900
-                        hover:bg-gray-600/20
-                        transition
-                      "
-                    >
-                      <MdOutlineAddPhotoAlternate size={20} />
-                    </div>
-                  </div>
+                  {
+                    loggedUser.cover_image ? (
+                      <div className=" bg-[#10171f] overflow-hidden flex items-center justify-center h-48">
+                        <img 
+                          src={loggedUser.cover_image}
+                          onClick={() => {}}
+                          {
+                            ...register(
+                              "cover_image", {
+                                value: loggedUser.cover_image
+                              }
+                            )
+                          }
+                          className="
+                            w-full
+                            object-cover
+                          "
+                        />
+                        <div 
+                          onClick={() => {}}
+                          className="
+                            cursor-pointer
+                            absolute
+                            w-fit
+                            p-4
+                            rounded-full 
+                            bg-gray-900/50
+                            hover:bg-gray-600/50
+                            transition
+                          "
+                        >
+                          <MdOutlineAddPhotoAlternate size={20} />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className=" bg-[#10171f] flex items-center justify-center h-48">
+                        <div 
+                          onClick={() => {}}
+                          {
+                            ...register(
+                              "cover_image", {
+                                value: ""
+                              }
+                            )
+                          }
+                          className="
+                            cursor-pointer
+                            w-fit
+                            p-4
+                            rounded-full 
+                            bg-gray-900
+                            hover:bg-gray-600/20
+                            transition
+                          "
+                        >
+                          <MdOutlineAddPhotoAlternate size={20} />
+                        </div>
+                      </div>
+                    )
+                  }
                   {
                     loggedUser.avatar && (
                       <div className="relative">
@@ -119,19 +167,27 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                         >
                           <MdOutlineAddPhotoAlternate size={20} />
                         </div>
-                        <img src={loggedUser.avatar} alt="profile" 
-                        className="
-                          w-28
-                          rounded-full
-                          p-1.5
-                          ml-3
-                          -mt-16
-                          bg-[#15202B]
-                          opacity-60
+                        <img 
+                          src={loggedUser.avatar}
+                          {
+                            ...register(
+                              "avatar", {
+                                value: loggedUser.avatar
+                              }
+                            )
+                          }
+                          alt="profile" 
+                          className="
+                            w-28
+                            rounded-full
+                            p-1.5
+                            ml-3
+                            -mt-16
+                            bg-[#15202B]
+                            opacity-60
                           "
                         />
                       </div>
-
                     )
                   }
                   <div className="mx-4 flex flex-col gap-6">
@@ -141,33 +197,33 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                         placeholder="Name"
                         type="text"
                         register={register}
-                        RegExPattern={new RegExp('^[a-zA-Z0-9]+@[a-z]+\.[a-z]{2,3}$')}
+                        RegExPattern={new RegExp('^[a-zA-Z-0-9]{4,20}$')}
                         errors={errors}
                         textValue={loggedUser.username || ""}
                     />
                     <Input
-                        required
                         id="bio"
                         placeholder="Bio"
                         type="text"
                         register={register}
                         errors={errors}
+                        textValue={loggedUser.bio || ""}
                     />
                     <Input
-                        required
                         id="location"
                         placeholder="Location"
                         type="text"
                         register={register}
                         errors={errors}
+                        textValue={loggedUser.location || ""}
                     />
                     <Input
-                        required
                         id="website"
                         placeholder="Website"
                         type="text"
                         register={register}
                         errors={errors}
+                        textValue={loggedUser.website || ""}
                     />
                   </div>
                 </div>

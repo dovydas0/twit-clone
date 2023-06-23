@@ -6,5 +6,5 @@ export default (router: express.Router) => {
     router.get('/users', isAuthenticated, getAllUsers);
     router.post('/users/email', getUserByEmail);
     router.delete('/users/:id', deleteUser);
-    // router.patch('/users/:id', updateUser);
+    router.patch('/users/:id', updateUser);
 }

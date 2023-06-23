@@ -1,7 +1,8 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { createUser, getByEmail } from '../db/users';
+import { dbUser } from '../types/userObject';
+import { createUser, getByEmail, getUserById } from '../db/users';
 require('dotenv').config();
 
 
@@ -62,7 +63,7 @@ export const login = async (req: express.Request, res: express.Response) => {
 
         delete userObject.password;        
 
-        const token = jwt.sign(userObject, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
+        const token = jwt.sign(userObject, process.env.JWT_SECRET_KEY, { expiresIn: '30m' });
 
         res.cookie("USER_TOKEN", token);
 
@@ -84,9 +85,13 @@ export const reconnection = async (req: express.Request, res: express.Response) 
 
         jwt.verify(token, process.env.JWT_SECRET_KEY);
 
-        const userObject = jwt.decode(token);
+        // Converting JWT token to user JSON object
+        const userObject = jwt.decode(token) as dbUser;
 
-        return res.status(200).json(userObject);
+        // Updating user object with the most recent info from the database
+        const mostRecentUserObj = await getUserById(userObject.id)        
+
+        return res.status(200).json(mostRecentUserObj.rows[0]);
     } catch (error) {
         return res.status(403).json({ message: "Unauthenticated connection" });
     }

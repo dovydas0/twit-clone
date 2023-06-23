@@ -186,15 +186,18 @@ const ProfilePage = () => {
             {
                 categories.map(category => (
                     category.category === selectedCat && (
-                        <div className="
-                            mt-10
-                            mb-14
-                            mx-auto
-                            w-96
-                            flex
-                            flex-col
-                            gap-4
-                        ">
+                        <div 
+                            key={category.category}
+                            className="
+                                mt-10
+                                mb-14
+                                mx-auto
+                                w-96
+                                flex
+                                flex-col
+                                gap-4
+                            "
+                        >
                             <div className="font-bold text-3xl">
                                 {
                                     category.emptyContentHeader

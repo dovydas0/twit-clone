@@ -21,7 +21,6 @@ function App() {
   const dispatch = useAppDispatch();
   const loggedUser = useAppSelector(state => state.user);
 
-
   useEffect(() => {
     if (document.cookie.indexOf('USER_TOKEN=') === -1) {
       return;
@@ -29,7 +28,6 @@ function App() {
     
     // Temporary solution to clearing the auth cookie
     const timeout = setTimeout(() => {
-      console.log('clearing cookies');
       document.cookie = '';
     }, 1800000)
 
@@ -37,7 +35,6 @@ function App() {
       try {
         const userObject = await axios.get(import.meta.env.VITE_API_SERVER_URL + "/auth/user", { withCredentials: true });
         dispatch(setUser(userObject.data))
-
       } catch (error) {
         
       }

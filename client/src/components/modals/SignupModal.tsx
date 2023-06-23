@@ -14,7 +14,6 @@ import { useNavigate } from 'react-router-dom';
 enum SIGNUP {
     ACCOUNT_TYPES = 0,
     CREATE_ACCOUNT = 1
-
 }
 
 const Modal = () => {

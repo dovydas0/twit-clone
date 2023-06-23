@@ -52,11 +52,13 @@ const Footer = () => {
                             <Button
                                 value="Log in"
                                 outline
+                                big
                             />
                         </Link>
                         <Link to="/signup" className="w-full mr-12">
                             <Button
                                 value="Sign up"
+                                big
                             />
                         </Link>
                     </div>

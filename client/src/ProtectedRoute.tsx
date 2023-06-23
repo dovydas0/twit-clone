@@ -8,7 +8,7 @@ interface ProtectedRouteProps {
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
     children
 }) => {
-    const loggedUser = useAppSelector(state => state.user);
+    const loggedUser = useAppSelector(state => state.user);    
 
     if (Object.keys(loggedUser).length < 1) {
         return <Navigate to='/login' />;
