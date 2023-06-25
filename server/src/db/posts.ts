@@ -1,6 +1,6 @@
 import { poolNew } from './dbImplementation';
 
-// export const getPosts = () => poolNew.query('SELECT * FROM post_table');
+// Getting posts together with post owner information
 export const getPosts = () => poolNew.query(`
     select 
         pt.id as post_id,

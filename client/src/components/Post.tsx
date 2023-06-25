@@ -35,6 +35,9 @@ const Post: React.FC<PostProps> = ({
         updateLikedPost(e, post, isLiked);
         setIsLiked(!isLiked);
     }
+
+    console.log(Post);
+    
     
   return (
     <div 

@@ -1,5 +1,6 @@
 import express from 'express';
 import { validateUUID } from '../utils';
+import { v2 as cloudinary } from 'cloudinary';
 
 import { deleteUserById, getUserById, getByEmail, getUsers, updateUserById } from "../db/users"
 
@@ -55,13 +56,28 @@ export const deleteUser = async (req: express.Request, res: express.Response) =>
 
 export const updateUser = async (req: express.Request, res: express.Response) => {
     try {
+        // Accessing data from the client
+        const files = req.files as { [fieldname: string]: Express.Multer.File[] };
         const { id } = req.params;
         const user = req.body;
 
-        if (user.name.length < 4 || !user.avatar) {
+        let avatar;
+        let cover_image
+        
+        if (files['avatar']) {
+            avatar = files['avatar'][0].buffer.toString('base64');
+        }
+        
+        if (files['cover_image']) {
+            cover_image = files['cover_image'][0].buffer.toString('base64');
+        }
+        
+        // If username is < 4 or no user avatar is provided
+        if ((avatar || !user.avatar) && user.name.length < 4) {
             return res.status(404).json({ message: 'Invalid request'})
         }
-    
+
+        // Constructing an updated user object
         const { rows } = await getUserById(id);
         
         delete rows[0].password;
@@ -92,14 +108,21 @@ export const updateUser = async (req: express.Request, res: express.Response) =>
             updatedUserObject.website = user.website;
         }
         
-        if (user.avatar !== updatedUserObject.avatar) {
-            updatedUserObject.avatar = user.avatar;
-        }
+        if (avatar) {
+            // uploading the avatar image to cloud
+            const avatarURL = await cloudinary.uploader.upload(`data:image/png;base64,${avatar}`);
 
-        if (user.cover_image !== updatedUserObject.cover_image) {
-            updatedUserObject.cover_image = user.cover_image;
+            updatedUserObject.avatar = avatarURL.secure_url;
         }
         
+        if (cover_image) {
+            // uploading the cover image to cloud
+            const coverURL = await cloudinary.uploader.upload(`data:image/png;base64,${cover_image}`);
+
+            updatedUserObject.cover_image = coverURL.secure_url;
+        }
+        
+        // Storing the new updated user object in the database
         await updateUserById(id, updatedUserObject)
 
         return res.status(200).json(updatedUserObject);

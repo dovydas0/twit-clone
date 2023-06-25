@@ -171,7 +171,7 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
                   <div className="flex items-center gap-4">
                     <img
                       src={loggedUser.avatar || 'default_avatar.jpg'}
-                      className="rounded-full w-10"
+                      className="rounded-full w-10 h-10"
                       alt="user image"
                     />
                     <b className="hidden xl:block text-lg">{loggedUser.username}</b>

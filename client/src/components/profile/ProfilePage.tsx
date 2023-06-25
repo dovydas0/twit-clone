@@ -83,16 +83,20 @@ const ProfilePage = () => {
                     </div>
                 </div>
             </div>
-            <div className="bg-slate-600 h-56 overflow-hidden">
-                {
-                    loggedUser.cover_image && (
+            {
+                loggedUser.cover_image ? (
+                    <div className="h-56 overflow-hidden">
                         <img 
                             src={loggedUser.cover_image}
                             alt="cover image"
-                            className="m-auto w-full object-cover" />
-                    )
-                }
-            </div>
+                            className="m-auto w-full object-cover"
+                        />
+                    </div>
+                ) : (
+                    <div className="bg-slate-600 h-56 overflow-hidden">
+                    </div>
+                )
+            }
             <div className="
                 flex
                 justify-between
@@ -106,6 +110,7 @@ const ProfilePage = () => {
                             className="
                                 object-cover
                                 w-36
+                                h-36
                                 p-1.5
                                 bg-[#15202B]
                                 rounded-full

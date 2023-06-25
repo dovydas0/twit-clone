@@ -8,9 +8,16 @@ import { createDatabase, connectToDatabase, createTables } from './db/dbImplemen
 require('dotenv').config();
 
 // Cloudinary configuration
-cloudinary.config({
+cloudinary.config({ 
+    cloud_name: 'dgtndwfxr', 
+    api_key: '416645621722788', 
+    api_secret: '6MkkVTnhk250yOiu8oW6wlKo5rw',
     secure: true
-});
+  });
+
+const storage = multer.memoryStorage();
+
+export const upload = multer({ storage })
 
 // const storage = multer.diskStorage({
 //     destination: (req, file, cb) => {

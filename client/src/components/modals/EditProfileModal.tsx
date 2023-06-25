@@ -5,9 +5,9 @@ import { ChangeEvent } from "react";
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 import { useAppDispatch, useAppSelector } from "../../store/store";
+import { useRef, useState } from "react";
 import { setUser } from "../../store/features/userSlice";
 import axios from "axios";
-import { useRef } from "react";
 
 interface EditProfileModalProps {
   handleProfileEditModal: () => void;
@@ -19,7 +19,12 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
   const loggedUser = useAppSelector(state => state.user)
   const dispatch = useAppDispatch()
 
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [ avatarImg, setAvatarImg ] = useState<File>()
+  const [ coverImg, setCoverImg ] = useState<File>()
+
+  // upload button refs
+  const avatarFileInputRef = useRef<HTMLInputElement>(null);
+  const coverFileInputRef = useRef<HTMLInputElement>(null);
 
   const { 
     handleSubmit,
@@ -29,20 +34,47 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
     }
   } = useForm<FieldValues>();
 
+  const handleCoverClick = () => {
+    if (coverFileInputRef.current) {
+      coverFileInputRef.current.click();
+    }
+  }
+
   const handleAvatarClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
+    if (avatarFileInputRef.current) {
+      avatarFileInputRef.current.click();
     }
   }
 
   const handleAvatarUpload = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      console.log(e.target.files[0]);
+      setAvatarImg(e.target.files[0])
+
+    }
+  }
+  
+  const handleCoverUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setCoverImg(e.target.files[0])
     }
   }
 
   const updateAccount: SubmitHandler<FieldValues> = async (data) => {
-    const userUpdate = await axios.patch(import.meta.env.VITE_API_SERVER_URL + `/users/${loggedUser.id}`, data);
+    const formData = new FormData();    
+
+    for (const entry in data) {
+      if (entry === 'avatar' && avatarImg) {
+        formData.append("avatar", avatarImg);
+      }
+      else if (entry === 'cover_image' && coverImg) {
+        formData.append("cover_image", coverImg);
+      }
+      else {
+        formData.append(entry, data[entry]);
+      }
+    }
+    
+    const userUpdate = await axios.patch(import.meta.env.VITE_API_SERVER_URL + `/users/${loggedUser.id}`, formData);
 
     dispatch(setUser(userUpdate.data))
   }
@@ -103,10 +135,9 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                 <div className='flex flex-col gap-5'>
                   {
                     loggedUser.cover_image ? (
-                      <div className=" bg-[#10171f] overflow-hidden flex items-center justify-center h-48">
+                      <div className="relative bg-[#10171f] overflow-hidden flex items-center justify-center h-48">
                         <img 
                           src={loggedUser.cover_image}
-                          onClick={() => {}}
                           {
                             ...register(
                               "cover_image", {
@@ -120,7 +151,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                           "
                         />
                         <div 
-                          onClick={() => {}}
+                          onClick={handleCoverClick}
                           className="
                             cursor-pointer
                             absolute
@@ -132,13 +163,20 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                             transition
                           "
                         >
+                          <input 
+                            ref={avatarFileInputRef}
+                            type="file"
+                            accept="image/*"
+                            onChange={handleCoverUpload}
+                            className='absolute top-0 left-0 w-0 opacity-0'
+                          />
                           <MdOutlineAddPhotoAlternate size={20} />
                         </div>
                       </div>
                     ) : (
                       <div className=" bg-[#10171f] flex items-center justify-center h-48">
                         <div 
-                          onClick={() => {}}
+                          onClick={handleCoverClick}
                           {
                             ...register(
                               "cover_image", {
@@ -151,11 +189,18 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                             w-fit
                             p-4
                             rounded-full 
-                            bg-gray-900
-                            hover:bg-gray-600/20
+                            bg-gray-900/50
+                            hover:bg-gray-600/50
                             transition
                           "
                         >
+                          <input 
+                            ref={coverFileInputRef}
+                            type="file"
+                            accept="image/*"
+                            onChange={handleCoverUpload}
+                            className='absolute top-0 left-0 w-0 opacity-0'
+                          />
                           <MdOutlineAddPhotoAlternate size={20} />
                         </div>
                       </div>
@@ -175,14 +220,15 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                             w-fit
                             p-4
                             rounded-full
-                            bg-gray-900/60
-                            hover:bg-gray-900/40
+                            bg-gray-900/50
+                            hover:bg-gray-600/50
                             transition
                           "
                         >
                           <input 
-                            ref={fileInputRef}
+                            ref={avatarFileInputRef}
                             type="file"
+                            accept="image/*"
                             onChange={handleAvatarUpload}
                             className='absolute top-0 left-0 w-0 opacity-0'
                           />
@@ -200,12 +246,13 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                           alt="profile" 
                           className="
                             w-28
+                            h-28
+                            object-cover
                             rounded-full
                             p-1.5
                             ml-3
                             -mt-16
                             bg-[#15202B]
-                            opacity-60
                           "
                         />
                       </div>
