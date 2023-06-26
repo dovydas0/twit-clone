@@ -109,7 +109,6 @@ export const createTables = async() => {
         poolNew.query(`
             CREATE TABLE IF NOT EXISTS user_post_table (
                 id UUID UNIQUE DEFAULT uuid_generate_v4() PRIMARY KEY NOT NULL,
-                created_at TIMESTAMP DEFAULT NOW() NOT NULL,
                 user_id UUID NOT NULL,
                 post_id UUID NOT NULL,
                 isLiked boolean DEFAULT FALSE NOT NULL,

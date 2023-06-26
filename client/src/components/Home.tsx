@@ -92,7 +92,7 @@ function Home() {
     content = (
         <div className="mb-[70px]">
           <ExploreHeader />
-          <MainFeed isUserLogged={false} onClick={handlePostOpen} postData={posts} setPosts={setPosts} />
+          <MainFeed loggedUser={loggedUser} onClick={handlePostOpen} postData={posts} setPosts={setPosts} />
         </div>
     )
   }
@@ -102,7 +102,7 @@ function Home() {
         <>
           <ContentType feedType={feedType} onClick={handleFeedType} />
           <PostInput theme={theme} loggedUser={loggedUser} handlePost={handlePost} inputValue={inputValue} setInputValue={setInputValue} />
-          <MainFeed isUserLogged={true} onClick={handlePostOpen} postData={posts} setPosts={setPosts} />
+          <MainFeed loggedUser={loggedUser} onClick={handlePostOpen} postData={posts} setPosts={setPosts} />
         </>
     )
   }

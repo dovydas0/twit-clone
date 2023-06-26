@@ -1,5 +1,4 @@
 import { AiOutlineHeart } from "react-icons/ai";
-import Button from "./custom_elements/Button";
 
 interface CommentProps {
     owner_avatar: string;

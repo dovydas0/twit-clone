@@ -1,17 +1,19 @@
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { PostType } from '../types/PostType';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { User } from '../types/UserType';
+import axios from 'axios';
 
 interface PostProps {
-    isUserLogged: boolean;
+    loggedUser: User;
     onClick: (data: PostType) => void;
     Post: PostType;
     updateLikedPost: (e: React.MouseEvent, post: PostType, isLiked: boolean) => void;
 }
 
 const Post: React.FC<PostProps> = ({
-    isUserLogged,
+    loggedUser,
     onClick,
     Post,
     updateLikedPost
@@ -20,9 +22,21 @@ const Post: React.FC<PostProps> = ({
     const [ likes, setLikes ] = useState(Post.likes || 0)
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const getPostStatus = async () => {
+            const postStatusString = import.meta.env.VITE_API_SERVER_URL + "/posts/status";
+            const postStatusData = await axios.post(postStatusString, { userID: loggedUser.id, postID: Post.post_id });
+            
+            if (postStatusData.data) {
+                setIsLiked(postStatusData.data.is_liked)                
+            }
+        }
+        getPostStatus()
+    }, [])    
+
     const handlePostLike = (e: React.MouseEvent, post: PostType) => {
         // If user is not logged in navigate to login page
-        if (!isUserLogged) {
+        if (Object.keys(loggedUser).length < 1) {
             navigate('/login')
             return;
         }
@@ -32,9 +46,9 @@ const Post: React.FC<PostProps> = ({
         } else {
             setLikes(prev => prev - 1);
         }
-        updateLikedPost(e, post, isLiked);
-        setIsLiked(!isLiked);
-    }    
+        updateLikedPost(e, post, !isLiked);
+        setIsLiked(prev => !prev);
+    }
     
   return (
     <div 

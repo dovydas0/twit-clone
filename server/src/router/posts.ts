@@ -1,5 +1,6 @@
 import express from 'express';
-import { getAllPosts, deletePost, createNewPost, updatePostLikes } from '../controllers/posts';
+import { getAllPosts, deletePost, createNewPost } from '../controllers/posts';
+import { changePostLikedState, getPostLikedState } from '../controllers/userPostJunction';
 
 export default (router: express.Router) => {
     // /posts
@@ -8,8 +9,9 @@ export default (router: express.Router) => {
     router.delete('/posts/:id', deletePost);
     // router.patch('/posts/:id', updatePost);
     
-    // /posts/like/:id
-    router.post('/posts/like/:id', updatePostLikes);
+    // ACTIONS
+    router.post('/posts/like', changePostLikedState);
+    router.post('/posts/status', getPostLikedState);
     
     return router;
 }

@@ -1,7 +1,5 @@
 import express from 'express';
 import { validateUUID } from '../utils';
-import { v4 as uuid, validate } from 'uuid';
-
 import { getPosts, deletePostById, createPost, getPostById, updatePostById } from "../db/posts"
 import { getUserById, updateUserById } from '../db/users';
 
