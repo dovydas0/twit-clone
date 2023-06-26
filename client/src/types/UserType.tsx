@@ -8,5 +8,6 @@ export type User = {
     id: string,
     location: string,
     username: string,
-    website: string
+    website: string,
+    tweet_count: number
 }

@@ -3,7 +3,7 @@ import { validateUUID } from '../utils';
 import { v4 as uuid, validate } from 'uuid';
 
 import { getPosts, deletePostById, createPost, getPostById, updatePostById } from "../db/posts"
-import { getUserById } from '../db/users';
+import { getUserById, updateUserById } from '../db/users';
 
 export const getAllPosts = async(req: express.Request, res: express.Response) => {
     try {
@@ -36,6 +36,13 @@ export const createNewPost = async(req: express.Request, res: express.Response) 
         }
 
         await createPost(userID, content);        
+
+        const updatedUserObject = {
+            ...rows[0],
+            tweet_count: rows[0].tweet_count + 1
+        }
+
+        await updateUserById(userID, updatedUserObject)
 
         return res.status(200).json({ message: "Post created" });
     } catch (error) {

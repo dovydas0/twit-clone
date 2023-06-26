@@ -6,7 +6,8 @@ import PostElement from "./PostElement";
 import { PostType } from "../types/PostType";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { useAppSelector } from "../store/store"
+import { useAppDispatch, useAppSelector } from "../store/store"
+import { setUser } from "../store/features/userSlice"
 import ExploreHeader from "./home/ExploreHeader";
 
 enum CONTENT {
@@ -23,6 +24,7 @@ function Home() {
   const theme = 'dark';
   let content;
 
+  const dispatch = useAppDispatch();
   const loggedUser = useAppSelector(state => state.user);
   
   useEffect(() => {
@@ -52,9 +54,18 @@ function Home() {
     await axios.post(url, { userID: loggedUser.id, content: inputValue.trim() })
 
     // Fetching updated posts
-    const updatedPosts = await axios.get(url);    
+    const updatedPosts = await axios.get(url);  
     
+    // updating posts list
     setPosts(updatedPosts.data)
+    
+    // updating user tweet count    
+    const updatedUser = {
+      ...loggedUser,
+      tweet_count: loggedUser.tweet_count + 1
+    }
+    dispatch(setUser(updatedUser))
+
     setInputValue('');
   }
 
@@ -90,7 +101,7 @@ function Home() {
     content = (
         <>
           <ContentType feedType={feedType} onClick={handleFeedType} />
-          <PostInput theme={theme} handlePost={handlePost} inputValue={inputValue} setInputValue={setInputValue} />
+          <PostInput theme={theme} loggedUser={loggedUser} handlePost={handlePost} inputValue={inputValue} setInputValue={setInputValue} />
           <MainFeed isUserLogged={true} onClick={handlePostOpen} postData={posts} setPosts={setPosts} />
         </>
     )

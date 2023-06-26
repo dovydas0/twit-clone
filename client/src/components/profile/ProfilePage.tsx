@@ -74,12 +74,10 @@ const ProfilePage = () => {
                 </div>
                 <div className="ml-6">
                     <div className="font-bold text-[1.4rem] capitalize">
-                        {
-                            loggedUser.username
-                        }
+                        {loggedUser.username}
                     </div>
                     <div className="text-slate-400/80 text-sm tracking-wider">
-                        0 Tweets
+                        {loggedUser.tweet_count} Tweets
                     </div>
                 </div>
             </div>

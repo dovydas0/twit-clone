@@ -34,7 +34,8 @@ export const updateUserById = (userID: string, userObject: dbUser ) => {
             location = $4,
             website = $5,
             avatar = $6,
-            cover_image = $7
+            cover_image = $7,
+            tweet_count = $8
         WHERE id = $1;
         `,
         [
@@ -44,6 +45,7 @@ export const updateUserById = (userID: string, userObject: dbUser ) => {
             userObject.location,
             userObject.website,
             userObject.avatar,
-            userObject.cover_image
+            userObject.cover_image,
+            userObject.tweet_count
         ]);
 }

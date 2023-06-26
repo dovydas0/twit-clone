@@ -1,10 +1,12 @@
 import { FormEvent, useState } from "react";
 import BlueButton from "../custom_elements/BlueButton";
 import InputTextArea from "../custom_elements/InputTextArea";
+import { User } from "../../types/UserType";
 
 interface PostInputProps {
     theme: string;
     inputValue: string;
+    loggedUser: User;
     setInputValue: (value: string) => void;
     handlePost: (e: FormEvent) => void;
 }
@@ -12,13 +14,14 @@ interface PostInputProps {
 const PostInput: React.FC<PostInputProps> = ({
     theme,
     inputValue,
+    loggedUser,
     setInputValue,
     handlePost
 }) => {
 
   return (
     <div className="py-2 flex w-full border-white/20 border-y">
-        <img src="/default_avatar.jpg" className="w-10 h-10 ml-3 rounded-full"></img>
+        <img src={loggedUser.avatar} className="w-10 h-10 ml-3 rounded-full"></img>
         <div className="
             flex
             flex-col

@@ -57,7 +57,8 @@ export const createTables = async() => {
                 cover_image VARCHAR(255),
                 bio VARCHAR(160),
                 location VARCHAR(30),
-                website VARCHAR(100)
+                website VARCHAR(100),
+                tweet_count integer DEFAULT 0 NOT NULL,
             );
         `)
 

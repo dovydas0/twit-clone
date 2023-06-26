@@ -9,4 +9,5 @@ export type dbUser = {
     bio: string;
     location: string;
     website: string;
+    tweet_count: number;
 }
