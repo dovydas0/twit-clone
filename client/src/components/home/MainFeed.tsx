@@ -1,5 +1,5 @@
 import Post from "../Post"
-import PostType from "../types/PostType";
+import { PostType } from "../../types/PostType";
 import axios from "axios";
 
 interface MainFeedProps {
@@ -26,9 +26,9 @@ const MainFeed: React.FC<MainFeedProps> = ({
         <>
             {
                 postData.length > 0 ? (
-                    postData.map((post, index) => (
+                    postData.map((post) => (
                         <Post 
-                            key={index}
+                            key={post.post_id}
                             isUserLogged={isUserLogged}
                             onClick={onClick}
                             Post={post}

@@ -39,7 +39,7 @@ const InputTextArea: React.FC<InputTextAreaProps> = ({
           overflow-hidden
           w-[93%]
           text-xl
-          ml-2
+          ml-1
           p-2
           outline-none
           ${classes}

@@ -3,7 +3,7 @@ import PostInput from "./home/PostInput";
 import MainFeed from "./home/MainFeed";
 import { FormEvent, useCallback, useEffect, useState } from 'react';
 import PostElement from "./PostElement";
-import PostType from "./types/PostType";
+import { PostType } from "../types/PostType";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useAppSelector } from "../store/store"
@@ -99,10 +99,8 @@ function Home() {
   if (showContent === CONTENT.POST) {
     content = (
       <PostElement
-        isUserLogged={Object.keys(loggedUser).length === 0 ? false : true}
+        loggedUser={loggedUser}
         theme={theme}
-        inputValue={inputValue}
-        setInputValue={setInputValue}
         post={activePost}
         onClose={handlePostClose}
       />

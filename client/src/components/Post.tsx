@@ -1,5 +1,5 @@
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import PostType from './types/PostType';
+import { PostType } from '../types/PostType';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
@@ -34,10 +34,7 @@ const Post: React.FC<PostProps> = ({
         }
         updateLikedPost(e, post, isLiked);
         setIsLiked(!isLiked);
-    }
-
-    console.log(Post);
-    
+    }    
     
   return (
     <div 

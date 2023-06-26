@@ -2,7 +2,7 @@ import { poolNew } from './dbImplementation';
 
 // Getting posts together with post owner information
 export const getPosts = () => poolNew.query(`
-    select 
+    SELECT 
         pt.id as post_id,
         pt.created_at as post_created_at,
         pt.user_id, 
@@ -12,7 +12,7 @@ export const getPosts = () => poolNew.query(`
         ut.username,
         ut.avatar as user_avatar,
         ut.cover_image as user_cover_image
-    from post_table pt JOIN user_table ut 
+    FROM post_table pt JOIN user_table ut 
     ON ut.id = pt.user_id
     ORDER BY pt.created_at DESC;
 `);

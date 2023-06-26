@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../store/store";
 import { useRef, useState } from "react";
 import { setUser } from "../../store/features/userSlice";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 interface EditProfileModalProps {
   handleProfileEditModal: () => void;
@@ -60,23 +61,38 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
   }
 
   const updateAccount: SubmitHandler<FieldValues> = async (data) => {
-    const formData = new FormData();    
-
-    for (const entry in data) {
-      if (entry === 'avatar' && avatarImg) {
-        formData.append("avatar", avatarImg);
-      }
-      else if (entry === 'cover_image' && coverImg) {
-        formData.append("cover_image", coverImg);
-      }
-      else {
-        formData.append(entry, data[entry]);
-      }
-    }
     
-    const userUpdate = await axios.patch(import.meta.env.VITE_API_SERVER_URL + `/users/${loggedUser.id}`, formData);
+    try {
+      const formData = new FormData();    
+  
+      for (const entry in data) {
+        if (entry === 'avatar' && avatarImg) {
+          formData.append("avatar", avatarImg);
+        }
+        else if (entry === 'cover_image' && coverImg) {
+          formData.append("cover_image", coverImg);
+        }
+        else {
+          formData.append(entry, data[entry]);
+        }
+      }
+  
+      // Indicating the loader toaster
+      toast.loading('Saving...');
+      
+      const userUpdate = await axios.patch(import.meta.env.VITE_API_SERVER_URL + `/users/${loggedUser.id}`, formData);      
+      
+      // Updating redux user object data
+      dispatch(setUser(userUpdate.data))
 
-    dispatch(setUser(userUpdate.data))
+      toast.dismiss();
+      toast.success('Info updated!');
+      
+      handleProfileEditModal();
+      
+    } catch (error) {
+      toast.error('Something went wrong');
+    }
   }
 
   return (

@@ -81,6 +81,7 @@ export const createTables = async() => {
                 id UUID UNIQUE DEFAULT uuid_generate_v4() PRIMARY KEY NOT NULL, 
                 created_at TIMESTAMP DEFAULT NOW() NOT NULL, 
                 user_id UUID NOT NULL, 
+                post_id UUID NOT NULL, 
                 content text NOT NULL, 
                 likes integer DEFAULT 0 NOT NULL,
                 CONSTRAINT fk_comment_user FOREIGN KEY (user_id) REFERENCES user_table (id)

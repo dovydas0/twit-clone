@@ -5,7 +5,8 @@ import { deleteCommentById, getCommentById, getComments, createComment } from ".
 
 export const getAllComments = async(req: express.Request, res: express.Response) => {
     try {
-        const { rows } = await getComments();
+        const { id } = req.params;
+        const { rows } = await getComments(id);
                 
         return res.status(200).json(rows);
     } catch (error) {
@@ -17,13 +18,13 @@ export const getAllComments = async(req: express.Request, res: express.Response)
 export const createNewComment = async(req: express.Request, res: express.Response) => {
 
     try {
-        const { userID, content } = req.body;
+        const { userID, postID, content } = req.body;
 
-        if (!userID || !content) {
+        if (!userID || !postID || !content) {
             return res.status(400).json({ message: "Invalid Request: Data missing." });
         }
         
-        await createComment(userID, content)        
+        await createComment(userID, postID, content)        
 
         return res.status(200).json({ message: "Comment created" });
     } catch (error) {
