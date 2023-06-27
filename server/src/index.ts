@@ -9,27 +9,15 @@ require('dotenv').config();
 
 // Cloudinary configuration
 cloudinary.config({ 
-    cloud_name: 'dgtndwfxr', 
-    api_key: '416645621722788', 
-    api_secret: '6MkkVTnhk250yOiu8oW6wlKo5rw',
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
+    api_key: process.env.CLOUDINARY_API_KEY, 
+    api_secret: process.env.CLOUDINARY_API_SECRET,
     secure: true
   });
 
 const storage = multer.memoryStorage();
 
 export const upload = multer({ storage })
-
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, "media/")
-//     },
-//     filename: (req, file, cb) => {
-//         const uniqueSuffix = Date.now();
-//         cb(null, file.fieldname + '-' + uniqueSuffix)
-//     }
-// })
-
-// const upload = multer({ storage: storage})
 
 // creating express app
 const app = express();
