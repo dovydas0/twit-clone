@@ -7,7 +7,7 @@ export const getAllComments = async(req: express.Request, res: express.Response)
     try {
         const { id } = req.params;
         const { rows } = await getComments(id);
-                
+        
         return res.status(200).json(rows);
     } catch (error) {
         console.log(error);

@@ -80,7 +80,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
       // Indicating the loader toaster
       toast.loading('Saving...');
       
-      const userUpdate = await axios.patch(import.meta.env.VITE_API_SERVER_URL + `/users/${loggedUser.id}`, formData);      
+      const userUpdate = await axios.patch(import.meta.env.VITE_API_SERVER_URL + `/users/${loggedUser.id}`, formData, {withCredentials: true});      
       
       // Updating redux user object data
       dispatch(setUser(userUpdate.data))

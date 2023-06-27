@@ -10,7 +10,7 @@ import Comment from "./Comment";
 
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 interface PostElementProps {
     loggedUser: User;
@@ -44,21 +44,24 @@ const PostElement: React.FC<PostElementProps> = ({
     useEffect(() => {
         const getPostStatus = async () => {
             const postStatusString = import.meta.env.VITE_API_SERVER_URL + "/posts/status";
-            const postStatusData = await axios.post(postStatusString, { userID: loggedUser.id, postID: post?.post_id });
-            
+            const postStatusData = await axios.post(postStatusString, { userID: loggedUser.id, postID: post?.post_id }, {withCredentials: true});
+
             if (postStatusData.data) {
                 setIsLiked(postStatusData.data.is_liked)                
             }
-        }        
-        getPostStatus()
-    }, [])   
+        }
+
+        if (Object.keys(loggedUser).length > 0) {
+            getPostStatus()
+        }
+    }, [])    
 
     useEffect(() => {
         const getComments = async () => {
             const comments = await axios.get(import.meta.env.VITE_API_SERVER_URL + `/comments/${post?.post_id}`)
             
             setPostComments(comments.data)
-        }
+        }        
 
         getComments();
     }, [])
@@ -70,7 +73,7 @@ const PostElement: React.FC<PostElementProps> = ({
             content: commentValue
         }
 
-        await axios.post(import.meta.env.VITE_API_SERVER_URL + '/comments', commentData)
+        await axios.post(import.meta.env.VITE_API_SERVER_URL + '/comments', commentData, {withCredentials: true})
 
         const allComments = await axios.get(import.meta.env.VITE_API_SERVER_URL + `/comments/${post?.post_id}`)
 
@@ -94,7 +97,7 @@ const PostElement: React.FC<PostElementProps> = ({
         }
         
         // Storing updated post data in db
-        await axios.post(import.meta.env.VITE_API_SERVER_URL + `/posts/like`, data);
+        await axios.post(import.meta.env.VITE_API_SERVER_URL + `/posts/like`, data, {withCredentials: true});
         
         setIsLiked(prev => !prev);
 
@@ -102,6 +105,10 @@ const PostElement: React.FC<PostElementProps> = ({
         const updatedPosts = await axios.get(import.meta.env.VITE_API_SERVER_URL + '/posts')
 
         handleActivePostUpdate(updatedPosts.data);
+    }    
+
+    const handleCommentsUpdate = async (data: CommentType[]) => {            
+        setPostComments(data)
     }
 
   return (
@@ -235,10 +242,14 @@ const PostElement: React.FC<PostElementProps> = ({
                         postComments.map(comment => (
                             <Comment
                                 key={comment.comment_id}
+                                comment_id={comment.comment_id}
+                                post_id={post?.post_id}
                                 owner_avatar={comment.user_avatar}
                                 username={comment.username}
                                 content={comment.content}
                                 likes={comment.likes}
+                                loggedUser={loggedUser}
+                                handleCommentsUpdate={handleCommentsUpdate}
                             />
                         ))
                     }

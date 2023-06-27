@@ -39,9 +39,9 @@ export const changePostLikedState = async (req: express.Request, res: express.Re
 export const getPostLikedState = async (req: express.Request, res: express.Response) => {
     try {
         const { userID, postID } = req.body;
-
+        
         const userPostRow = await getUserPostRow(userID, postID);
-
+                
         return res.status(200).json(userPostRow.rows[0]);
     } catch (error) {
         console.log(error);

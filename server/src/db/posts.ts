@@ -35,9 +35,9 @@ export const getPostById = (postID: string) => {
 
 export const updatePostById = (postID: string, content: string, likes: number) => {
     return poolNew.query(`
-        UPDATE post_table SET 
-        content=$2, 
-        likes=$3 
+        UPDATE post_table 
+        SET content=$2, 
+            likes=$3 
         WHERE id = $1;`,
         [postID, content, likes])
 };

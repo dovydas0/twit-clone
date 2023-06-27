@@ -98,6 +98,7 @@ export const createTables = async() => {
                 comment_id UUID NOT NULL,
                 user_id UUID NOT NULL,
                 post_id UUID NOT NULL,
+                is_liked boolean DEFAULT FALSE NOT NULL,
                 CONSTRAINT fk_comment_comments FOREIGN KEY (comment_id) REFERENCES comment_table (id),
                 CONSTRAINT fk_user_comments FOREIGN KEY (user_id) REFERENCES user_table (id),
                 CONSTRAINT fk_post_comments FOREIGN KEY (post_id) REFERENCES post_table (id)

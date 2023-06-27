@@ -59,7 +59,7 @@ function Home() {
       return;
     }
 
-    await axios.post(url, { userID: loggedUser.id, content: inputValue.trim() })
+    await axios.post(url, { userID: loggedUser.id, content: inputValue.trim() }, {withCredentials: true})
 
     // Fetching updated posts
     const updatedPosts = await axios.get(url);  

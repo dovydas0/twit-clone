@@ -9,7 +9,7 @@ interface PostProps {
     loggedUser: User;
     onClick: (data: PostType) => void;
     Post: PostType;
-    setPosts: (data: PostType) => void;
+    setPosts: (data: PostType[]) => void;
 }
 
 const Post: React.FC<PostProps> = ({
@@ -24,13 +24,13 @@ const Post: React.FC<PostProps> = ({
     useEffect(() => {
         const getPostStatus = async () => {
             const postStatusString = import.meta.env.VITE_API_SERVER_URL + "/posts/status";
-            const postStatusData = await axios.post(postStatusString, { userID: loggedUser.id, postID: Post.post_id });
+            const postStatusData = await axios.post(postStatusString, { userID: loggedUser.id, postID: Post.post_id }, {withCredentials: true});
             
             if (postStatusData.data) {
                 setIsLiked(postStatusData.data.is_liked)                
             }
         }
-        console.log('updating liked status in db');
+        console.log('HTTP request on every post');
         
         getPostStatus()
     }, [])    
@@ -51,7 +51,7 @@ const Post: React.FC<PostProps> = ({
         }
         
         // Storing updated post data in db
-        await axios.post(import.meta.env.VITE_API_SERVER_URL + `/posts/like`, data);
+        await axios.post(import.meta.env.VITE_API_SERVER_URL + `/posts/like`, data, {withCredentials: true});
         
         setIsLiked(prev => !prev);
 

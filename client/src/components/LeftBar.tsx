@@ -97,7 +97,7 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
               onClick={() => setProfileClick(state => !state)}
               className="
                 z-40
-                absolute
+                fixed
                 top-0
                 left-0
                 w-full
@@ -108,7 +108,7 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
             <div className="
             bg-[#15202B]
               pop-up_shadow
-              absolute
+              fixed
               shadow-lg
               rounded-xl
               bottom-20

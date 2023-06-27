@@ -36,8 +36,12 @@ export const getCommentById = (CommentID: string) => {
     return poolNew.query('SELECT * FROM comment_table WHERE id = $1', [CommentID])
 };
 
-// export const updateCommentById = (CommentID: string) => {
-//     return poolNew.query('SELECT * FROM comment_table WHERE id = $1', [CommentID])
-// };
+export const updateCommentById = (CommentID: string, content: string, likes: number) => poolNew.query(`
+    UPDATE comment_table
+    SET content = $2,
+        likes = $3
+    WHERE id = $1`
+    , [CommentID, content, likes])
+;
 
 
