@@ -1,6 +1,6 @@
 import { PostType } from "../types/PostType"
 import { CommentType } from "../types/CommentType"
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { BiArrowBack } from "react-icons/bi";
 import { User } from "../types/UserType";
 import InputTextArea from "./custom_elements/InputTextArea";
@@ -10,22 +10,29 @@ import Comment from "./Comment";
 
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 
 interface PostElementProps {
     loggedUser: User;
     theme: string;
     post: PostType | null;
     onClose: (e: React.MouseEvent) => void;
+    handleActivePostUpdate: (data: PostType[]) => void;
 }
 
 const PostElement: React.FC<PostElementProps> = ({
     loggedUser,
     theme,
     post,
-    onClose
+    onClose,
+    handleActivePostUpdate
 }) => {
+    const [ isLiked, setIsLiked ] = useState(false)
     const [ commentValue, setCommentValue ] = useState('');
     const [ postComments, setPostComments ] = useState<CommentType[]>([]);
+
+    const navigate = useNavigate();
+
     const postDate = new Date(post?.post_created_at as Date);    
 
     const CreatedDate = postDate.getDate() + ' ' + postDate.toLocaleString('default', { month: 'short'}) + ' ' + postDate.getFullYear();
@@ -33,6 +40,18 @@ const PostElement: React.FC<PostElementProps> = ({
     if (Object.keys(loggedUser).length < 1) {
         // don't allow any buttons to be interactive
     }
+
+    useEffect(() => {
+        const getPostStatus = async () => {
+            const postStatusString = import.meta.env.VITE_API_SERVER_URL + "/posts/status";
+            const postStatusData = await axios.post(postStatusString, { userID: loggedUser.id, postID: post?.post_id });
+            
+            if (postStatusData.data) {
+                setIsLiked(postStatusData.data.is_liked)                
+            }
+        }        
+        getPostStatus()
+    }, [])   
 
     useEffect(() => {
         const getComments = async () => {
@@ -58,6 +77,32 @@ const PostElement: React.FC<PostElementProps> = ({
         setPostComments(allComments.data)
         setCommentValue('');
     }    
+
+    const handlePostLike = async (e: React.MouseEvent, post: PostType) => {
+        e.stopPropagation();
+        
+        // If user is not logged in navigate to login page
+        if (Object.keys(loggedUser).length < 1) {
+            navigate('/login')
+            return;
+        }
+
+        const data = {
+            userID: loggedUser.id,
+            postID: post.post_id,
+            isLiked: !isLiked
+        }
+        
+        // Storing updated post data in db
+        await axios.post(import.meta.env.VITE_API_SERVER_URL + `/posts/like`, data);
+        
+        setIsLiked(prev => !prev);
+
+        // Fetching updated posts from db
+        const updatedPosts = await axios.get(import.meta.env.VITE_API_SERVER_URL + '/posts')
+
+        handleActivePostUpdate(updatedPosts.data);
+    }
 
   return (
     <div className="h-full">
@@ -121,20 +166,32 @@ const PostElement: React.FC<PostElementProps> = ({
                                     </span>
                 </p>
             </div>
-            <div className='
-                flex
-                gap-1
-                w-fit
-                p-2
-                mt-1
-                items-center
-                hover:text-pink-600
-                hover:bg-pink-600/10
-                rounded-full
-                transition
-                cursor-pointer
-            '>
-                <AiOutlineHeart size={18} />
+            <div
+                onClick={(e) => {handlePostLike(e, post as PostType)}}
+                className={`
+                    flex
+                    gap-1
+                    w-fit
+                    p-2
+                    mt-1
+                    items-center
+                    hover:text-pink-600
+                    hover:bg-pink-600/10
+                    rounded-full
+                    transition
+                    cursor-pointer
+                    ${ isLiked ? 'text-pink-600' : 'text-neutral-500'}
+                `}
+            >
+            {
+                isLiked ? (
+                    <AiFillHeart size={18} />
+                    ) : (
+                    <AiOutlineHeart size={18} 
+                        className=''
+                    />
+                )
+            }
             </div>
             {
                 Object.keys(loggedUser).length > 0 ? (

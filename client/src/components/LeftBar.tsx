@@ -114,7 +114,7 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
               bottom-20
               z-50
               py-2
-              w-[320px]
+              w-64
               border-white/20
               border
             ">
@@ -124,11 +124,12 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
                   hover:bg-white/5
                   font-bold
                   text-lg
-                  p-3
+                  px-3
+                  py-2
                   w-full
                   cursor-pointer
                 "
-                >
+              >
                 Log out {loggedUser.username}
               </div>
             </div>

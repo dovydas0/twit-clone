@@ -22,7 +22,7 @@ function Home() {
   const [ posts, setPosts ] = useState<PostType[]>([]);
   const [ inputValue, setInputValue ] = useState("");
   const theme = 'dark';
-  let content;
+  let content;  
 
   const dispatch = useAppDispatch();
   const loggedUser = useAppSelector(state => state.user);
@@ -41,6 +41,14 @@ function Home() {
 
     fetchPosts();
   }, [])
+
+  const handleActivePostUpdate = (posts: PostType[]) => {
+    setPosts(posts);
+
+    const postActive = posts.filter(post => activePost?.post_id === post.post_id)
+
+    setActivePost(postActive[0])
+  }  
 
   const handlePost = async (e: FormEvent) => {
     e.preventDefault()
@@ -74,7 +82,7 @@ function Home() {
       setFeedType("forYou");
     } else {
       setFeedType("following");
-    }    
+    }
 
   }, [feedType])
 
@@ -114,6 +122,7 @@ function Home() {
         theme={theme}
         post={activePost}
         onClose={handlePostClose}
+        handleActivePostUpdate={handleActivePostUpdate}
       />
     )
   }

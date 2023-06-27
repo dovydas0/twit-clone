@@ -9,17 +9,16 @@ interface PostProps {
     loggedUser: User;
     onClick: (data: PostType) => void;
     Post: PostType;
-    updateLikedPost: (e: React.MouseEvent, post: PostType, isLiked: boolean) => void;
+    setPosts: (data: PostType) => void;
 }
 
 const Post: React.FC<PostProps> = ({
     loggedUser,
     onClick,
     Post,
-    updateLikedPost
+    setPosts
 }) => {
     const [ isLiked, setIsLiked ] = useState(false)
-    const [ likes, setLikes ] = useState(Post.likes || 0)
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -31,23 +30,35 @@ const Post: React.FC<PostProps> = ({
                 setIsLiked(postStatusData.data.is_liked)                
             }
         }
+        console.log('updating liked status in db');
+        
         getPostStatus()
     }, [])    
 
-    const handlePostLike = (e: React.MouseEvent, post: PostType) => {
+    const handlePostLike = async (e: React.MouseEvent, post: PostType) => {
+        e.stopPropagation();
+        
         // If user is not logged in navigate to login page
         if (Object.keys(loggedUser).length < 1) {
             navigate('/login')
             return;
         }
 
-        if (!isLiked) {
-            setLikes(prev => prev + 1);
-        } else {
-            setLikes(prev => prev - 1);
+        const data = {
+            userID: loggedUser.id,
+            postID: post.post_id,
+            isLiked: !isLiked
         }
-        updateLikedPost(e, post, !isLiked);
+        
+        // Storing updated post data in db
+        await axios.post(import.meta.env.VITE_API_SERVER_URL + `/posts/like`, data);
+        
         setIsLiked(prev => !prev);
+
+        // Fetching updated posts from db
+        const updatedPosts = await axios.get(import.meta.env.VITE_API_SERVER_URL + '/posts')
+
+        setPosts(updatedPosts.data);
     }
     
   return (
@@ -97,13 +108,11 @@ const Post: React.FC<PostProps> = ({
                     <AiFillHeart size={18} />
                     ) : (
                     <AiOutlineHeart size={18} 
-                        className='
-    
-                        '
-                        />
+                        className=''
+                    />
                 )
             }
-            <p className="text-xs">{likes}</p>
+            <p className="text-xs">{Post.likes}</p>
             </div>
         </div>
     </div>
