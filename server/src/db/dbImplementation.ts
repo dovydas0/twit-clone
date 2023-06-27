@@ -58,7 +58,7 @@ export const createTables = async() => {
                 bio VARCHAR(160),
                 location VARCHAR(30),
                 website VARCHAR(100),
-                tweet_count integer DEFAULT 0 NOT NULL,
+                tweet_count integer DEFAULT 0 NOT NULL
             );
         `)
 
@@ -112,8 +112,8 @@ export const createTables = async() => {
                 id UUID UNIQUE DEFAULT uuid_generate_v4() PRIMARY KEY NOT NULL,
                 user_id UUID NOT NULL,
                 post_id UUID NOT NULL,
-                isLiked boolean DEFAULT FALSE NOT NULL,
-                isRetweeted boolean DEFAULT FALSE NOT NULL,
+                is_liked boolean DEFAULT FALSE NOT NULL,
+                is_retweeted boolean DEFAULT FALSE NOT NULL,
                 CONSTRAINT fk_user_comments FOREIGN KEY (user_id) REFERENCES user_table (id),
                 CONSTRAINT fk_post_comments FOREIGN KEY (post_id) REFERENCES post_table (id)
             );

@@ -14,7 +14,7 @@ export const changePostLikedState = async (req: express.Request, res: express.Re
             await createStateEntry(userID, postID, isLiked)
         } else {
             await changeLikedState(userID, postID, isLiked)
-        }
+        }        
 
         // Fetching the post to check like count
         const { rows } = await getPostById(postID);
