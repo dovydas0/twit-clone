@@ -18,7 +18,6 @@ enum SIGNUP {
 
 const Modal = () => {
     const [ showContent, setShowContent ] = useState(SIGNUP.ACCOUNT_TYPES);
-    const [ disabled, setDisabled ] = useState(false);
     const { 
         handleSubmit, 
         register, 
@@ -320,7 +319,7 @@ const Modal = () => {
                                 <Button
                                     thick
                                     big
-                                    disabled={disabled}
+                                    disabled={false}
                                     value="Create account"
                                     onClick={handleSubmit(createAccount)}
                                 />
