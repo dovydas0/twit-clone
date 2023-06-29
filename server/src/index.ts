@@ -4,6 +4,7 @@ import router from './router';
 import cookieParser from 'cookie-parser';
 import { v2 as cloudinary } from 'cloudinary';
 import multer from 'multer';
+import path from 'path';
 import { createDatabase, connectToDatabase, createTables } from './db/dbImplementation';
 require('dotenv').config();
 
@@ -15,6 +16,7 @@ cloudinary.config({
     secure: true
   });
 
+const buildPath = path.join(__dirname, "../../client/dist");
 const storage = multer.memoryStorage();
 
 export const upload = multer({ storage })
@@ -22,19 +24,20 @@ export const upload = multer({ storage })
 // creating express app
 const app = express();
 
-// Setting server's port
+// Setting server port
 const PORT = 8000;
 
 // middleware
 app.use(cors({
     credentials: true,
-    origin: process.env.CLIENT_URL
+    origin: "*"
 }));
 app.use(express.json());
+app.use(express.static(buildPath));
 app.use(cookieParser());
 
 // Database implementation
-app.get('/db', (req, res) => {
+app.get('/db/reimplementation/danger/only-at-the-depoyment', (req, res) => {
     createDatabase();
     setTimeout(() => {
         connectToDatabase();
@@ -43,6 +46,15 @@ app.get('/db', (req, res) => {
         }, 1000)
     }, 1000)
     res.end('hi');
+})
+
+app.get('/', (req, res) => {
+    console.log(buildPath + "\\index.html");
+    res.sendFile(buildPath + "\\index.html"),
+    (err: any) => {
+        console.log(err);
+    }
+
 })
 
 app.listen(PORT, () => {
