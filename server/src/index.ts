@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+// import path from 'path';
 import router from './router';
 import cookieParser from 'cookie-parser';
 import { v2 as cloudinary } from 'cloudinary';
@@ -13,7 +14,9 @@ cloudinary.config({
     api_key: process.env.CLOUDINARY_API_KEY, 
     api_secret: process.env.CLOUDINARY_API_SECRET,
     secure: true
-  });
+});
+
+// const buildPath = path.join(__dirname, "../client/dist");
 
 const storage = multer.memoryStorage();
 
@@ -26,15 +29,16 @@ const app = express();
 const PORT = 8000;
 
 // middleware
+// app.use(express.static(buildPath));
 app.use(cors({
     credentials: true,
-    origin: "*"
+    origin: "https://twit-clon.duckdns.org"
 }));
 app.use(express.json());
 app.use(cookieParser());
 
 // Database implementation
-app.get('/db/reimplementation/danger/only-at-the-depoyment', (req, res) => {
+app.get('/db/reimplementation/danger/only-at-the-deployment', (req, res) => {
     createDatabase();
     setTimeout(() => {
         connectToDatabase();
@@ -49,4 +53,4 @@ app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`); 
 })
 
-app.use('/', router());
+app.use('/api', router());
