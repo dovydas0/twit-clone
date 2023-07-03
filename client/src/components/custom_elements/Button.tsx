@@ -2,6 +2,7 @@ import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 import { IconType } from "react-icons";
 
 interface ButtonProps {
+    themeable?: boolean;
     value: string;
     outline?: boolean;
     small?: boolean;
@@ -15,6 +16,7 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({
+    themeable,
     value,
     outline,
     textSize,
@@ -39,6 +41,7 @@ const Button: React.FC<ButtonProps> = ({
             items-align
             p-1.5
             transition
+            ${themeable ? 'border' : ''}
             ${thick ? 'py-3' : ''}
             ${small ? 'px-3 py-1.5' : ''}
             ${medium ? 'px-6' : ''}
@@ -47,7 +50,7 @@ const Button: React.FC<ButtonProps> = ({
             ${outline ? '' : 'bg-white'}
             ${outline ? 'text-white' : 'text-black'}
             ${outline ? 'hover:bg-white/10' : 'hover:bg-white/[0.85]'}
-            ${outline ? 'border-white/25 border' : ''}
+            ${outline ? 'border-white/25 border' : 'dark:border-none border-neutral-500/50'}
             ${disabled ? 'bg-white/50' : ''}
             ${disabled ? 'hover:bg-white/50' : ''}
         `

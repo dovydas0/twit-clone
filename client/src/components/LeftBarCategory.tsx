@@ -17,7 +17,7 @@ const LeftBarCategory: React.FC<LeftBarCategoryProps> = ({
     selected
 }) => {
   return (
-    <div className="text-white text-2xl xl:justify-end xl:text-2xl">
+    <div className="dark:text-neutral-100 text-zinc-900 text-2xl xl:justify-end xl:text-2xl">
         <div className="xl:flex gap-3 xl:h-full justify-start items-center w-2/4">
             <button 
             onClick={() => onClick(route, label)}

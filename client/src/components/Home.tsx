@@ -128,7 +128,7 @@ function Home() {
   }
 
   return (
-    <div className="sm:col-span-8 lg:col-span-6 xl:ml-[223px] ml-[76px] h-full border-white/20 border bg-[#15202B]">
+    <div className="sm:col-span-8 lg:col-span-6 xl:ml-[223px] ml-[76px] h-full border-neutral-500/50 border dark:text-neutral-100 text-zinc-900 dark:bg-[#15202B] bg-white">
       {content}
     </div>
   )

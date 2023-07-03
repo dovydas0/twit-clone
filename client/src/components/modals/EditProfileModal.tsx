@@ -91,6 +91,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
       handleProfileEditModal();
       
     } catch (error) {
+      toast.dismiss();
       toast.error('Something went wrong');
     }
   }

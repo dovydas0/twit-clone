@@ -136,7 +136,7 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
           </>
         )
       }
-      <div className="h-20 fixed sm:h-screen sm:col-span-1 lg:col-span-1 xl:col-span-2 bg-[#15202B]">
+      <div className="h-20 fixed sm:h-screen sm:col-span-1 lg:col-span-1 xl:col-span-2 dark:bg-[#15202B] bg-white">
         {
           Object.keys(loggedUser).length > 0 ? (
             <div className="pt-4 pr-3.5 flex flex-col gap-1 items-end xl:items-start">
