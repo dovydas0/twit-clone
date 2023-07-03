@@ -20,20 +20,17 @@ import ProtectedRoute from "./ProtectedRoute";
 function App() {
   const dispatch = useAppDispatch();
   const darkTheme = useAppSelector(state => state.theme.dark);
-  const loggedUser = useAppSelector(state => state.user);
+  const loggedUser = useAppSelector(state => state.user);  
 
   useEffect(() => {
     if (document.cookie.indexOf('USER_TOKEN=') === -1) {
       return;
     }
 
-    const dark = localStorage.getItem('dark');
-    console.log(dark);
-
     if (localStorage.getItem('dark') === 'on') {
-      console.log('setting local storage');
-      
       dispatch(setDark({ dark: true }));
+      document.body.classList.add('dark');
+      document.body.style.background = '#15202B';
     }
     
     // Temporary solution to clearing the auth cookie

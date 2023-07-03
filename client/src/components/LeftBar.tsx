@@ -182,7 +182,7 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
               </div>
             </div>
           ) : (
-            <div className="pt-4 mr-4 flex flex-col gap-1 xl:w-[12.9rem] items-end xl:items-start">
+            <div className="pt-4 -ml-1 mr-4 flex flex-col gap-1 xl:w-[12.9rem] items-end xl:items-start">
               {
                 loggedOutCat.map(category => (
                   <LeftBarCategory

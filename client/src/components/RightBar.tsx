@@ -7,7 +7,6 @@ import BlueButton from "./custom_elements/BlueButton";
 
 function RightBar() {
   const loggedUser = useAppSelector(state => state.user);
-  const darkTheme = useAppSelector(state => state.theme.dark)
   
 
   return (

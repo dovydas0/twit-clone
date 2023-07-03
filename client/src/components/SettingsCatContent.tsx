@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { IoMdArrowBack } from 'react-icons/io';
 import { setDark } from '../store/features/ThemeSlice';
 import { useAppDispatch } from "../store/store";
-import Button from './custom_elements/Button';
 
 interface SettingsCatContentProps {
     darkTheme: boolean;
