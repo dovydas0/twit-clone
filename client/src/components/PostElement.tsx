@@ -14,7 +14,6 @@ import { useNavigate } from "react-router-dom";
 
 interface PostElementProps {
     loggedUser: User;
-    theme: string;
     post: PostType | null;
     onClose: (e: React.MouseEvent) => void;
     handleActivePostUpdate: (data: PostType[]) => void;
@@ -22,7 +21,6 @@ interface PostElementProps {
 
 const PostElement: React.FC<PostElementProps> = ({
     loggedUser,
-    theme,
     post,
     onClose,
     handleActivePostUpdate
@@ -152,6 +150,7 @@ const PostElement: React.FC<PostElementProps> = ({
                         <div>
                             <Button
                                 medium
+                                themeable
                                 value="Follow"
                             />
                         </div>
@@ -217,7 +216,6 @@ const PostElement: React.FC<PostElementProps> = ({
                             />
                         </div>
                         <InputTextArea 
-                            theme={theme}
                             inputValue={commentValue}
                             setInputValue={setCommentValue}
                             placeholder="Tweet your reply!"

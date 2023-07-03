@@ -10,6 +10,7 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../store/store';
 
 enum SIGNUP {
     ACCOUNT_TYPES = 0,
@@ -18,7 +19,7 @@ enum SIGNUP {
 
 const Modal = () => {
     const [ showContent, setShowContent ] = useState(SIGNUP.ACCOUNT_TYPES);
-    const [ disabled, setDisabled ] = useState(false);
+    const darkTheme = useAppSelector(state => state.theme.dark)
     const { 
         handleSubmit, 
         register, 
@@ -87,10 +88,14 @@ const Modal = () => {
                 z-20
                 absolute
                 overflow-y-auto
-                bg-gray-800
+                dark:text-neutral-100
+                text-zinc-900
+                dark:bg-gray-800
+                bg-neutral-100
             ">
                 <div className="
-                    bg-[#15202B]
+                    dark:bg-[#15202B]
+                    bg-white
                     rounded-none
                     w-full
                     h-full
@@ -104,7 +109,7 @@ const Modal = () => {
                     md:w-[36rem]
                     md:rounded-2xl
                 ">
-                    <div className='flex rounded-2xl items-center p-3 top-0 z-50 bg-[#15202B]'>
+                    <div className='flex rounded-2xl items-center p-3 top-0 z-50 dark:bg-[#15202B] bg-white'>
                         <div className='
                             cursor-pointer
                             p-1.5
@@ -113,11 +118,17 @@ const Modal = () => {
                             transition
                         '>
                             <Link to="/">
-                                <RxCross2 size={22} />
+                                <RxCross2 size={22} style={{ color: `${darkTheme ? 'rgba(255, 255, 255, 0.6)' : 'rgba(30, 30, 30, 0.6)'}` }} />
                             </Link>
                         </div>
                         <div className='absolute left-1/2 -translate-x-4'>
-                            <img src="/twitter_logo.png" alt="logo" className='w-9' />
+                            {
+                                darkTheme ? (
+                                    <img src="/twitter_logo.png" alt="logo" className='w-9' />
+                                ) : (
+                                    <img src="/twitter_logo_dark.png" alt="logo" className='w-9' />
+                                )
+                            }
                         </div>
                     </div>
                     <div className='
@@ -132,21 +143,24 @@ const Modal = () => {
                             </div>
                             <Button
                                 value="Sign up with Google"
+                                themeable
                                 icon={FcGoogle}
                                 onClick={() => {}}
                                 />
                             <Button
                                 value="Sign up with Apple"
+                                themeable
                                 icon={BsApple}
                                 onClick={() => {}}
                             />
                             <div className='flex justify-center -mb-2'>
-                                <div className='before:content-[""] w-full mx-2 border-b border-neutral-200/20 -translate-y-1/2'></div>
+                                <div className='before:content-[""] w-full mx-2 border-b border-neutral-500/50 -translate-y-1/2'></div>
                                 or
-                                <div className='before:content-[""] w-full mx-2 border-b border-neutral-200/20 -translate-y-1/2'></div>
+                                <div className='before:content-[""] w-full mx-2 border-b border-neutral-500/50 -translate-y-1/2'></div>
                             </div>
                             <Button
                                 value="Create account"
+                                themeable
                                 onClick={() => setShowContent(SIGNUP.CREATE_ACCOUNT)}
                             />
                             <div className='-mt-2 text-slate-400 text-xs tracking-wider'>
@@ -184,10 +198,14 @@ const Modal = () => {
                 absolute
                 z-20
                 overflow-y-auto
-                bg-gray-800
+                dark:text-neutral-100
+                text-zinc-900
+                dark:bg-gray-800
+                bg-neutral-100
             ">
                 <div className="
-                    bg-[#15202B]
+                    dark:bg-[#15202B]
+                    bg-white
                     rounded-none
                     w-full
                     h-full
@@ -202,11 +220,11 @@ const Modal = () => {
                     md:w-[36rem]
                     md:rounded-2xl
                 ">
-                    <div className='flex items-center p-3 sticky top-0 z-50 bg-[#15202B]'>
+                    <div className='flex items-center p-3 sticky top-0 z-50 dark:bg-[#15202B] bg-white'>
                         <div className='
                             cursor-pointer
                             p-1.5
-                            hover:bg-neutral-200/20
+                            hover:bg-neutral-500/50
                             rounded-full
                             transition
                         '>
@@ -215,7 +233,13 @@ const Modal = () => {
                             </Link>
                         </div>
                         <div className='absolute left-1/2 -translate-x-4'>
-                            <img src="/twitter_logo.png" alt="logo" className='w-9' />
+                            {
+                                darkTheme ? (
+                                    <img src="/twitter_logo.png" alt="logo" className='w-9' />
+                                ) : (
+                                    <img src="/twitter_logo_dark.png" alt="logo" className='w-9' />
+                                )
+                            }
                         </div>
                     </div>
                     <div className='
@@ -262,7 +286,7 @@ const Modal = () => {
                                 errors={errors}
                             />
                             <div className='mt-2'>
-                                <div className='mb-1 text-md text-white font-bold'>
+                                <div className='mb-1 text-md font-bold'>
                                     Date of Birth
                                 </div>
                                 <div className='text-slate-400 text-xs tracking-wider'>
@@ -271,6 +295,7 @@ const Modal = () => {
                                 </div>
                                 <div className='mt-4 flex justify-between gap-2 h-16'>
                                     <DropdownSelector
+                                        themeable
                                         id='month'
                                         label='Month'
                                         widthClass='custom_month_width'
@@ -279,6 +304,7 @@ const Modal = () => {
                                         errors={errors}
                                     />
                                     <DropdownSelector
+                                        themeable
                                         id='day'
                                         label='Day'
                                         widthClass='custom_day_width'
@@ -287,6 +313,7 @@ const Modal = () => {
                                         errors={errors}
                                     />
                                     <DropdownSelector
+                                        themeable
                                         id='year'
                                         label='Year'
                                         widthClass='custom_year_width'
@@ -300,12 +327,13 @@ const Modal = () => {
                     </div>
                     <div className='
                         w-full
-                        bg-[#15202B]                            
+                        dark:bg-[#15202B]
+                        bg-white                            
                         mx-auto
                         border-t
                         sticky
                         bottom-0
-                        border-neutral-200/25
+                        border-neutral-500/50
                         z-50
                     '>
                         <div className='
@@ -320,7 +348,7 @@ const Modal = () => {
                                 <Button
                                     thick
                                     big
-                                    disabled={disabled}
+                                    themeable
                                     value="Create account"
                                     onClick={handleSubmit(createAccount)}
                                 />

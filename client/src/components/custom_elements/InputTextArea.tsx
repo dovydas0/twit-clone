@@ -2,7 +2,6 @@ import useAutosizeTextArea from '../useAutosizeTextArea';
 import { useRef } from 'react';
 
 interface InputTextAreaProps {
-  theme: string;
   inputValue: string;
   setInputValue: (value: string) => void;
   placeholder: string;
@@ -10,7 +9,6 @@ interface InputTextAreaProps {
 }
 
 const InputTextArea: React.FC<InputTextAreaProps> = ({
-  theme,
   inputValue,
   setInputValue,
   placeholder, 
@@ -42,8 +40,9 @@ const InputTextArea: React.FC<InputTextAreaProps> = ({
           ml-1
           p-2
           outline-none
+          dark:bg-[#15202B]
+          bg-white
           ${classes}
-          ${theme === 'dark' ? 'bg-[#15202B]' : ''}
       `}
     >
     </textarea>

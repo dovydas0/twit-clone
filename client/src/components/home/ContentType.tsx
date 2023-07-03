@@ -10,7 +10,7 @@ const ContentType: React.FC<ContentTypeProps> = ({
 }) => {
 
   return (
-    <div className="sticky top-0 mr-[1px] dark:bg-[#15202B]/80 bg-neutral-500/80 backdrop-blur-md">
+    <div className="sticky top-0 mr-[1px] dark:bg-[#15202B]/80 bg-white/80 backdrop-blur-md">
         <div className="pl-3 py-3 font-semibold text-xl">
             Home
         </div>
@@ -19,7 +19,7 @@ const ContentType: React.FC<ContentTypeProps> = ({
                 onClick={() => onClick("forYou")}
                 className="
                     w-1/2
-                    hover:bg-neutral-600
+                    hover:bg-neutral-500/50
                     mx-auto
                     flex
                     justify-center
@@ -38,7 +38,7 @@ const ContentType: React.FC<ContentTypeProps> = ({
                 onClick={() => onClick("following")}
                 className="
                     w-1/2
-                    hover:bg-neutral-600
+                    hover:bg-neutral-500/50
                     mx-auto
                     flex
                     justify-center

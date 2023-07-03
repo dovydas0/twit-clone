@@ -18,6 +18,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
   handleProfileEditModal
 }) => {
   const loggedUser = useAppSelector(state => state.user)
+  const darkTheme = useAppSelector(state => state.theme.dark)
   const dispatch = useAppDispatch()
 
   const [ avatarImg, setAvatarImg ] = useState<File>()
@@ -97,9 +98,12 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
   }
 
   return (
-    <div className="fixed flex justify-center items-center top-0 left-0 w-full h-full overflow-hidden bg-slate-400/20">
+    <div className="fixed flex justify-center items-center top-0 left-0 w-full h-full overflow-hidden bg-neutral-500/20">
       <div className="
-          bg-[#15202B]
+          dark:text-neutral-100
+          text-zinc-900
+          dark:bg-[#15202B]
+          bg-white
           rounded-none
           w-full
           h-full
@@ -113,7 +117,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
           md:w-[36rem]
           md:rounded-2xl
       ">
-          <div className='flex items-center justify-between p-3 sticky top-0 z-50 bg-[#15202B]'>
+          <div className='flex items-center justify-between p-3 sticky top-0 z-50 dark:bg-[#15202B] bg-white'>
               <div className="flex items-center">
                 <div 
                   onClick={handleProfileEditModal}
@@ -125,7 +129,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                       transition
                   '
                 >
-                  <RxCross2 size={22} />
+                  <RxCross2 size={22} style={{ color: `${darkTheme ? 'rgba(255, 255, 255, 0.6)' : 'rgba(30, 30, 30, 0.6)'}` }} />
                 </div>
                 <div className='ml-6 font-semibold text-lg'>
                   Edit profile
@@ -134,6 +138,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
               <div className="text-sm flex items-end">
                 <Button
                   medium
+                  themeable
                   onClick={handleSubmit(updateAccount)}
                   value='Save'
                 />
@@ -187,7 +192,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                             onChange={handleCoverUpload}
                             className='absolute top-0 left-0 w-0 opacity-0'
                           />
-                          <MdOutlineAddPhotoAlternate size={20} />
+                          <MdOutlineAddPhotoAlternate size={20} style={{ color: `rgb(255, 255, 255)` }} />
                         </div>
                       </div>
                     ) : (
@@ -218,7 +223,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                             onChange={handleCoverUpload}
                             className='absolute top-0 left-0 w-0 opacity-0'
                           />
-                          <MdOutlineAddPhotoAlternate size={20} />
+                          <MdOutlineAddPhotoAlternate size={20} style={{ color: `rgb(255, 255, 255)` }} />
                         </div>
                       </div>
                     )
@@ -249,7 +254,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                             onChange={handleAvatarUpload}
                             className='absolute top-0 left-0 w-0 opacity-0'
                           />
-                          <MdOutlineAddPhotoAlternate size={20} />
+                          <MdOutlineAddPhotoAlternate size={20}style={{ color: `rgb(255, 255, 255)` }} />
                         </div>
                         <img 
                           src={loggedUser.avatar}
@@ -269,7 +274,8 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                             p-1.5
                             ml-3
                             -mt-16
-                            bg-[#15202B]
+                            dark:bg-[#15202B]
+                            bg-white
                           "
                         />
                       </div>

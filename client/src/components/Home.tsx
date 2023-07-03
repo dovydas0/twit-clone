@@ -21,7 +21,6 @@ function Home() {
   const [ activePost, setActivePost ] = useState<PostType | null>(null);
   const [ posts, setPosts ] = useState<PostType[]>([]);
   const [ inputValue, setInputValue ] = useState("");
-  const theme = 'dark';
   let content;  
 
   const dispatch = useAppDispatch();
@@ -109,7 +108,7 @@ function Home() {
     content = (
         <>
           <ContentType feedType={feedType} onClick={handleFeedType} />
-          <PostInput theme={theme} loggedUser={loggedUser} handlePost={handlePost} inputValue={inputValue} setInputValue={setInputValue} />
+          <PostInput loggedUser={loggedUser} handlePost={handlePost} inputValue={inputValue} setInputValue={setInputValue} />
           <MainFeed loggedUser={loggedUser} onClick={handlePostOpen} postData={posts} setPosts={setPosts} />
         </>
     )
@@ -119,7 +118,6 @@ function Home() {
     content = (
       <PostElement
         loggedUser={loggedUser}
-        theme={theme}
         post={activePost}
         onClose={handlePostClose}
         handleActivePostUpdate={handleActivePostUpdate}

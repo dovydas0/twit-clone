@@ -106,7 +106,10 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
             >
             </div>                    
             <div className="
-            bg-[#15202B]
+              dark:bg-[#15202B]
+              bg-white
+              dark:text-neutral-100
+              text-zinc-900
               pop-up_shadow
               fixed
               shadow-lg
@@ -115,13 +118,13 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
               z-50
               py-2
               w-64
-              border-white/20
+              border-neutral-500/50
               border
             ">
               <div
                 onClick={handleSignOut}
                 className="
-                  hover:bg-white/5
+                  hover:bg-neutral-500/5
                   font-bold
                   text-lg
                   px-3
@@ -136,7 +139,18 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
           </>
         )
       }
-      <div className="h-20 fixed sm:h-screen sm:col-span-1 lg:col-span-1 xl:col-span-2 dark:bg-[#15202B] bg-white">
+      <div className="
+        h-20
+        fixed
+        sm:h-screen
+        sm:col-span-1
+        lg:col-span-1
+        xl:col-span-2
+        dark:bg-[#15202B]
+        bg-white
+        dark:text-neutral-100
+        text-zinc-900
+      ">
         {
           Object.keys(loggedUser).length > 0 ? (
             <div className="pt-4 pr-3.5 flex flex-col gap-1 items-end xl:items-start">
@@ -164,7 +178,7 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
                     p-3
                     xl:py-3
                     xl:px-4
-                    hover:bg-white/10
+                    hover:bg-neutral-500/10
                     rounded-full
                     transition  
                 `}
