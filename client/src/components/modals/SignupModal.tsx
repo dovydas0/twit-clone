@@ -144,12 +144,14 @@ const Modal = () => {
                             <Button
                                 value="Sign up with Google"
                                 themeable
+                                themedHover
                                 icon={FcGoogle}
                                 onClick={() => {}}
                                 />
                             <Button
                                 value="Sign up with Apple"
                                 themeable
+                                themedHover
                                 icon={BsApple}
                                 onClick={() => {}}
                             />
@@ -161,6 +163,7 @@ const Modal = () => {
                             <Button
                                 value="Create account"
                                 themeable
+                                themedHover
                                 onClick={() => setShowContent(SIGNUP.CREATE_ACCOUNT)}
                             />
                             <div className='-mt-2 text-slate-400 text-xs tracking-wider'>
@@ -349,6 +352,7 @@ const Modal = () => {
                                     thick
                                     big
                                     themeable
+                                    themedHover
                                     value="Create account"
                                     onClick={handleSubmit(createAccount)}
                                 />

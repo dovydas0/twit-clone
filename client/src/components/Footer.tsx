@@ -34,6 +34,8 @@ const Footer = () => {
                         <Link to="/login">
                             <Button
                                 value="Log in"
+                                themeable
+                                themedHover
                                 outline
                                 small
                             />

@@ -2,6 +2,7 @@ import { IconType } from "react-icons";
 
 interface ButtonProps {
     themeable?: boolean;
+    themedHover?: boolean;
     value: string;
     outline?: boolean;
     color?: string;
@@ -17,9 +18,9 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({
     themeable,
+    themedHover,
     value,
     outline,
-    color,
     textSize,
     small,
     medium,
@@ -47,14 +48,16 @@ const Button: React.FC<ButtonProps> = ({
             ${medium ? 'px-6' : ''}
             ${big ? 'w-full' : ''}
             ${textSize ? `text-${textSize}` : ''}
-            ${outline ? '' : 'bg-white'}
-            ${outline && color ? `dark:text-${color}` : 'text-black'}
-            ${outline && !color ? `text-white` : ''}
-            ${outline ? 'hover:bg-white/10' : 'hover:bg-white/[0.85]'}
+            ${outline ? `dark:text-white` : 'text-black'}
+            ${outline ? `text-white` : ''}
+            ${outline ? 'hover:bg-white/10' : ''}
+            ${!outline && !themedHover ? 'hover:bg-white/[0.85]' : ''}
             ${outline ? 'border-white/25 border' : 'dark:border-none border-neutral-500/50'}
+            ${!outline || !themedHover ? 'bg-white' : ''}
+            ${themeable ? 'border-neutral-500/50 border' : ''}
+            ${themedHover ? 'dark:hover:bg-white/80 hover:bg-neutral-500/10' : ''}
             ${disabled ? 'bg-white/50' : ''}
             ${disabled ? 'hover:bg-white/50' : ''}
-            ${themeable ? 'border-neutral-500/50 border' : ''}
         `
     }>
         { Icon &&

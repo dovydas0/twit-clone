@@ -145,12 +145,14 @@ const LoginModal = () => {
                             </div>
                             <Button
                                 themeable
+                                themedHover
                                 value="Sign in with Google"
                                 icon={FcGoogle}
                                 onClick={() => {}}
                                 />
                             <Button
                                 themeable
+                                themedHover
                                 value="Sign in with Apple"
                                 icon={BsApple}
                                 onClick={() => {}}
@@ -171,11 +173,12 @@ const LoginModal = () => {
                             />
                             <Button
                                 themeable
+                                themedHover
                                 value="Next"
                                 onClick={handleSubmit(handleEmailSubmit)}
                             />
                             <Button
-                                outline
+                                themedHover
                                 themeable
                                 color="white"
                                 value="Forgot password?"
@@ -291,6 +294,7 @@ const LoginModal = () => {
                             <div>
                                 <Button
                                     big
+                                    themedHover
                                     themeable
                                     value="Log in"
                                     onClick={handleSubmit(handleSigninSubmit)}
