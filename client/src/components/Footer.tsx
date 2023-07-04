@@ -43,6 +43,8 @@ const Footer = () => {
                         <Link to="/signup">
                             <Button
                                 value="Sign up"
+                                themedHover
+                                whiteHover
                                 small
                             />
                         </Link>
@@ -53,6 +55,8 @@ const Footer = () => {
                         <Link to="/login" className="w-full">
                             <Button
                                 value="Log in"
+                                themeable
+                                themedHover
                                 outline
                                 big
                             />
@@ -60,6 +64,7 @@ const Footer = () => {
                         <Link to="/signup" className="w-full mr-12">
                             <Button
                                 value="Sign up"
+                                themedHover
                                 big
                             />
                         </Link>

@@ -179,6 +179,7 @@ const LoginModal = () => {
                             />
                             <Button
                                 themedHover
+                                outline
                                 themeable
                                 color="white"
                                 value="Forgot password?"
