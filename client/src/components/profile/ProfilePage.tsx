@@ -126,6 +126,7 @@ const ProfilePage = () => {
                         small
                         outline
                         themeable
+                        themedHover
                         color='white'
                         value='Edit profile'
                         onClick={handleProfileEditModal}
@@ -143,10 +144,10 @@ const ProfilePage = () => {
                 </div>
                 <div className="text-slate-500/80 flex gap-4">
                     <div>
-                        <span className="text-white">{0}</span> Following
+                        <span className="dark:text-white text-black">{0}</span> Following
                     </div>
                     <div className="text-slate-500/80">
-                        <span className="text-white">{0}</span> Followers
+                        <span className="dark:text-white text-black">{0}</span> Followers
                     </div>
                 </div>
             </div>

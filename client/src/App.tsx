@@ -55,8 +55,17 @@ function App() {
   }, [])
     
   return (
-    <div className="max-w-[1440px] overflow-x-hidden px-4 mx-auto h-full sm:grid sm:grid-cols-9 dark:bg-[#15202B] bg-white">
-      <LeftBar />
+    <div className="
+      max-w-[1440px]
+      overflow-x-hidden
+      sm:px-4
+      mx-auto
+      h-full
+      lg:grid
+      lg:grid-cols-9
+      dark:bg-[#15202B]
+      bg-white
+    ">
       <Routes>
         {/* Authentication */}
         <Route path="/login" element={<LoginModal />} />
@@ -66,15 +75,28 @@ function App() {
         <Route path="/" element={
           <>
             <Home />
+            <LeftBar />
             <RightBar />
+            {
+              Object.keys(loggedUser).length === 0 ? <Footer /> : ''
+            }
           </>
-        }
-        />
-        <Route path="/settings" element={<Settings darkTheme={darkTheme} />} />
+        } />
+
+        <Route path="/settings" element={
+          <>
+            <LeftBar />
+            <Settings darkTheme={darkTheme} />
+            {
+              Object.keys(loggedUser).length === 0 ? <Footer /> : ''
+            }
+          </>
+        } />
         {/* Authenticated Pages */}
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={
             <>
+              <LeftBar />
               <ProfilePage />
               <RightBar />
             </>
@@ -82,11 +104,16 @@ function App() {
         </Route>
         
         {/* Unexisting Pages */}
-        <Route path="*" element={<Error />} />
+        <Route path="*" element={
+          <>
+            <LeftBar />
+            <Error />
+            {
+              Object.keys(loggedUser).length === 0 ? <Footer /> : ''
+            }
+          </>
+        } />
       </Routes>
-      {
-        Object.keys(loggedUser).length === 0 ? <Footer /> : ''
-      }
     </div>
   );
 }

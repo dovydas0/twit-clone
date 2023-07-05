@@ -140,12 +140,29 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
         )
       }
       <div className="
-        h-20
+        h-14
+        left-0
+        border-t
+        border-neutral-500/50
+        z-10
+        bottom-[72px]
         fixed
+        flex
+        justify-center
+        items-center
+        w-screen
+
+        sm:bottom-0
+        sm:border-none
+        sm:left-auto
+        sm:fixed
+        sm:w-auto
         sm:h-screen
+        sm:items-start
         sm:col-span-1
         lg:col-span-1
         xl:col-span-2
+
         dark:bg-[#15202B]
         bg-white
         dark:text-neutral-100
@@ -153,7 +170,20 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
       ">
         {
           Object.keys(loggedUser).length > 0 ? (
-            <div className="pt-4 pr-3.5 flex flex-col gap-1 items-end xl:items-start">
+            <div className="
+              gap-1
+              flex
+              flex-row
+              justify-evenly
+              w-screen
+              
+              sm:w-auto
+              sm:pt-4
+              sm:pr-3.5
+              sm:flex-col
+              sm:items-end
+              xl:items-start
+            ">
               {
                 loggedInCat.map(category => (
                   <LeftBarCategory
@@ -166,7 +196,7 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
                   />
                 ))
               }
-              <div className="absolute bottom-3 -mr-2 xl:pr-2 xl:w-full">
+              <div className="sticky top-0 sm:bottom-3 sm:-mr-2 xl:pr-2 xl:w-full">
                 <button 
                 onClick={() => {setProfileClick(prev => !prev)}}
                 className={`
@@ -196,7 +226,21 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
               </div>
             </div>
           ) : (
-            <div className="pt-4 -ml-1 mr-4 flex flex-col gap-1 xl:w-[12.9rem] items-end xl:items-start">
+            <div className="
+              flex
+              flex-row
+              justify-evenly
+              w-screen
+              gap-1
+
+              sm:w-auto
+              sm:pt-4
+              sm:mr-3
+              sm:flex-col
+              sm:items-end
+              xl:w-[12.9rem]
+              xl:items-start
+            ">
               {
                 loggedOutCat.map(category => (
                   <LeftBarCategory

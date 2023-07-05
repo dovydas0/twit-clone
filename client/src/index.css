@@ -50,7 +50,13 @@ body{
 
 @media (max-width:1024px) {
   .settings-category-size {
-    width: calc(100vw - 103px)
+    width: calc(100vw - 103px);
+  }
+}
+
+@media (max-width:639.5px) {
+  .settings-category-size-xs {
+    width: calc(100vw - 1px);
   }
 }
 

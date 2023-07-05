@@ -6,6 +6,7 @@ const Footer = () => {
   return (
     <div className="
             fixed
+            z-20
             bottom-0
             left-0
             w-screen
@@ -65,6 +66,7 @@ const Footer = () => {
                             <Button
                                 value="Sign up"
                                 themedHover
+                                whiteHover
                                 big
                             />
                         </Link>

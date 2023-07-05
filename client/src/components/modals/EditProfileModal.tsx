@@ -139,6 +139,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                 <Button
                   medium
                   themeable
+                  themedHover
                   onClick={handleSubmit(updateAccount)}
                   value='Save'
                 />

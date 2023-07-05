@@ -55,14 +55,38 @@ const Settings: React.FC<SettingsProps> = ({
     else {
         content = (
             <>
-                <div className="h-full xl:ml-[223px] ml-[77px] sm:col-span-9 lg:min-w-0 lg:w-auto lg:col-span-4 xl:col-span-5 border-neutral-500/50 border dark:bg-[#15202B] bg-white">
+                <div className="
+                    h-full
+                    sm:ml-[77px]
+                    sm:col-span-9
+                    lg:min-w-0
+                    lg:w-auto
+                    lg:col-span-4
+                    xl:col-span-5
+                    xl:ml-[223px]
+                    border-neutral-500/50
+                    border
+                    dark:bg-[#15202B]
+                    bg-white
+                ">
                     <SettingsCategories
                         categoryClick={handleCategoryClick} 
                         selectedCat={selectedCat}
                     />
                     {
                         selectedCat && (
-                            <div className="absolute top-0 lg:w-full settings-category-size h-full block sm:block lg:hidden mr-4">
+                            <div className="
+                                absolute
+                                top-0
+                                lg:w-full
+                                settings-category-size-xs
+                                settings-category-size
+                                h-full
+                                block
+                                sm:block
+                                lg:hidden
+                                mr-4
+                            ">
                                 <SettingsCatContent handleCategoryClick={handleCategoryClick} category={selectedCat} darkTheme={darkTheme} />
                             </div>
                         )
