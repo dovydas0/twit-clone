@@ -70,7 +70,7 @@ const Post: React.FC<PostProps> = ({
             py-2
             border-b
             border-neutral-500/50
-            hover:bg-neutral-100/5
+            hover:bg-neutral-500/10
             cursor-pointer
             transition
         "

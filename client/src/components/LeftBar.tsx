@@ -70,6 +70,29 @@ const loggedInCat = [
   }
 ]
 
+const loggedInSmallCat = [
+  {
+    label: 'Home',
+    icon: RiHome7Fill,
+    route: '/'
+  },
+  {
+    label: 'Explore',
+    icon: CiSearch,
+    route: '/'
+  },
+  {
+    label: 'Notifications',
+    icon: RiNotification2Line,
+    route: '/notifications'
+  },
+  {
+    label: 'Messages',
+    icon: BiEnvelope,
+    route: '/messages'
+  }
+]
+
 const LeftBar: React.FC<LeftBarProps> = ({}) => {
   const [ profileClick, setProfileClick ] = useState(false)
   const [ selectedCat, setSelectedCat ] = useState('')
@@ -174,7 +197,7 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
               gap-1
               flex
               flex-row
-              justify-evenly
+              items-center
               w-screen
               
               sm:w-auto
@@ -184,19 +207,54 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
               sm:items-end
               xl:items-start
             ">
-              {
-                loggedInCat.map(category => (
-                  <LeftBarCategory
-                    key={category.label ? category.label : 'logo'}
-                    label={category.label ? category.label : ''}
-                    onClick={handleCategoryClick}
-                    icon={category.icon}
-                    route={category.route}
-                    selected={category.label === selectedCat}
-                  />
-                ))
-              }
-              <div className="sticky top-0 sm:bottom-3 sm:-mr-2 xl:pr-2 xl:w-full">
+              {/* Left bar */}
+              <div className="
+                dark:text-neutral-100
+                text-zinc-900
+                text-2xl
+                hidden
+                sm:block
+                xl:justify-end
+                xl:text-2xl
+              ">
+                {
+                  loggedInCat.map(category => (
+                    <LeftBarCategory
+                      key={category.label ? category.label : 'logo'}
+                      label={category.label ? category.label : ''}
+                      onClick={handleCategoryClick}
+                      icon={category.icon}
+                      route={category.route}
+                      selected={category.label === selectedCat}
+                    />
+                  ))
+                }
+              </div>
+
+              {/* bottom bar */}
+              <div className="
+                dark:text-neutral-100
+                text-zinc-900
+                flex
+                justify-evenly
+                w-full
+                border-red-500 border
+                sm:hidden
+              ">
+                {
+                  loggedInSmallCat.map(category => (
+                    <LeftBarCategory
+                      key={category.label ? category.label : 'logo'}
+                      label={category.label ? category.label : ''}
+                      onClick={handleCategoryClick}
+                      icon={category.icon}
+                      route={category.route}
+                      selected={category.label === selectedCat}
+                    />
+                  ))
+                }
+              </div>
+              <div className="hidden sm:absolute sm:block sm:bottom-3 sm:-mr-2 xl:pr-2 xl:w-full">
                 <button 
                 onClick={() => {setProfileClick(prev => !prev)}}
                 className={`

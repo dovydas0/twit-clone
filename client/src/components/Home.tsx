@@ -9,6 +9,7 @@ import { toast } from "react-hot-toast";
 import { useAppDispatch, useAppSelector } from "../store/store"
 import { setUser } from "../store/features/userSlice"
 import ExploreHeader from "./home/ExploreHeader";
+import SideMenuModal from "./modals/sideMenuModal";
 
 enum CONTENT {
   MAINFEED,
@@ -21,6 +22,7 @@ function Home() {
   const [ activePost, setActivePost ] = useState<PostType | null>(null);
   const [ posts, setPosts ] = useState<PostType[]>([]);
   const [ inputValue, setInputValue ] = useState("");
+  const [ sideMenuOpen, setSideMenuOpen ] = useState(false);
   let content;  
 
   const dispatch = useAppDispatch();
@@ -47,7 +49,11 @@ function Home() {
     const postActive = posts.filter(post => activePost?.post_id === post.post_id)
 
     setActivePost(postActive[0])
-  }  
+  }
+
+  const handleSideMenu = () => {
+    setSideMenuOpen(state => !state)
+  }
 
   const handlePost = async (e: FormEvent) => {
     e.preventDefault()
@@ -107,9 +113,14 @@ function Home() {
   else if (showContent === CONTENT.MAINFEED) {
     content = (
         <>
-          <ContentType feedType={feedType} onClick={handleFeedType} />
+          <ContentType feedType={feedType} onClick={handleFeedType} loggedUser={loggedUser} handleSideMenu={handleSideMenu} />
           <PostInput loggedUser={loggedUser} handlePost={handlePost} inputValue={inputValue} setInputValue={setInputValue} />
           <MainFeed loggedUser={loggedUser} onClick={handlePostOpen} postData={posts} setPosts={setPosts} />
+          {
+            sideMenuOpen && (
+              <SideMenuModal handleSideMenu={handleSideMenu} />
+            )
+          }
         </>
     )
   }

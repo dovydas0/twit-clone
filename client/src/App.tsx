@@ -66,7 +66,9 @@ function App() {
       dark:bg-[#15202B]
       bg-white
     ">
+      <LeftBar />
       <Routes>
+        
         {/* Authentication */}
         <Route path="/login" element={<LoginModal />} />
         <Route path="/signup" element={<SignupModal />} />
@@ -75,7 +77,6 @@ function App() {
         <Route path="/" element={
           <>
             <Home />
-            <LeftBar />
             <RightBar />
             {
               Object.keys(loggedUser).length === 0 ? <Footer /> : ''
@@ -85,7 +86,6 @@ function App() {
 
         <Route path="/settings" element={
           <>
-            <LeftBar />
             <Settings darkTheme={darkTheme} />
             {
               Object.keys(loggedUser).length === 0 ? <Footer /> : ''
@@ -96,7 +96,6 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={
             <>
-              <LeftBar />
               <ProfilePage />
               <RightBar />
             </>
@@ -106,7 +105,6 @@ function App() {
         {/* Unexisting Pages */}
         <Route path="*" element={
           <>
-            <LeftBar />
             <Error />
             {
               Object.keys(loggedUser).length === 0 ? <Footer /> : ''
