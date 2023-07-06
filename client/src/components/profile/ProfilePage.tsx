@@ -50,11 +50,16 @@ const ProfilePage = () => {
     return (
       <div className="
           sm:col-span-8
-          h-full
+          xl:h-auto
+          md:h-full
+          h-auto
+          sm:mb-0
+          mb-12
           lg:col-span-6
           xl:col-span-6
           xl:ml-[223px] 
-          ml-[76px]
+          sm:ml-[76px]
+          
           border-neutral-500/50
           border
           dark:text-neutral-100
@@ -191,37 +196,38 @@ const ProfilePage = () => {
                     flex
                     border-neutral-500/50
                     border-t
+                    px-4
                 "
             >
-            {
-                categories.map(category => (
-                    category.category === selectedCat && (
-                        <div 
-                            key={category.category}
-                            className="
-                                mt-10
-                                mb-14
-                                mx-auto
-                                w-96
-                                flex
-                                flex-col
-                                gap-4
-                            "
-                        >
-                            <div className="font-bold text-3xl">
-                                {
-                                    category.emptyContentHeader
-                                }
+                {
+                    categories.map(category => (
+                        category.category === selectedCat && (
+                            <div 
+                                key={category.category}
+                                className="
+                                    mt-10
+                                    mb-14
+                                    mx-auto
+                                    w-96
+                                    flex
+                                    flex-col
+                                    gap-4
+                                "
+                            >
+                                <div className="font-bold text-3xl">
+                                    {
+                                        category.emptyContentHeader
+                                    }
+                                </div>
+                                <div className="text-md text-slate-500/80">
+                                    {
+                                        category.emptyContentText
+                                    }
+                                </div>
                             </div>
-                            <div className="text-md text-slate-500/80">
-                                {
-                                    category.emptyContentText
-                                }
-                            </div>
-                        </div>
-                    )
-                ))
-            }
+                        )
+                    ))
+                }
             </div>
         </div>
         {

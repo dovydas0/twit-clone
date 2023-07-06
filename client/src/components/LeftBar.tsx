@@ -162,18 +162,19 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
           </>
         )
       }
-      <div className="
+      <div className={`
         h-14
         left-0
         border-t
         border-neutral-500/50
         z-10
-        bottom-[72px]
+        ${Object.keys(loggedUser).length > 0 ? 'bottom-0' : 'bottom-[72px]'}
         fixed
         flex
         justify-center
         items-center
         w-screen
+        -bottom-[1px]
 
         sm:bottom-0
         sm:border-none
@@ -190,7 +191,7 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
         bg-white
         dark:text-neutral-100
         text-zinc-900
-      ">
+      `}>
         {
           Object.keys(loggedUser).length > 0 ? (
             <div className="
@@ -238,7 +239,6 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
                 flex
                 justify-evenly
                 w-full
-                border-red-500 border
                 sm:hidden
               ">
                 {

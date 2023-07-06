@@ -47,6 +47,9 @@ body{
   box-shadow: 0 0 20px 0 rgba(255, 255, 255, 0.15);
 }
 
+.h-full-extra-72 {
+  height: auto calc(72px)
+}
 
 @media (max-width:1024px) {
   .settings-category-size {

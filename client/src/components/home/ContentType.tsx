@@ -17,6 +17,7 @@ const ContentType: React.FC<ContentTypeProps> = ({
 
   return (
     <div className="sticky top-0 mr-[1px] dark:bg-[#15202B]/80 bg-white/80 backdrop-blur-md">
+        
         {/* Mobile screens */}
         <div className="flex sm:hidden items-center pl-2 pt-2 font-semibold text-xl">
             <button 

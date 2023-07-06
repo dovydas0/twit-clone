@@ -98,7 +98,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
   }
 
   return (
-    <div className="fixed flex justify-center items-center top-0 left-0 w-full h-full overflow-hidden bg-neutral-500/20">
+    <div className="fixed flex justify-center items-center top-0 left-0 w-full h-full overflow-hidden bg-neutral-500/20 z-30">
       <div className="
           dark:text-neutral-100
           text-zinc-900

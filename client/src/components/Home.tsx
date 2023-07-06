@@ -9,7 +9,7 @@ import { toast } from "react-hot-toast";
 import { useAppDispatch, useAppSelector } from "../store/store"
 import { setUser } from "../store/features/userSlice"
 import ExploreHeader from "./home/ExploreHeader";
-import SideMenuModal from "./modals/sideMenuModal";
+import SideMenuModal from "./modals/SideMenuModal";
 
 enum CONTENT {
   MAINFEED,
@@ -116,9 +116,25 @@ function Home() {
           <ContentType feedType={feedType} onClick={handleFeedType} loggedUser={loggedUser} handleSideMenu={handleSideMenu} />
           <PostInput loggedUser={loggedUser} handlePost={handlePost} inputValue={inputValue} setInputValue={setInputValue} />
           <MainFeed loggedUser={loggedUser} onClick={handlePostOpen} postData={posts} setPosts={setPosts} />
+          <SideMenuModal handleSideMenu={handleSideMenu} sideMenuOpen={sideMenuOpen} />
+          {/* black screen overlay */}
           {
             sideMenuOpen && (
-              <SideMenuModal handleSideMenu={handleSideMenu} />
+              <div 
+                onClick={handleSideMenu}
+                className="
+                  z-30
+                  absolute
+                  block
+                  sm:hidden
+                  top-0
+                  left-0
+                  w-screen
+                  h-screen
+                  bg-neutral-500/50
+                "
+              >
+              </div>
             )
           }
         </>
@@ -145,6 +161,8 @@ function Home() {
       xl:ml-[223px]
       
       h-full
+      pb-[53px]
+      overflow-scroll
       dark:text-neutral-100
       text-zinc-900
       dark:bg-[#15202B]
