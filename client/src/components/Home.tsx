@@ -162,6 +162,7 @@ function Home() {
       
       h-full
       pb-[53px]
+      sm:pb-0
       overflow-scroll
       dark:text-neutral-100
       text-zinc-900

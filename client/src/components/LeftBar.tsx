@@ -168,13 +168,12 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
         border-t
         border-neutral-500/50
         z-10
-        ${Object.keys(loggedUser).length > 0 ? 'bottom-0' : 'bottom-[72px]'}
+        ${Object.keys(loggedUser).length > 0 ? '-bottom-[1px]' : 'bottom-[72px]'}
         fixed
         flex
         justify-center
         items-center
         w-screen
-        -bottom-[1px]
 
         sm:bottom-0
         sm:border-none

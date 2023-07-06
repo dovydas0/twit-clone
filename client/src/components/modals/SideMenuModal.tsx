@@ -1,6 +1,6 @@
 import { RxCross2 } from "react-icons/rx"
 import { useAppSelector } from "../../store/store";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsFillPersonFill } from "react-icons/bs";
 import { CiSettings } from "react-icons/ci";
 
@@ -16,6 +16,13 @@ const SideMenuModal: React.FC<SideMenuModalProps> = ({
   const darkTheme = useAppSelector(state => state.theme.dark);
   const loggedUser = useAppSelector(state => state.user);
 
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    document.cookie = "USER_TOKEN=; expires=true; path=/"
+    navigate('/');
+    document.location.reload()
+  }
 
   return (
     <div className="
@@ -130,6 +137,24 @@ const SideMenuModal: React.FC<SideMenuModalProps> = ({
               <CiSettings size={28} /> Settings
             </div>
           </Link>
+          <div 
+            onClick={handleSignOut}
+            className="
+              flex
+              items-center
+              gap-4
+              font-semibold
+              mt-2
+              cursor-pointer
+              rounded
+              px-1
+              py-2
+              hover:bg-neutral-500/20
+              transition
+            "
+          >
+            Log out
+          </div>
         </div>
       </div>
     </div>
