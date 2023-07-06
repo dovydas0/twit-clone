@@ -30,7 +30,6 @@ const Post: React.FC<PostProps> = ({
                 setIsLiked(postStatusData.data.is_liked)                
             }
         }
-        console.log('HTTP request on every post');
         
         getPostStatus()
     }, [])    
