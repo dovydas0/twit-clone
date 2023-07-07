@@ -676,7 +676,7 @@ Error generating stack: `+l.message+`
                 `,children:["Display ",c.jsx(ro,{size:21,style:{color:`${n?"rgba(255, 255, 255, 0.6)":"rgba(30, 30, 30, 0.6)"}`}})]})]})]})},P5=({darkTheme:e})=>{const[t,n]=S.useState(""),r=He(i=>i.user);let o;const l=i=>{n(i)};return Object.keys(r).length>0?o=c.jsxs(c.Fragment,{children:[c.jsxs("div",{className:`\r
                     h-full\r
                     pb-[72px]\r
-                    overflow-scroll\r
+                    overflow-y-auto\r
                     xl:ml-[223px]\r
                     sm:ml-[76px]\r
                     sm:col-span-9\r
@@ -702,7 +702,7 @@ Error generating stack: `+l.message+`
                             `,children:c.jsx(gl,{handleCategoryClick:l,category:t,darkTheme:e})})]}),c.jsx("div",{className:"hidden sm:hidden lg:block lg:col-span-5 xl:col-span-4 border-neutral-500/50 border-r dark:bg-[#15202B] bg-white",children:t===""?c.jsx("div",{className:"flex flex-col",children:c.jsx("div",{className:"mx-auto mt-20 text-2xl font-semibold text-neutral-400/60 tracking-wide",children:"Please select a category"})}):c.jsx(gl,{category:t,darkTheme:e})})]}):o=c.jsxs(c.Fragment,{children:[c.jsxs("div",{className:`\r
                     h-full\r
                     pb-[144px]\r
-                    overflow-scroll\r
+                    overflow-y-auto\r
                     sm:ml-[77px]\r
                     sm:col-span-9\r
                     lg:min-w-0\r
@@ -873,7 +873,7 @@ Error generating stack: `+l.message+`
           h-full\r
           flex\r
           flex-col\r
-          overflow-auto\r
+          overflow-y-auto\r
           sm:h-[90%]\r
           sm:w-[36rem]\r
           sm:rounded-2xl\r
@@ -941,9 +941,9 @@ Error generating stack: `+l.message+`
           xl:h-auto\r
           md:h-full\r
           h-full\r
-          overflow-y-scroll\r
+          overflow-y-auto\r
           sm:mb-0\r
-          mb-12\r
+          pb-12\r
           lg:col-span-6\r
           xl:col-span-6\r
           xl:ml-[223px] \r
@@ -960,7 +960,7 @@ Error generating stack: `+l.message+`
                         p-2\r
                         cursor-pointer\r
                         hover:bg-white/10\r
-                        `,children:c.jsx(Eu,{size:22})}),c.jsxs("div",{className:"ml-6",children:[c.jsx("div",{className:"font-bold text-[1.4rem] capitalize",children:e.username}),c.jsxs("div",{className:"text-slate-500/80 text-sm tracking-wider",children:[e.tweet_count," Tweets"]})]})]}),e.cover_image?c.jsx("div",{className:"h-56 overflow-hidden",children:c.jsx("img",{src:e.cover_image,alt:"cover image",className:"m-auto w-full object-cover"})}):c.jsx("div",{className:"bg-slate-600 h-56 overflow-hidden"}),c.jsxs("div",{className:`\r
+                        `,children:c.jsx(Eu,{size:22})}),c.jsxs("div",{className:"ml-6",children:[c.jsx("div",{className:"font-bold text-[1.4rem] capitalize",children:e.username}),c.jsxs("div",{className:"text-slate-500/80 text-sm tracking-wider",children:[e.tweet_count," Tweets"]})]})]}),e.cover_image?c.jsx("div",{className:"h-56 overflow-hidden flex justify-center items-center",children:c.jsx("img",{src:e.cover_image,alt:"cover image",className:"m-auto w-full object-cover"})}):c.jsx("div",{className:"bg-slate-600 h-56 overflow-hidden"}),c.jsxs("div",{className:`\r
                 flex\r
                 justify-between\r
                 px-4\r
@@ -1201,7 +1201,7 @@ Error generating stack: `+l.message+`
                       rounded-full\r
                       cursor-pointer\r
                       hover:bg-neutral-500/10\r
-                      `})})}),c.jsxs("div",{className:"flex flex-col gap-2 mt-1",children:[c.jsx("div",{className:"font-bold text-lg capitalize",children:r.username}),c.jsxs("div",{className:"text-slate-500/80 text-sm flex gap-4",children:[c.jsxs("div",{children:[c.jsx("span",{className:"dark:text-white text-black",children:0})," Following"]}),c.jsxs("div",{className:"text-slate-500/80",children:[c.jsx("span",{className:"dark:text-white text-black",children:0})," Followers"]})]})]}),c.jsxs("div",{className:"mt-1 border-t border-neutral-500/50",children:[c.jsx(Ue,{to:"/profile",children:c.jsxs("div",{className:`\r
+                      `})})}),c.jsxs("div",{className:"flex flex-col gap-2 mt-1",children:[c.jsx("div",{className:"font-bold text-lg capitalize",children:r.username}),c.jsxs("div",{className:"text-slate-500/80 text-sm flex gap-4",children:[c.jsxs("div",{children:[c.jsx("span",{className:"dark:text-white text-black pr-[2px]",children:0})," Following"]}),c.jsxs("div",{className:"text-slate-500/80",children:[c.jsx("span",{className:"dark:text-white text-black pr-[2px]",children:0})," Followers"]})]})]}),c.jsxs("div",{className:"mt-1 border-t border-neutral-500/50",children:[c.jsx(Ue,{to:"/profile",children:c.jsxs("div",{className:`\r
               flex\r
               items-center\r
               gap-4\r
@@ -1233,7 +1233,7 @@ Error generating stack: `+l.message+`
               mt-2\r
               cursor-pointer\r
               rounded\r
-              px-1\r
+              px-2\r
               py-2\r
               hover:bg-neutral-500/20\r
               transition\r
@@ -1257,12 +1257,12 @@ Error generating stack: `+l.message+`
       h-full\r
       pb-[53px]\r
       sm:pb-0\r
-      overflow-scroll\r
+      overflow-y-scroll\r
       dark:text-neutral-100\r
       text-zinc-900\r
       dark:bg-[#15202B]\r
       bg-white\r
-    `,children:p})}const H5=({children:e})=>{const t=He(n=>n.user);return Object.keys(t).length<1?c.jsx(X1,{to:"/login"}):e||c.jsx(Z1,{})};function W5(){const e=Jo(),t=He(r=>r.theme.dark),n=He(r=>r.user);return S.useEffect(()=>{if(document.cookie.indexOf("USER_TOKEN=")===-1)return;localStorage.getItem("dark")==="on"&&(e(vu({dark:!0})),document.body.classList.add("dark"),document.body.style.background="#15202B");const r=setTimeout(()=>{document.cookie=""},18e5);return(async()=>{try{const l=await ye.get("https://twit-clon.duckdns.org/api/auth/user",{withCredentials:!0});e(ss(l.data))}catch{}})(),()=>{clearTimeout(r)}},[]),c.jsxs("div",{className:`\r
+    `,children:p})}const H5=({children:e})=>{const t=He(n=>n.user);return Object.keys(t).length<1?c.jsx(X1,{to:"/login"}):e||c.jsx(Z1,{})};function W5(){const e=Jo(),t=He(r=>r.theme.dark),n=He(r=>r.user);return S.useEffect(()=>{if(localStorage.getItem("dark")==="on"&&(e(vu({dark:!0})),document.body.classList.add("dark"),document.body.style.background="#15202B"),document.cookie.indexOf("USER_TOKEN=")===-1)return;const r=setTimeout(()=>{document.cookie=""},18e5);return(async()=>{try{const l=await ye.get("https://twit-clon.duckdns.org/api/auth/user",{withCredentials:!0});e(ss(l.data))}catch{}})(),()=>{clearTimeout(r)}},[]),c.jsxs("div",{className:`\r
       max-w-[1440px]\r
       overflow-x-hidden\r
       sm:px-4\r

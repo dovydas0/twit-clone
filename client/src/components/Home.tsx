@@ -163,7 +163,7 @@ function Home() {
       h-full
       pb-[53px]
       sm:pb-0
-      overflow-scroll
+      overflow-y-scroll
       dark:text-neutral-100
       text-zinc-900
       dark:bg-[#15202B]
