@@ -95,10 +95,10 @@ const SideMenuModal: React.FC<SideMenuModalProps> = ({
           </div>
           <div className="text-slate-500/80 text-sm flex gap-4">
             <div>
-                <span className="dark:text-white text-black">{0}</span> Following
+                <span className="dark:text-white text-black pr-[2px]">{0}</span> Following
             </div>
             <div className="text-slate-500/80">
-                <span className="dark:text-white text-black">{0}</span> Followers
+                <span className="dark:text-white text-black pr-[2px]">{0}</span> Followers
             </div>
           </div>
         </div>
@@ -147,7 +147,7 @@ const SideMenuModal: React.FC<SideMenuModalProps> = ({
               mt-2
               cursor-pointer
               rounded
-              px-1
+              px-2
               py-2
               hover:bg-neutral-500/20
               transition

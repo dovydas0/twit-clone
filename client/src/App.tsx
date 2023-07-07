@@ -23,14 +23,15 @@ function App() {
   const loggedUser = useAppSelector(state => state.user);  
 
   useEffect(() => {
-    if (document.cookie.indexOf('USER_TOKEN=') === -1) {
-      return;
-    }
 
-    if (localStorage.getItem('dark') === 'on') {
+    if (localStorage.getItem('dark') === 'on') {      
       dispatch(setDark({ dark: true }));
       document.body.classList.add('dark');
       document.body.style.background = '#15202B';
+    }
+
+    if (document.cookie.indexOf('USER_TOKEN=') === -1) {
+      return;
     }
     
     // Temporary solution to clearing the auth cookie
@@ -68,7 +69,6 @@ function App() {
     ">
       <LeftBar />
       <Routes>
-        
         {/* Authentication */}
         <Route path="/login" element={<LoginModal />} />
         <Route path="/signup" element={<SignupModal />} />

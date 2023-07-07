@@ -25,7 +25,7 @@ const Settings: React.FC<SettingsProps> = ({
                 <div className="
                     h-full
                     pb-[72px]
-                    overflow-scroll
+                    overflow-y-auto
                     xl:ml-[223px]
                     sm:ml-[76px]
                     sm:col-span-9
@@ -84,7 +84,7 @@ const Settings: React.FC<SettingsProps> = ({
                 <div className="
                     h-full
                     pb-[144px]
-                    overflow-scroll
+                    overflow-y-auto
                     sm:ml-[77px]
                     sm:col-span-9
                     lg:min-w-0

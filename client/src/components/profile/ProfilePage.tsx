@@ -53,9 +53,9 @@ const ProfilePage = () => {
           xl:h-auto
           md:h-full
           h-full
-          overflow-scroll
+          overflow-y-auto
           sm:mb-0
-          mb-12
+          pb-12
           lg:col-span-6
           xl:col-span-6
           xl:ml-[223px] 
@@ -92,7 +92,7 @@ const ProfilePage = () => {
             </div>
             {
                 loggedUser.cover_image ? (
-                    <div className="h-56 overflow-hidden">
+                    <div className="h-56 overflow-hidden flex justify-center items-center">
                         <img 
                             src={loggedUser.cover_image}
                             alt="cover image"

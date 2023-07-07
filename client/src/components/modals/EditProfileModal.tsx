@@ -109,7 +109,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
           h-full
           flex
           flex-col
-          overflow-auto
+          overflow-y-auto
           sm:h-[90%]
           sm:w-[36rem]
           sm:rounded-2xl
