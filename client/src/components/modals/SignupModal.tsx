@@ -20,6 +20,7 @@ enum SIGNUP {
 const Modal = () => {
     const [ showContent, setShowContent ] = useState(SIGNUP.ACCOUNT_TYPES);
     const darkTheme = useAppSelector(state => state.theme.dark)
+
     const { 
         handleSubmit, 
         register, 
