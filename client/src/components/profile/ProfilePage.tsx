@@ -50,14 +50,23 @@ const ProfilePage = () => {
     return (
       <div className="
           sm:col-span-8
+          xl:h-auto
+          md:h-full
           h-full
+          overflow-scroll
+          sm:mb-0
+          mb-12
           lg:col-span-6
           xl:col-span-6
           xl:ml-[223px] 
-          ml-[76px]
-          border-white/20
+          sm:ml-[76px]
+          
+          border-neutral-500/50
           border
-        bg-[#15202B]
+          dark:text-neutral-100
+          text-zinc-900
+          dark:bg-[#15202B]
+          bg-white
       ">
         <div>
             <div className="flex items-center px-2 py-1">
@@ -76,7 +85,7 @@ const ProfilePage = () => {
                     <div className="font-bold text-[1.4rem] capitalize">
                         {loggedUser.username}
                     </div>
-                    <div className="text-slate-400/80 text-sm tracking-wider">
+                    <div className="text-slate-500/80 text-sm tracking-wider">
                         {loggedUser.tweet_count} Tweets
                     </div>
                 </div>
@@ -110,7 +119,8 @@ const ProfilePage = () => {
                                 w-36
                                 h-36
                                 p-1.5
-                                bg-[#15202B]
+                                dark:bg-[#15202B]
+                                bg-white
                                 rounded-full
                                 mt-[-4.5rem]
                             "
@@ -121,6 +131,9 @@ const ProfilePage = () => {
                     <Button
                         small
                         outline
+                        themeable
+                        themedHover
+                        color='white'
                         value='Edit profile'
                         onClick={handleProfileEditModal}
                     />
@@ -132,15 +145,15 @@ const ProfilePage = () => {
                         loggedUser.username
                     }
                 </div>
-                <div className="flex gap-2 items-center text-slate-400/80">
+                <div className="flex gap-2 items-center text-slate-500/80">
                     <FaRegCalendarAlt /> Joined {JoinedDate}
                 </div>
-                <div className="text-slate-400/80 flex gap-4">
+                <div className="text-slate-500/80 flex gap-4">
                     <div>
-                        <span className="text-white">{0}</span> Following
+                        <span className="dark:text-white text-black">{0}</span> Following
                     </div>
-                    <div className="text-slate-400/80">
-                        <span className="text-white">{0}</span> Followers
+                    <div className="text-slate-500/80">
+                        <span className="dark:text-white text-black">{0}</span> Followers
                     </div>
                 </div>
             </div>
@@ -182,39 +195,40 @@ const ProfilePage = () => {
             <div
                 className="
                     flex
-                    border-white/20
+                    border-neutral-500/50
                     border-t
+                    px-4
                 "
             >
-            {
-                categories.map(category => (
-                    category.category === selectedCat && (
-                        <div 
-                            key={category.category}
-                            className="
-                                mt-10
-                                mb-14
-                                mx-auto
-                                w-96
-                                flex
-                                flex-col
-                                gap-4
-                            "
-                        >
-                            <div className="font-bold text-3xl">
-                                {
-                                    category.emptyContentHeader
-                                }
+                {
+                    categories.map(category => (
+                        category.category === selectedCat && (
+                            <div 
+                                key={category.category}
+                                className="
+                                    mt-10
+                                    mb-14
+                                    mx-auto
+                                    w-96
+                                    flex
+                                    flex-col
+                                    gap-4
+                                "
+                            >
+                                <div className="font-bold text-3xl">
+                                    {
+                                        category.emptyContentHeader
+                                    }
+                                </div>
+                                <div className="text-md text-slate-500/80">
+                                    {
+                                        category.emptyContentText
+                                    }
+                                </div>
                             </div>
-                            <div className="text-md text-slate-400/80">
-                                {
-                                    category.emptyContentText
-                                }
-                            </div>
-                        </div>
-                    )
-                ))
-            }
+                        )
+                    ))
+                }
             </div>
         </div>
         {

@@ -14,7 +14,6 @@ import { useNavigate } from "react-router-dom";
 
 interface PostElementProps {
     loggedUser: User;
-    theme: string;
     post: PostType | null;
     onClose: (e: React.MouseEvent) => void;
     handleActivePostUpdate: (data: PostType[]) => void;
@@ -22,7 +21,6 @@ interface PostElementProps {
 
 const PostElement: React.FC<PostElementProps> = ({
     loggedUser,
-    theme,
     post,
     onClose,
     handleActivePostUpdate
@@ -120,7 +118,7 @@ const PostElement: React.FC<PostElementProps> = ({
                 px-4
                 py-2
                 border-b
-                border-white/20
+                border-neutral-500/50
             "
         >
             <div className="flex items-center gap-6 pb-4">
@@ -152,6 +150,7 @@ const PostElement: React.FC<PostElementProps> = ({
                         <div>
                             <Button
                                 medium
+                                themeable
                                 value="Follow"
                             />
                         </div>
@@ -163,10 +162,10 @@ const PostElement: React.FC<PostElementProps> = ({
                     {post?.content}
                 </p>
             </div>
-            <div className="pb-2 text-neutral-400 font-normal text-xs border-b  border-white/20">
+            <div className="pb-2 text-neutral-400 font-normal text-xs border-b  border-neutral-500/50">
                 <p>{CreatedDate}</p>
             </div>
-            <div className="py-2 border-b border-white/20">
+            <div className="py-2 border-b border-neutral-500/50">
                 <p className="text-sm font-semibold">
                     {post?.likes} <span className="text-neutral-400 font-normal text-xs">
                                     Likes
@@ -207,7 +206,7 @@ const PostElement: React.FC<PostElementProps> = ({
                         pt-4
                         my-2
                         border-t
-                        border-white/20
+                        border-neutral-500/50
                     ">
                         <div className="min-w-[2.7rem]">
                             <img
@@ -217,7 +216,6 @@ const PostElement: React.FC<PostElementProps> = ({
                             />
                         </div>
                         <InputTextArea 
-                            theme={theme}
                             inputValue={commentValue}
                             setInputValue={setCommentValue}
                             placeholder="Tweet your reply!"

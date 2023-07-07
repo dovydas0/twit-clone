@@ -1,12 +1,14 @@
 import {
     IoIosArrowForward
 } from 'react-icons/all'
+import { useAppSelector } from '../store/store';
 
 const categories = [
     "Personalization and data",
     "your twitter data",
     "cookie preferences",
-    "additional resources"
+    "additional resources",
+    "Display"
 ]
 
 interface SettingsCategoriesProps {
@@ -18,10 +20,11 @@ const SettingsCategories: React.FC<SettingsCategoriesProps> = ({
     categoryClick,
     selectedCat
 }) => {
+    const darkTheme = useAppSelector(state => state.theme.dark);    
 
   return (
-    <div className=''>
-        <div className='text-xl font-semibold m-3'>
+    <div className='dark:text-neutral-100 text-zinc-900'>
+        <div className='text-xl text- font-semibold m-3'>
             Settings
         </div>
         <div className='py-1'>
@@ -35,13 +38,13 @@ const SettingsCategories: React.FC<SettingsCategoriesProps> = ({
                     items-center
                     justify-between
                     p-3
-                    hover:bg-white/5
+                    hover:bg-neutral-500/5
                     transition
                     cursor-pointer
-                    ${selectedCat === categories[0] ? 'border-r border-sky-500' : ''}
+                    ${selectedCat === categories[0] ? 'border-r-2 border-sky-500' : ''}
                 `}
             >
-                Personalization and data <IoIosArrowForward size={21} style={{ color: "rgba(255, 255, 255, 0.6)" }} />
+                Personalization and data <IoIosArrowForward size={21} style={{ color: `${darkTheme ? 'rgba(255, 255, 255, 0.6)' : 'rgba(30, 30, 30, 0.6)'}` }} />
             </div>
             <div
                 onClick={() => categoryClick(categories[1])}
@@ -53,10 +56,10 @@ const SettingsCategories: React.FC<SettingsCategoriesProps> = ({
                     hover:bg-white/5
                     transition
                     cursor-pointer
-                    ${selectedCat === categories[1] ? 'border-r border-sky-500' : ''}
+                    ${selectedCat === categories[1] ? 'border-r-2 border-sky-500' : ''}
                 `}
             >
-                Your twitter data <IoIosArrowForward size={21} style={{ color: "rgba(255, 255, 255, 0.6)" }}  />
+                Your twitter data <IoIosArrowForward size={21} style={{ color: `${darkTheme ? 'rgba(255, 255, 255, 0.6)' : 'rgba(30, 30, 30, 0.6)'}` }}  />
             </div>
             <div
                 onClick={() => categoryClick(categories[2])}
@@ -68,14 +71,14 @@ const SettingsCategories: React.FC<SettingsCategoriesProps> = ({
                     hover:bg-white/5
                     transition
                     cursor-pointer
-                    ${selectedCat === categories[2] ? 'border-r border-sky-500' : ''}
+                    ${selectedCat === categories[2] ? 'border-r-2 border-sky-500' : ''}
                 `}
             >
                 <div>
                     <div>Cookie preferences</div>
                     <div className='text-gray-400/80 text-sm'>Manage your cookie experience on Twitter.</div>
                 </div>
-                <IoIosArrowForward size={21} style={{ color: "rgba(255, 255, 255, 0.6)" }}  />
+                <IoIosArrowForward size={21} style={{ color: `${darkTheme ? 'rgba(255, 255, 255, 0.6)' : 'rgba(30, 30, 30, 0.6)'}` }}  />
             </div>
             <div className='m-3'>
                 These settings apply to this browser or 
@@ -83,7 +86,7 @@ const SettingsCategories: React.FC<SettingsCategoriesProps> = ({
                 have any effect when you’re logged in.
             </div>
         </div>
-        <hr className='border-white/20' />
+        <hr className='border-neutral-500/50' />
         <div>
             <div className='text-xl font-semibold m-3'>
                 General
@@ -98,10 +101,25 @@ const SettingsCategories: React.FC<SettingsCategoriesProps> = ({
                     hover:bg-white/5
                     transition
                     cursor-pointer
-                    ${selectedCat === categories[3] ? 'border-r border-sky-500' : ''}
+                    ${selectedCat === categories[3] ? 'border-r-2 border-sky-500' : ''}
                 `}
             >
-                Additional resources <IoIosArrowForward size={21} style={{ color: "rgba(255, 255, 255, 0.6)" }}  />
+                Additional resources <IoIosArrowForward size={21} style={{ color: `${darkTheme ? 'rgba(255, 255, 255, 0.6)' : 'rgba(30, 30, 30, 0.6)'}` }}  />
+            </div>
+            <div
+                onClick={() => categoryClick(categories[4])}
+                className={`
+                    flex
+                    items-center
+                    justify-between
+                    p-3
+                    hover:bg-white/5
+                    transition
+                    cursor-pointer
+                    ${selectedCat === categories[4] ? 'border-r-2 border-sky-500' : ''}
+                `}
+            >
+                Display <IoIosArrowForward size={21} style={{ color: `${darkTheme ? 'rgba(255, 255, 255, 0.6)' : 'rgba(30, 30, 30, 0.6)'}` }}  />
             </div>
         </div>
     </div>

@@ -9,7 +9,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setUser } from "../../store/features/userSlice";
 
 enum SIGNIN {
@@ -20,6 +20,7 @@ enum SIGNIN {
 const LoginModal = () => {
     const [ showContent, setShowContent ] = useState(SIGNIN.EMAIL_AUTHENTICATION)
     const [ email, setEmail ] = useState('')
+    const darkTheme = useAppSelector(state => state.theme.dark);
     let content;
     const { 
         handleSubmit,
@@ -81,10 +82,14 @@ const LoginModal = () => {
                 justify-center
                 items-center
                 absolute
-                bg-gray-800
+                dark:text-neutral-100
+                text-zinc-900
+                dark:bg-gray-800
+                bg-neutral-100
             ">
                 <div className="
-                    bg-[#15202B]
+                    dark:bg-[#15202B]
+                    bg-white
                     rounded-none
                     w-full
                     h-full
@@ -98,7 +103,7 @@ const LoginModal = () => {
                     md:w-[36rem]
                     md:rounded-2xl
                 ">
-                    <div className='flex items-center p-3 sticky top-0 z-50 bg-[#15202B]'>
+                    <div className='flex items-center p-3 sticky top-0 z-50 bg-white dark:bg-[#15202B]'>
                         <div 
                             className='
                                 cursor-pointer
@@ -109,11 +114,17 @@ const LoginModal = () => {
                             '
                         >
                             <Link to="/">
-                                <RxCross2 size={22} />
+                                <RxCross2 size={22} style={{ color: `${darkTheme ? 'rgba(255, 255, 255, 0.6)' : 'rgba(30, 30, 30, 0.6)'}` }} />
                             </Link>
                         </div>
                         <div className='absolute left-1/2 -translate-x-4'>
-                            <img src="/twitter_logo.png" alt="logo" className='w-9' />
+                            {
+                                darkTheme ? (
+                                    <img src="/twitter_logo.png" alt="logo" className='w-9' />
+                                ) : (
+                                    <img src="/twitter_logo_dark.png" alt="logo" className='w-9' />
+                                )
+                            }
                         </div>
                     </div>
                     <div className='
@@ -133,19 +144,23 @@ const LoginModal = () => {
                                 {email}
                             </div>
                             <Button
+                                themeable
+                                themedHover
                                 value="Sign in with Google"
                                 icon={FcGoogle}
                                 onClick={() => {}}
                                 />
                             <Button
+                                themeable
+                                themedHover
                                 value="Sign in with Apple"
                                 icon={BsApple}
                                 onClick={() => {}}
                             />
                             <div className='flex justify-center -mb-2'>
-                                <div className='before:content-[""] w-full mx-2 border-b border-neutral-200/20 -translate-y-1/2'></div>
+                                <div className='before:content-[""] w-full mx-2 border-b border-neutral-500/50 -translate-y-1/2'></div>
                                 or
-                                <div className='before:content-[""] w-full mx-2 border-b border-neutral-200/20 -translate-y-1/2'></div>
+                                <div className='before:content-[""] w-full mx-2 border-b border-neutral-500/50 -translate-y-1/2'></div>
                             </div>
                             <Input
                                 required
@@ -157,11 +172,16 @@ const LoginModal = () => {
                                 errors={errors}
                             />
                             <Button
+                                themeable
+                                themedHover
                                 value="Next"
                                 onClick={handleSubmit(handleEmailSubmit)}
                             />
                             <Button
+                                themedHover
                                 outline
+                                themeable
+                                color="white"
                                 value="Forgot password?"
                                 textSize="sm"
                                 onClick={() => {}}
@@ -195,10 +215,14 @@ const LoginModal = () => {
                 justify-center
                 items-center
                 absolute
-                bg-gray-800
+                dark:text-neutral-100
+                text-zinc-900
+                dark:bg-gray-800
+                bg-neutral-100
             ">
                 <div className="
-                    bg-[#15202B]
+                    dark:bg-[#15202B]
+                    bg-white
                     rounded-none
                     w-full
                     h-full
@@ -212,7 +236,7 @@ const LoginModal = () => {
                     md:w-[36rem]
                     md:rounded-2xl
                 ">
-                    <div className='flex items-center p-3 sticky top-0 z-50 bg-[#15202B]'>
+                    <div className='flex items-center p-3 sticky top-0 z-50 bg-white dark:bg-[#15202B]'>
                         <div className='
                             cursor-pointer
                             p-1.5
@@ -221,11 +245,17 @@ const LoginModal = () => {
                             transition
                         '>
                             <Link to="/">
-                                <RxCross2 size={22} />
+                                <RxCross2 size={22} style={{ color: `${darkTheme ? 'rgba(255, 255, 255, 0.6)' : 'rgba(30, 30, 30, 0.6)'}` }} />
                             </Link>
                         </div>
                         <div className='absolute left-1/2 -translate-x-4'>
-                            <img src="/twitter_logo.png" alt="logo" className='w-9' />
+                            {
+                                darkTheme ? (
+                                    <img src="/twitter_logo.png" alt="logo" className='w-9' />
+                                ) : (
+                                    <img src="/twitter_logo_dark.png" alt="logo" className='w-9' />
+                                )
+                            }
                         </div>
                     </div>
                     <div className='
@@ -265,6 +295,8 @@ const LoginModal = () => {
                             <div>
                                 <Button
                                     big
+                                    themedHover
+                                    themeable
                                     value="Log in"
                                     onClick={handleSubmit(handleSigninSubmit)}
                                 />

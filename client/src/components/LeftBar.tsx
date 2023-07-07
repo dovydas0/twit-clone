@@ -70,6 +70,29 @@ const loggedInCat = [
   }
 ]
 
+const loggedInSmallCat = [
+  {
+    label: 'Home',
+    icon: RiHome7Fill,
+    route: '/'
+  },
+  {
+    label: 'Explore',
+    icon: CiSearch,
+    route: '/'
+  },
+  {
+    label: 'Notifications',
+    icon: RiNotification2Line,
+    route: '/notifications'
+  },
+  {
+    label: 'Messages',
+    icon: BiEnvelope,
+    route: '/messages'
+  }
+]
+
 const LeftBar: React.FC<LeftBarProps> = ({}) => {
   const [ profileClick, setProfileClick ] = useState(false)
   const [ selectedCat, setSelectedCat ] = useState('')
@@ -106,7 +129,10 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
             >
             </div>                    
             <div className="
-            bg-[#15202B]
+              dark:bg-[#15202B]
+              bg-white
+              dark:text-neutral-100
+              text-zinc-900
               pop-up_shadow
               fixed
               shadow-lg
@@ -115,13 +141,13 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
               z-50
               py-2
               w-64
-              border-white/20
+              border-neutral-500/50
               border
             ">
               <div
                 onClick={handleSignOut}
                 className="
-                  hover:bg-white/5
+                  hover:bg-neutral-500/5
                   font-bold
                   text-lg
                   px-3
@@ -136,23 +162,98 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
           </>
         )
       }
-      <div className="h-20 fixed sm:h-screen sm:col-span-1 lg:col-span-1 xl:col-span-2 bg-[#15202B]">
+      <div className={`
+        h-14
+        left-0
+        border-t
+        border-neutral-500/50
+        z-10
+        ${Object.keys(loggedUser).length > 0 ? '-bottom-[1px]' : 'bottom-[72px]'}
+        fixed
+        flex
+        justify-center
+        items-center
+        w-screen
+
+        sm:bottom-0
+        sm:border-none
+        sm:left-auto
+        sm:fixed
+        sm:w-auto
+        sm:h-screen
+        sm:items-start
+        sm:col-span-1
+        lg:col-span-1
+        xl:col-span-2
+
+        dark:bg-[#15202B]
+        bg-white
+        dark:text-neutral-100
+        text-zinc-900
+      `}>
         {
           Object.keys(loggedUser).length > 0 ? (
-            <div className="pt-4 pr-3.5 flex flex-col gap-1 items-end xl:items-start">
-              {
-                loggedInCat.map(category => (
-                  <LeftBarCategory
-                    key={category.label ? category.label : 'logo'}
-                    label={category.label ? category.label : ''}
-                    onClick={handleCategoryClick}
-                    icon={category.icon}
-                    route={category.route}
-                    selected={category.label === selectedCat}
-                  />
-                ))
-              }
-              <div className="absolute bottom-3 -mr-2 xl:pr-2 xl:w-full">
+            <div className="
+              gap-1
+              flex
+              flex-row
+              items-center
+              w-screen
+              
+              sm:w-auto
+              sm:pt-4
+              sm:pr-3.5
+              sm:flex-col
+              sm:items-end
+              xl:items-start
+            ">
+              {/* Left bar */}
+              <div className="
+                dark:text-neutral-100
+                text-zinc-900
+                text-2xl
+                hidden
+                sm:block
+                xl:justify-end
+                xl:text-2xl
+              ">
+                {
+                  loggedInCat.map(category => (
+                    <LeftBarCategory
+                      key={category.label ? category.label : 'logo'}
+                      label={category.label ? category.label : ''}
+                      onClick={handleCategoryClick}
+                      icon={category.icon}
+                      route={category.route}
+                      selected={category.label === selectedCat}
+                    />
+                  ))
+                }
+              </div>
+
+              {/* bottom bar */}
+              <div className="
+                dark:text-neutral-100
+                text-zinc-900
+                flex
+                justify-evenly
+                w-full
+                sm:hidden
+              ">
+                {
+                  loggedInSmallCat.map(category => (
+                    <LeftBarCategory
+                      key={category.label ? category.label : 'logo'}
+                      label={category.label ? category.label : ''}
+                      onClick={handleCategoryClick}
+                      icon={category.icon}
+                      route={category.route}
+                      selected={category.label === selectedCat}
+                    />
+                  ))
+                }
+              </div>
+              <div className="hidden sm:absolute sm:block sm:bottom-3 sm:-mr-2 xl:pr-2 xl:w-full">
                 <button 
                 onClick={() => {setProfileClick(prev => !prev)}}
                 className={`
@@ -164,7 +265,7 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
                     p-3
                     xl:py-3
                     xl:px-4
-                    hover:bg-white/10
+                    hover:bg-neutral-500/10
                     rounded-full
                     transition  
                 `}
@@ -182,7 +283,21 @@ const LeftBar: React.FC<LeftBarProps> = ({}) => {
               </div>
             </div>
           ) : (
-            <div className="pt-4 mr-4 flex flex-col gap-1 xl:w-[12.9rem] items-end xl:items-start">
+            <div className="
+              flex
+              flex-row
+              justify-evenly
+              w-screen
+              gap-1
+
+              sm:w-auto
+              sm:pt-4
+              sm:mr-3
+              sm:flex-col
+              sm:items-end
+              xl:w-[12.9rem]
+              xl:items-start
+            ">
               {
                 loggedOutCat.map(category => (
                   <LeftBarCategory

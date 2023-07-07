@@ -17,8 +17,7 @@ const LeftBarCategory: React.FC<LeftBarCategoryProps> = ({
     selected
 }) => {
   return (
-    <div className="text-white text-2xl xl:justify-end xl:text-2xl">
-        <div className="xl:flex gap-3 xl:h-full justify-start items-center w-2/4">
+        <div className="xl:flex gap-3 xl:h-full justify-start items-center">
             <button 
             onClick={() => onClick(route, label)}
             className={`
@@ -26,7 +25,7 @@ const LeftBarCategory: React.FC<LeftBarCategoryProps> = ({
                 gap-3
                 items-center
                 p-3
-                ${label === '' ? 'xl:px-3 ml-1' : 'xl:px-4'}
+                ${label === '' ? 'xl:px-3 xl:ml-1' : 'xl:px-4'}
                 xl:py-3
                 hover:bg-neutral-200/20
                 rounded-full
@@ -41,7 +40,6 @@ const LeftBarCategory: React.FC<LeftBarCategoryProps> = ({
                 )}
             </button>
         </div>
-    </div>
     )
 }
 

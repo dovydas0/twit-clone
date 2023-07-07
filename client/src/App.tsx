@@ -4,10 +4,10 @@ import SignupModal from "./components/modals/SignupModal";
 import axios from "axios";
 
 import { Routes, Route } from "react-router-dom";
-import { useAppDispatch } from "./store/store";
+import { useAppDispatch, useAppSelector } from "./store/store";
 import { useEffect } from "react";
 import { setUser } from "./store/features/userSlice";
-import { useAppSelector } from "./store/store";
+import { setDark } from "./store/features/ThemeSlice";
 import Error from "./components/Error";
 import Settings from "./components/Settings";
 import LeftBar from "./components/LeftBar";
@@ -19,12 +19,19 @@ import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   const dispatch = useAppDispatch();
-  const loggedUser = useAppSelector(state => state.user);
+  const darkTheme = useAppSelector(state => state.theme.dark);
+  const loggedUser = useAppSelector(state => state.user);  
 
   useEffect(() => {
     if (document.cookie.indexOf('USER_TOKEN=') === -1) {
       return;
-    }    
+    }
+
+    if (localStorage.getItem('dark') === 'on') {
+      dispatch(setDark({ dark: true }));
+      document.body.classList.add('dark');
+      document.body.style.background = '#15202B';
+    }
     
     // Temporary solution to clearing the auth cookie
     const timeout = setTimeout(() => {
@@ -48,9 +55,20 @@ function App() {
   }, [])
     
   return (
-    <div className="max-w-[1440px] px-4 mx-auto h-full sm:grid sm:grid-cols-9 bg-[#15202B]">
+    <div className="
+      max-w-[1440px]
+      overflow-x-hidden
+      sm:px-4
+      mx-auto
+      h-full
+      lg:grid
+      lg:grid-cols-9
+      dark:bg-[#15202B]
+      bg-white
+    ">
       <LeftBar />
       <Routes>
+        
         {/* Authentication */}
         <Route path="/login" element={<LoginModal />} />
         <Route path="/signup" element={<SignupModal />} />
@@ -60,10 +78,20 @@ function App() {
           <>
             <Home />
             <RightBar />
+            {
+              Object.keys(loggedUser).length === 0 ? <Footer /> : ''
+            }
           </>
-        }
-        />
-        <Route path="/settings" element={<Settings />} />
+        } />
+
+        <Route path="/settings" element={
+          <>
+            <Settings darkTheme={darkTheme} />
+            {
+              Object.keys(loggedUser).length === 0 ? <Footer /> : ''
+            }
+          </>
+        } />
         {/* Authenticated Pages */}
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={
@@ -75,11 +103,15 @@ function App() {
         </Route>
         
         {/* Unexisting Pages */}
-        <Route path="*" element={<Error />} />
+        <Route path="*" element={
+          <>
+            <Error />
+            {
+              Object.keys(loggedUser).length === 0 ? <Footer /> : ''
+            }
+          </>
+        } />
       </Routes>
-      {
-        Object.keys(loggedUser).length === 0 ? <Footer /> : ''
-      }
     </div>
   );
 }

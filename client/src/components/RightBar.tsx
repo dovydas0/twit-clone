@@ -7,16 +7,19 @@ import BlueButton from "./custom_elements/BlueButton";
 
 function RightBar() {
   const loggedUser = useAppSelector(state => state.user);
-
   
 
   return (
     <div className="
-      bg-[#15202B]
+      dark:bg-[#15202B]
+      bg-white
+      dark:text-neutral-100
+      text-zinc-900
       lg:col-span-3
       xl:col-span-3
       lg:block
       sm:hidden
+      hidden
     ">
       {
         Object.keys(loggedUser).length > 0 ? (
@@ -24,7 +27,7 @@ function RightBar() {
             w-[90%]
             mx-auto
             mt-4
-            border-white/20
+            border-neutral-500/50
             border
             rounded-xl
           ">
@@ -47,7 +50,7 @@ function RightBar() {
             w-[90%]
             mx-auto
             mt-4
-            border-white/20
+            border-neutral-500/50
             border
             rounded-xl
           ">
@@ -59,15 +62,18 @@ function RightBar() {
                 Sign up now to get your own personalized timeline!
               </div>
               <Button 
+                themeable
                 value="Sign up with Google"
                 icon={FcGoogle}
               />
               <Button
+                themeable
                 value="Sign up with Google"
                 icon={BsApple}
               />
               <Link to='/signup'>
                 <Button
+                  themeable
                   big
                   value="Create account"
                 />

@@ -51,7 +51,8 @@ const Input: React.FC<InputProps> = ({
                         className={`
                             peer
                             w-full
-                            bg-[#15202B]
+                            dark:bg-[#15202B]
+                            bg-white
                             outline-none
                             px-2
                             pt-6
@@ -59,8 +60,8 @@ const Input: React.FC<InputProps> = ({
                             rounded
                             focus:border-2
                             border
-                            ${errors[id] ? 'border-rose-500' : 'border-neutral-200/25'}
-                            focus:${errors[id] ? 'border-rose-500' : 'border-sky-600'}
+                            ${errors[id] ? 'border-rose-500' : 'border-neutral-500/50'}
+                            ${errors[id] ? 'focus:border-rose-500' : 'focus:border-sky-600'}
                         `}
                     />
                     {errors[id] && <p className='text-rose-500'>Enter a valid {id}</p>}
@@ -80,7 +81,7 @@ const Input: React.FC<InputProps> = ({
                         pt-6
                         pb-2
                         rounded
-                        border-neutral-200/25
+                        border-neutral-500/50
                         focus:border-sky-500
                         focus:border-2
                         border
