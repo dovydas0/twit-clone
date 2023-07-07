@@ -4,7 +4,6 @@ import InputTextArea from "../custom_elements/InputTextArea";
 import { User } from "../../types/UserType";
 
 interface PostInputProps {
-    theme: string;
     inputValue: string;
     loggedUser: User;
     setInputValue: (value: string) => void;
@@ -12,7 +11,6 @@ interface PostInputProps {
 }
 
 const PostInput: React.FC<PostInputProps> = ({
-    theme,
     inputValue,
     loggedUser,
     setInputValue,
@@ -20,7 +18,7 @@ const PostInput: React.FC<PostInputProps> = ({
 }) => {
 
   return (
-    <div className="py-2 flex w-full border-white/20 border-y">
+    <div className="py-2 flex w-full border-neutral-500/50 border-y">
         <img src={loggedUser.avatar} className="w-10 h-10 ml-3 rounded-full"></img>
         <div className="
             flex
@@ -29,7 +27,6 @@ const PostInput: React.FC<PostInputProps> = ({
         ">
             <form action="submit" onSubmit={handlePost}>
                 <InputTextArea 
-                    theme={theme}
                     inputValue={inputValue}
                     setInputValue={setInputValue}
                     placeholder="What is happening?!"

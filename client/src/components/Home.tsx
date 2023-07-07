@@ -9,6 +9,7 @@ import { toast } from "react-hot-toast";
 import { useAppDispatch, useAppSelector } from "../store/store"
 import { setUser } from "../store/features/userSlice"
 import ExploreHeader from "./home/ExploreHeader";
+import SideMenuModal from "./modals/SideMenuModal";
 
 enum CONTENT {
   MAINFEED,
@@ -21,7 +22,7 @@ function Home() {
   const [ activePost, setActivePost ] = useState<PostType | null>(null);
   const [ posts, setPosts ] = useState<PostType[]>([]);
   const [ inputValue, setInputValue ] = useState("");
-  const theme = 'dark';
+  const [ sideMenuOpen, setSideMenuOpen ] = useState(false);
   let content;  
 
   const dispatch = useAppDispatch();
@@ -48,7 +49,11 @@ function Home() {
     const postActive = posts.filter(post => activePost?.post_id === post.post_id)
 
     setActivePost(postActive[0])
-  }  
+  }
+
+  const handleSideMenu = () => {
+    setSideMenuOpen(state => !state)
+  }
 
   const handlePost = async (e: FormEvent) => {
     e.preventDefault()
@@ -108,9 +113,30 @@ function Home() {
   else if (showContent === CONTENT.MAINFEED) {
     content = (
         <>
-          <ContentType feedType={feedType} onClick={handleFeedType} />
-          <PostInput theme={theme} loggedUser={loggedUser} handlePost={handlePost} inputValue={inputValue} setInputValue={setInputValue} />
+          <ContentType feedType={feedType} onClick={handleFeedType} loggedUser={loggedUser} handleSideMenu={handleSideMenu} />
+          <PostInput loggedUser={loggedUser} handlePost={handlePost} inputValue={inputValue} setInputValue={setInputValue} />
           <MainFeed loggedUser={loggedUser} onClick={handlePostOpen} postData={posts} setPosts={setPosts} />
+          <SideMenuModal handleSideMenu={handleSideMenu} sideMenuOpen={sideMenuOpen} />
+          {/* black screen overlay */}
+          {
+            sideMenuOpen && (
+              <div 
+                onClick={handleSideMenu}
+                className="
+                  z-30
+                  absolute
+                  block
+                  sm:hidden
+                  top-0
+                  left-0
+                  w-screen
+                  h-screen
+                  bg-neutral-500/50
+                "
+              >
+              </div>
+            )
+          }
         </>
     )
   }
@@ -119,7 +145,6 @@ function Home() {
     content = (
       <PostElement
         loggedUser={loggedUser}
-        theme={theme}
         post={activePost}
         onClose={handlePostClose}
         handleActivePostUpdate={handleActivePostUpdate}
@@ -128,7 +153,22 @@ function Home() {
   }
 
   return (
-    <div className="sm:col-span-8 lg:col-span-6 xl:ml-[223px] ml-[76px] h-full border-white/20 border bg-[#15202B]">
+    <div className="
+      border-x
+      border-neutral-500/50
+      sm:ml-[76px]
+      lg:col-span-6
+      xl:ml-[223px]
+      
+      h-full
+      pb-[53px]
+      sm:pb-0
+      overflow-scroll
+      dark:text-neutral-100
+      text-zinc-900
+      dark:bg-[#15202B]
+      bg-white
+    ">
       {content}
     </div>
   )

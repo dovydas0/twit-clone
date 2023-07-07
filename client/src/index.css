@@ -9,7 +9,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #15202B;
+  
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -21,7 +21,6 @@
 
 body{
   height: 100vh;
-  background: #15202B;
 }
 
 #root{
@@ -46,6 +45,22 @@ body{
 
 .pop-up_shadow {
   box-shadow: 0 0 20px 0 rgba(255, 255, 255, 0.15);
+}
+
+.h-full-extra-72 {
+  height: auto calc(72px)
+}
+
+@media (max-width:1024px) {
+  .settings-category-size {
+    width: calc(100vw - 103px);
+  }
+}
+
+@media (max-width:639.5px) {
+  .settings-category-size-xs {
+    width: calc(100vw - 1px);
+  }
 }
 
 @media (max-width:639.5px) {

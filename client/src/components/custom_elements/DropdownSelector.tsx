@@ -2,6 +2,7 @@ import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 
 interface DropdownSelectorProps {
     id: string;
+    themeable?: boolean;
     label: string;
     options: string[];
     widthClass: string;
@@ -27,13 +28,14 @@ const DropdownSelector: React.FC<DropdownSelectorProps> = ({
             })}
             className={`
                 peer
-                bg-[#15202B]
+                dark:bg-[#15202B]
+                bg-white
                 min-w-full
                 absolute
                 pt-8
                 pl-[3px]
                 pb-2
-                border-neutral-200/25
+                border-neutral-500/50
                 rounded
                 outline-none
                 focus:border-sky-500

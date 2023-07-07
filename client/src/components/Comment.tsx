@@ -81,7 +81,7 @@ const Comment: React.FC<CommentProps> = ({
             pb-1
             w-full
             border-b
-            border-white/20
+            border-neutral-500/50
             hover:bg-neutral-100/5
             cursor-pointer
             transition

@@ -30,7 +30,6 @@ const Post: React.FC<PostProps> = ({
                 setIsLiked(postStatusData.data.is_liked)                
             }
         }
-        console.log('HTTP request on every post');
         
         getPostStatus()
     }, [])    
@@ -69,8 +68,8 @@ const Post: React.FC<PostProps> = ({
             px-3
             py-2
             border-b
-            border-white/20
-            hover:bg-neutral-100/5
+            border-neutral-500/50
+            hover:bg-neutral-500/10
             cursor-pointer
             transition
         "

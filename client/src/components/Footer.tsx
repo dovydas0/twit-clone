@@ -6,6 +6,7 @@ const Footer = () => {
   return (
     <div className="
             fixed
+            z-20
             bottom-0
             left-0
             w-screen
@@ -34,6 +35,8 @@ const Footer = () => {
                         <Link to="/login">
                             <Button
                                 value="Log in"
+                                themeable
+                                themedHover
                                 outline
                                 small
                             />
@@ -41,6 +44,8 @@ const Footer = () => {
                         <Link to="/signup">
                             <Button
                                 value="Sign up"
+                                themedHover
+                                whiteHover
                                 small
                             />
                         </Link>
@@ -51,6 +56,8 @@ const Footer = () => {
                         <Link to="/login" className="w-full">
                             <Button
                                 value="Log in"
+                                themeable
+                                themedHover
                                 outline
                                 big
                             />
@@ -58,6 +65,8 @@ const Footer = () => {
                         <Link to="/signup" className="w-full mr-12">
                             <Button
                                 value="Sign up"
+                                themedHover
+                                whiteHover
                                 big
                             />
                         </Link>

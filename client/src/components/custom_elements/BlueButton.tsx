@@ -16,14 +16,15 @@ const BlueButton: React.FC<BlueButtonProps> = ({
       disabled={disabled}
       onClick={onClick}
       className={`
-          ${disabled ? 'bg-sky-700' : 'bg-sky-500'}
+          ${disabled ? 'bg-sky-500/50' : 'bg-sky-500'}
+          ${disabled ? 'text-neutral-100/70' : 'text-white'}
+          dark:text-black;
           p-1.5
           px-5
           h-10
           font-semibold
           rounded-full
           tracking-wide
-          ${disabled ? 'text-neutral-400' : ''}
           hover:${disabled ? '' : 'bg-sky-600'}
           transition
       `}
