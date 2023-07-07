@@ -53,7 +53,7 @@ const ProfilePage = () => {
           xl:h-auto
           md:h-full
           h-full
-          overflow-scroll
+          overflow-y-scroll
           sm:mb-0
           mb-12
           lg:col-span-6

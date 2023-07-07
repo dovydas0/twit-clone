@@ -32,7 +32,7 @@ const PORT = 8000;
 // app.use(express.static(buildPath));
 app.use(cors({
     credentials: true,
-    origin: "https://twit-clon.duckdns.org"
+    origin: process.env.CLIENT_URL
 }));
 app.use(express.json());
 app.use(cookieParser());
