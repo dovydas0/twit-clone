@@ -15,4 +15,4 @@ Main fundamental functionalities such as account support, posting, and commentin
 
 Technologies used for this project:
 
-HTML/CSS/Tailwind CSS, JavaScript/Typescript, JWT token, ReactJS, Redux, NodeJS/Express, PostgreSQL
+HTML/CSS/Tailwind CSS, JavaScript/Typescript, JWT tokens, ReactJS, Redux, NodeJS/Express, PostgreSQL, AWS
