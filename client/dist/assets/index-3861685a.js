@@ -960,7 +960,7 @@ Error generating stack: `+l.message+`
                         p-2\r
                         cursor-pointer\r
                         hover:bg-white/10\r
-                        `,children:c.jsx(Eu,{size:22})}),c.jsxs("div",{className:"ml-6",children:[c.jsx("div",{className:"font-bold text-[1.4rem] capitalize",children:e.username}),c.jsxs("div",{className:"text-slate-500/80 text-sm tracking-wider",children:[e.tweet_count," Tweets"]})]})]}),e.cover_image?c.jsx("div",{className:"h-56 overflow-hidden flex justify-center items-center",children:c.jsx("img",{src:e.cover_image,alt:"cover image",className:"m-auto w-full object-cover"})}):c.jsx("div",{className:"bg-slate-600 h-56 overflow-hidden"}),c.jsxs("div",{className:`\r
+                        `,children:c.jsx(Eu,{size:22})}),c.jsxs("div",{className:"ml-6",children:[c.jsx("div",{className:"font-bold text-[1.4rem] capitalize",children:e.username}),c.jsxs("div",{className:"text-slate-500/80 text-sm tracking-wider",children:[e.tweet_count," Tweets"]})]})]}),e.cover_image?c.jsx("div",{className:"h-56 overflow-hidden flex justify-center items-center",children:c.jsx("img",{src:e.cover_image,alt:"cover image",className:"w-full object-cover"})}):c.jsx("div",{className:"bg-slate-600 h-56 overflow-hidden"}),c.jsxs("div",{className:`\r
                 flex\r
                 justify-between\r
                 px-4\r
