@@ -96,7 +96,7 @@ const ProfilePage = () => {
                         <img 
                             src={loggedUser.cover_image}
                             alt="cover image"
-                            className="m-auto w-full object-cover"
+                            className="w-full object-cover"
                         />
                     </div>
                 ) : (
